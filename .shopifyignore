@@ -1,0 +1,12 @@
+tests/**
+reports/**
+node_modules/**
+.github/**
+.auth/**
+playwright.config.ts
+package.json
+package-lock.json
+tsconfig.json
+docs/**
+README.md
+AGENTS.md
