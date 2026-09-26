@@ -1,0 +1,50 @@
+name: Bootstrap Shopify TEST Theme
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pull-theme:
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: jksgiq-r4.myshopify.com
+      SHOPIFY_THEME_ID: "207539044694"
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Validate Theme Access token
+        shell: bash
+        run: |
+          if [ -z "$SHOPIFY_CLI_THEME_TOKEN" ]; then
+            echo "::error::Missing repository secret SHOPIFY_CLI_THEME_TOKEN"
+            exit 1
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Pull current unpublished TEST theme
+        run: bash scripts/theme-pull.sh
+
+      - name: Commit theme snapshot
+        shell: bash
+        run: |
+          git config user.name "amoura-theme-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets blocks config layout locales sections snippets templates
+          if git diff --cached --quiet; then
+            echo "Theme already matches repository snapshot."
+            exit 0
+          fi
+          git commit -m "Sync Shopify TEST theme snapshot"
+          git push
