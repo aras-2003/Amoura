@@ -1,0 +1,21 @@
+{
+  "name": "amoura-storefront-qa",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Automated UX, accessibility and visual QA for the Amoura Shopify storefront.",
+  "scripts": {
+    "audit": "playwright test tests/ux/site-audit.spec.ts",
+    "audit:mobile": "playwright test tests/ux/site-audit.spec.ts --project=mobile",
+    "audit:tablet": "playwright test tests/ux/site-audit.spec.ts --project=tablet",
+    "audit:desktop": "playwright test tests/ux/site-audit.spec.ts --project=desktop",
+    "visual": "playwright test tests/visual/core-pages.spec.ts",
+    "visual:update": "playwright test tests/visual/core-pages.spec.ts --update-snapshots",
+    "test": "npm run audit"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.0"
+  }
+}
