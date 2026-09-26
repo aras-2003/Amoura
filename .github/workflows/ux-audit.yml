@@ -1,0 +1,59 @@
+name: Amoura UX Audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches:
+      - "feature/**"
+      - "staging"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=207539044694
+      SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+      MAX_AUDIT_ROUTES: "30"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required secret
+        shell: bash
+        run: |
+          if [ -z "$SHOPIFY_STOREFRONT_PASSWORD" ]; then
+            echo "::error::Missing repository secret SHOPIFY_STOREFRONT_PASSWORD"
+            exit 1
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run rendered UX audit
+        run: npm run audit
+
+      - name: Upload UX reports and full-page screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amoura-ux-audit-${{ github.run_number }}
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 14
