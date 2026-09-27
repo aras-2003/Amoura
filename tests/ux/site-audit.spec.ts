@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 import { discoverRoutes } from '../helpers/routes';
-import { auditPage, type AuditFinding } from '../helpers/audit';
+import { auditPage, stripShopifyPreviewChrome, type AuditFinding } from '../helpers/audit';
 
 test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo) => {
   const project = testInfo.project.name;
@@ -22,7 +22,7 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
 
     let responseStatus: number | null = null;
     try {
-      const response = await page.goto(route, { waitUntil: 'networkidle', timeout: 45_000 });
+      const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
       responseStatus = response?.status() ?? null;
     } catch (error) {
       findings.push({
@@ -32,7 +32,8 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
       continue;
     }
 
-    await page.waitForTimeout(350);
+    await page.waitForTimeout(500);
+    await stripShopifyPreviewChrome(page);
 
     if (responseStatus && responseStatus >= 400) {
       findings.push({
