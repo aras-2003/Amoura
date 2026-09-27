@@ -25,7 +25,8 @@ export default async function globalSetup(config: FullConfig) {
 
     const openPassword = page.locator('.password-footer__button').first();
     if (await openPassword.isVisible().catch(() => false)) {
-      await openPassword.click();
+      // Shopify's preview bar iframe can overlap the footer visually. Trigger the real storefront button directly.
+      await openPassword.evaluate((el: HTMLElement) => el.click());
     }
 
     const passwordField = page.locator('input[type="password"][name="password"], #Password').first();
