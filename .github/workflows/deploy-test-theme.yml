@@ -1,0 +1,54 @@
+name: Deploy Shopify TEST Theme
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "feature/playwright-ux-audit"
+    paths:
+      - "assets/**"
+      - "blocks/**"
+      - "config/**"
+      - "layout/**"
+      - "locales/**"
+      - "sections/**"
+      - "snippets/**"
+      - "templates/**"
+      - "scripts/theme-push.sh"
+      - ".github/workflows/deploy-test-theme.yml"
+
+concurrency:
+  group: amoura-test-theme-deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SHOPIFY_STORE: jksgiq-r4.myshopify.com
+      SHOPIFY_THEME_ID: "207539044694"
+      SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Theme Access token
+        shell: bash
+        run: |
+          if [ -z "$SHOPIFY_CLI_THEME_TOKEN" ]; then
+            echo "::error::Missing repository secret SHOPIFY_CLI_THEME_TOKEN"
+            exit 1
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Push current branch to unpublished TEST theme
+        run: bash scripts/theme-push.sh
