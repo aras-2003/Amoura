@@ -132,7 +132,7 @@
         "text_trustlinks": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>{% if request.locale.iso_code == 'en' %}Shop{% else %}Sklep{% endif %}</strong> · <a href=\"{% if request.locale.iso_code == 'en' %}/en/collections/all{% else %}/collections/all{% endif %}\">{% if request.locale.iso_code == 'en' %}Products{% else %}Produkty{% endif %}</a> · <a href=\"{% if request.locale.iso_code == 'en' %}/en/pages/collections{% else %}/pages/kolekcje{% endif %}\">{% if request.locale.iso_code == 'en' %}Collections{% else %}Kolekcje{% endif %}</a></p><p><strong>{% if request.locale.iso_code == 'en' %}Journal{% else %}Wiedza{% endif %}</strong> · <a href=\"{% if request.locale.iso_code == 'en' %}/en/blogs/journal{% else %}/blogs/wiedza{% endif %}\">{% if request.locale.iso_code == 'en' %}All stories{% else %}Wszystkie teksty{% endif %}</a> · <a href=\"{% if request.locale.iso_code == 'en' %}/en/blogs/journal/where-to-begin{% else %}/blogs/wiedza/od-czego-zaczac{% endif %}\">{% if request.locale.iso_code == 'en' %}Start here{% else %}Na początek{% endif %}</a></p><p><strong>Amoura</strong> · <a href=\"{% if request.locale.iso_code == 'en' %}/en/pages/about-amoura{% else %}/pages/o-amoura{% endif %}\">{% if request.locale.iso_code == 'en' %}About Amoura{% else %}O Amoura{% endif %}</a> · <a href=\"{% if request.locale.iso_code == 'en' %}/en/pages/about-amoura#amoura-standard{% else %}/pages/o-amoura#amoura-standard{% endif %}\">Standard Amoura</a> · <a href=\"{% if request.locale.iso_code == 'en' %}/en/pages/amoura-club{% else %}/pages/klub-amoura{% endif %}\">Founding 50</a></p><p><strong>{% if request.locale.iso_code == 'en' %}Service{% else %}Obsługa{% endif %}</strong> · <a href=\"/pages/contact\">{% if request.locale.iso_code == 'en' %}Contact{% else %}Kontakt{% endif %}</a> · <a href=\"/policies/privacy-policy\">{% if request.locale.iso_code == 'en' %}Privacy{% else %}Prywatność{% endif %}</a></p>",
+            "text": "<div class=\"amoura-footer-links\">\n<div><strong>Sklep</strong><a href=\"/collections/all\">Produkty</a><a href=\"/pages/kolekcje\">Kolekcje</a></div>\n<div><strong>Wiedza</strong><a href=\"/blogs/wiedza\">Journal</a><a href=\"/blogs/wiedza/od-czego-zaczac\">Na początek</a></div>\n<div><strong>Amoura</strong><a href=\"/pages/o-amoura\">O Amoura</a><a href=\"/pages/o-amoura#amoura-standard\">Standard Amoura</a><a href=\"/pages/klub-amoura\">Founding 50</a></div>\n<div><strong>Obsługa</strong><a href=\"/pages/contact\">Kontakt</a></div>\n</div>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -164,8 +164,8 @@
         "section_width": "page-width",
         "gap": 20,
         "background_color": "#30272B",
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-start": 42,
+        "padding-block-end": 42
       }
     },
     "footer_utilities_jLGE8U": {
