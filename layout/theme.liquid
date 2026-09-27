@@ -184,6 +184,20 @@
     [data-amoura-reveal],[data-amoura-mask]{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
     [data-amoura-parallax]{transform:none!important}
   }
+/* Amoura final UX simplification pass */
+  .amoura-footer-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;margin-top:8px}
+  .amoura-footer-links>div{display:flex;flex-direction:column;gap:8px}
+  .amoura-footer-links strong{color:#F4EDE7;font-weight:600;margin-bottom:4px}
+  .amoura-footer-links a{color:#F4EDE7;text-decoration:none;opacity:.86}
+  .amoura-footer-links a:hover{opacity:1;text-decoration:underline}
+  @media(max-width:749px){
+    #header-group .header-announcements{display:none!important}
+    #header-group .header{min-height:58px!important}
+    .content-for-layout a.button,.content-for-layout button,.amx-founding__form button{min-height:44px}
+    .content-for-layout [class*="__more"],.content-for-layout [class*="__all"],.content-for-layout [class*="__link"]{padding-block:8px}
+    .content-for-layout [class*="eyebrow"],.content-for-layout [class*="__label"],.content-for-layout [class*="__meta"],.content-for-layout small{font-size:max(12px,.75rem)}
+    .amoura-footer-links{grid-template-columns:1fr 1fr;gap:24px 18px}
+  }
 </style>
 <script>
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
