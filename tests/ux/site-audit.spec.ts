@@ -22,8 +22,12 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
 
     let responseStatus: number | null = null;
     try {
-      const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
-      responseStatus = response?.status() ?? null;
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+        responseStatus = response?.status() ?? null;
+        if (responseStatus !== 429) break;
+        await page.waitForTimeout(1200 * attempt);
+      }
     } catch (error) {
       findings.push({
         route, viewport: project, severity: 'critical', code: 'navigation-failed',
@@ -32,14 +36,15 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
       continue;
     }
 
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(650);
     await stripShopifyPreviewChrome(page);
 
     if (responseStatus && responseStatus >= 400) {
       findings.push({
-        route, viewport: project, severity: 'critical', code: 'http-status',
+        route, viewport: project, severity: responseStatus === 429 ? 'warning' : 'critical', code: 'http-status',
         detail: String(responseStatus)
       });
+      continue;
     }
 
     for (const message of pageErrors) {
