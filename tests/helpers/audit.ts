@@ -1,6 +1,13 @@
 import AxeBuilder from '@axe-core/playwright';
 import type { Page } from '@playwright/test';
 
+export async function stripShopifyPreviewChrome(page: Page) {
+  await page.evaluate(() => {
+    document.querySelector('#PBarNextFrameWrapper')?.remove();
+    document.querySelector('#PBarNextFrame')?.remove();
+  }).catch(() => {});
+}
+
 export type AuditFinding = {
   route: string;
   viewport: string;
@@ -11,6 +18,7 @@ export type AuditFinding = {
 
 export async function auditPage(page: Page, route: string, viewport: string): Promise<AuditFinding[]> {
   const findings: AuditFinding[] = [];
+  await stripShopifyPreviewChrome(page);
 
   const metrics = await page.evaluate(() => {
     const visible = (el: Element) => {
@@ -100,6 +108,8 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
   }
 
   const axe = await new AxeBuilder({ page })
+    .exclude('#PBarNextFrameWrapper')
+    .exclude('#PBarNextFrame')
     .withTags(['wcag2a', 'wcag2aa'])
     .analyze();
 
