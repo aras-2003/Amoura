@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - "feature/playwright-ux-audit"
+      - "feature/amoura-daily-club"
     paths:
       - "assets/**"
       - "blocks/**"
@@ -27,7 +28,7 @@ permissions:
 jobs:
   deploy-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
     env:
       SHOPIFY_STORE: jksgiq-r4.myshopify.com
       SHOPIFY_THEME_ID: "207539044694"
@@ -52,3 +53,25 @@ jobs:
 
       - name: Push current branch to unpublished TEST theme
         run: bash scripts/theme-push.sh
+
+      - name: Install storefront audit dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Audit deployed TEST theme
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=207539044694
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+          MAX_AUDIT_ROUTES: "30"
+        run: npm run audit
+
+      - name: Upload deployed theme audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amoura-deployed-test-${{ github.sha }}
+          path: reports/
+          if-no-files-found: warn
+          retention-days: 14
