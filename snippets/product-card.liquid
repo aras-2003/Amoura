@@ -112,8 +112,20 @@
       {% if block_settings.padding-block-end > 0 %}--zoom-out-padding-block-end: min(var(--padding-xs), {{ block_settings.padding-block-end | times: 0.7}}px);{% endif %}
     "
   >
+    {% unless onboarding %}
+      {% assign amoura_card_tag = 'Wybrany produkt' %}
+      {% if product.handle contains 'lubricant' %}{% assign amoura_card_tag = 'Codzienny komfort' %}{% endif %}
+      {% if product.handle contains 'massager' %}{% assign amoura_card_tag = 'Eksploracja' %}{% endif %}
+      {% if product.handle contains 'set' or product.handle contains 'duo' or product.handle contains 'starter' %}{% assign amoura_card_tag = 'Gotowy punkt wejścia' %}{% endif %}
+      {% if product.handle contains 'oil' or product.handle contains 'candle' or product.handle contains 'stone' %}{% assign amoura_card_tag = 'Rytuał dla siebie' %}{% endif %}
+      <span class="amoura-product-card__decision-tag">{{ amoura_card_tag }}</span>
+    {% endunless %}
     {{ children }}
   </div>
 </product-card>
 
+<style>
+  .amoura-product-card__decision-tag{order:1;font-size:11px;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;color:#744D5E;margin-top:5px}
+  .product-card__content>*:not(.amoura-product-card__decision-tag){position:relative}
+</style>
 {% render 'product-card-styles' %}
