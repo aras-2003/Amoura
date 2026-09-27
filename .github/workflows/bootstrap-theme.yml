@@ -2,6 +2,12 @@ name: Bootstrap Shopify TEST Theme
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - "feature/playwright-ux-audit"
+    paths:
+      - ".github/workflows/bootstrap-theme.yml"
+      - "scripts/theme-pull.sh"
 
 permissions:
   contents: write
