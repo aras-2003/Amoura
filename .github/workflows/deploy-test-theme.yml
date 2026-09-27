@@ -55,7 +55,7 @@ jobs:
         run: bash scripts/theme-push.sh
 
       - name: Install storefront audit dependencies
-        run: npm ci
+        run: npm install
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
