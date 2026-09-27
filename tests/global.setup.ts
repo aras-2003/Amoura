@@ -14,8 +14,8 @@ export default async function globalSetup(config: FullConfig) {
   await page.goto(baseURL, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(800);
 
-  const passwordField = page.locator('input[type="password"], input[name="password"], #Password').first();
-  if (await passwordField.isVisible().catch(() => false)) {
+  const passwordPage = page.locator('[data-testid="password-footer"], .password-footer').first();
+  if (await passwordPage.isVisible().catch(() => false)) {
     const password = process.env.SHOPIFY_STOREFRONT_PASSWORD;
     if (!password) {
       throw new Error(
@@ -23,8 +23,16 @@ export default async function globalSetup(config: FullConfig) {
       );
     }
 
+    const openPassword = page.locator('.password-footer__button').first();
+    if (await openPassword.isVisible().catch(() => false)) {
+      await openPassword.click();
+    }
+
+    const passwordField = page.locator('input[type="password"][name="password"], #Password').first();
+    await passwordField.waitFor({ state: 'visible', timeout: 10_000 });
     await passwordField.fill(password);
-    const submit = page.getByRole('button', { name: /submit|prześlij|enter|wejdź/i }).first();
+
+    const submit = page.locator('.password-dialog__submit-button, button[type="submit"]').filter({ hasText: /submit|prześlij|enter|wejdź|wyślij/i }).first();
     if (await submit.isVisible().catch(() => false)) {
       await submit.click();
     } else {
@@ -34,7 +42,7 @@ export default async function globalSetup(config: FullConfig) {
     await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(1000);
 
-    const stillLocked = await page.locator('input[type="password"], input[name="password"], #Password')
+    const stillLocked = await page.locator('[data-testid="password-footer"], .password-footer')
       .first()
       .isVisible()
       .catch(() => false);
@@ -44,6 +52,7 @@ export default async function globalSetup(config: FullConfig) {
     }
   }
 
+  // Preserve both storefront authentication and the preview-theme session.
   await context.storageState({ path: '.auth/shopify.json' });
   await browser.close();
 }
