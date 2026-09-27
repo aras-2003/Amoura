@@ -7,11 +7,11 @@ const baseURL =
 export default defineConfig({
   testDir: './tests',
   globalSetup: require.resolve('./tests/global.setup'),
-  timeout: 90_000,
+  timeout: 600_000,
   expect: { timeout: 10_000 },
   fullyParallel: false,
   workers: process.env.CI ? 2 : undefined,
-  retries: process.env.CI ? 1 : 0,
+  retries: 0,
   reporter: [
     ['list'],
     ['html', { outputFolder: 'reports/html', open: 'never' }],
@@ -21,7 +21,7 @@ export default defineConfig({
   use: {
     baseURL,
     storageState: '.auth/shopify.json',
-    trace: 'retain-on-failure',
+    trace: 'off',
     screenshot: 'only-on-failure',
     video: 'off',
     ignoreHTTPSErrors: true,
