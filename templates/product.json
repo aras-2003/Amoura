@@ -1,0 +1,540 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "disclosures_g9mWze": {
+          "type": "disclosures",
+          "name": "t:names.disclosures",
+          "settings": {
+            "heading": "Warto wiedzieć",
+            "heading_preset": "h5",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h6",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "{{ settings.color_palette.color2 }}",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "grid",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "slideshow_controls_style": "counter",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "right",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 24,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 32,
+            "padding-block-end": 32,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "t:names.header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_xrnftG": {
+                  "type": "text",
+                  "name": "t:names.product_title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h2",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "h5",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_xrnftG",
+                "price_tVjtKg"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "{{ settings.color_palette.color2 }}",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "t:names.product_description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "text_aEtTtq"
+          ]
+        }
+      },
+      "block_order": [
+        "disclosures_g9mWze"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 24,
+        "padding-block-end": 40
+      }
+    },
+    "product_recommendations_qggXJq": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cbcgyb": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h3>W podobnym tonie</h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_DNizbJ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_M7MJkb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_gLWgA6": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_DNizbJ",
+            "product_title_M7MJkb",
+            "price_gLWgA6"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cbcgyb"
+      ],
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 64,
+        "padding-block-end": 72
+      }
+    },
+    "product_story": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amv2-pdp-support{padding:56px 0 72px;border-top:1px solid rgba(74,16,42,.14)}\n.amv2-pdp-support__note{display:grid;grid-template-columns:.7fr 1.3fr;gap:46px;padding:22px 0 34px}\n.amv2-pdp-support__note small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8B6675}\n.amv2-pdp-support__note p{font-size:15px;line-height:1.6;color:#3E3337;margin:0;max-width:46rem}\n.amv2-pdp-support__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(74,16,42,.16)}\n.amv2-pdp-support__item{background:#F4EDE7;padding:26px;min-height:170px}\n.amv2-pdp-support__item h3{font-family:Georgia,'Times New Roman',serif;font-size:21px;font-weight:400;color:#4A102A;margin:0 0 10px}\n.amv2-pdp-support__item p{font-size:14px;line-height:1.55;color:#3E3337;margin:0}\n@media(max-width:749px){.amv2-pdp-support__note,.amv2-pdp-support__grid{grid-template-columns:1fr}.amv2-pdp-support__note{gap:12px}.amv2-pdp-support__item{min-height:0}}\n</style>\n<section class=\"amv2-pdp-support\">\n{% if request.locale.iso_code == 'en' %}\n<div class=\"amv2-pdp-support__note\"><small>Concept product</small><p>This product is part of the Amoura prototype. Price, visuals and specifications are test content used to validate the experience and are not a final commercial offer.</p></div>\n<div class=\"amv2-pdp-support__grid\"><div class=\"amv2-pdp-support__item\"><h3>Take your time</h3><p>You do not need to use everything at once. Begin with the simplest version of the ritual and notice what feels comfortable.</p></div><div class=\"amv2-pdp-support__item\"><h3>Comfort matters</h3><p>The product should fit the body and the moment, not demand a performance.</p></div><div class=\"amv2-pdp-support__item\"><h3>What we look for</h3><p>A clear purpose, good materials and enough simplicity to make the product easy to live with.</p></div></div>\n{% else %}\n<div class=\"amv2-pdp-support__note\"><small>Produkt koncepcyjny</small><p>Ten produkt jest częścią prototypu Amoura. Cena, wizualizacja i parametry służą walidacji doświadczenia i nie stanowią jeszcze finalnej oferty handlowej.</p></div>\n<div class=\"amv2-pdp-support__grid\"><div class=\"amv2-pdp-support__item\"><h3>Daj sobie czas</h3><p>Nie musisz robić wszystkiego od razu. Zacznij od najprostszej wersji rytuału i sprawdź, co jest dla Ciebie komfortowe.</p></div><div class=\"amv2-pdp-support__item\"><h3>Komfort ma znaczenie</h3><p>Produkt ma pasować do ciała i chwili, nie stawiać przed Tobą zadania.</p></div><div class=\"amv2-pdp-support__item\"><h3>Na co zwracamy uwagę</h3><p>Jasna funkcja, dobre materiały i prostota, dzięki której z produktu naprawdę chce się korzystać.</p></div></div>\n{% endif %}\n</section>",
+        "background_color": "#F4EDE7",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "knowledge_bridge": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amv3-kbridge{display:grid;grid-template-columns:1.05fr .95fr;min-height:560px;background:#30272B;color:#F4EDE7;overflow:hidden}\n.amv3-kbridge__media{min-height:480px;overflow:hidden;background:#3B241E}\n.amv3-kbridge__media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}\n.amv3-kbridge:hover .amv3-kbridge__media img{transform:scale(1.018)}\n.amv3-kbridge__copy{padding:clamp(36px,5vw,70px);display:flex;flex-direction:column;justify-content:center}\n.amv3-kbridge__eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.68;margin:0 0 16px}\n.amv3-kbridge h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(36px,4.7vw,60px);line-height:.98;font-weight:400;color:#F4EDE7;margin:0 0 22px}\n.amv3-kbridge p{font-size:15px;line-height:1.65;opacity:.88;margin:0 0 24px;max-width:35rem}\n.amv3-kbridge a{align-self:flex-start;color:#F4EDE7;text-decoration:none;border-bottom:1px solid rgba(244,237,231,.75);padding-bottom:3px}\n@media(max-width:749px){.amv3-kbridge{grid-template-columns:1fr}.amv3-kbridge__media{min-height:330px}}\n</style>\n{% assign related_article = nil %}\n{% for a in blogs['wiedza'].articles %}\n  {% assign match = false %}\n  {% for tag in a.tags %}\n    {% if product.tags contains tag %}{% assign match = true %}{% endif %}\n  {% endfor %}\n  {% if match and related_article == nil %}{% assign related_article = a %}{% endif %}\n{% endfor %}\n{% if related_article %}\n  {% assign editorial_image = 'amoura-v2-editorial-lifestyle.png' %}\n  {% if related_article.tags contains 'intimacy' %}{% assign editorial_image = 'amoura-v3-intimacy-editorial.png' %}{% endif %}\n  {% if related_article.tags contains 'ritual' and related_article.tags contains 'touch' %}{% assign editorial_image = 'amoura-v3-ritual-editorial.png' %}{% endif %}\n  <section class=\"amv3-kbridge\">\n    <div class=\"amv3-kbridge__media\"><img src=\"{{ editorial_image | file_url }}\" alt=\"{{ related_article.title | escape }}\"></div>\n    <div class=\"amv3-kbridge__copy\">\n      <p class=\"amv3-kbridge__eyebrow\">{% if request.locale.iso_code == 'en' %}Read in context{% else %}Doczytaj w kontekście{% endif %}</p>\n      <h2>{{ related_article.title }}</h2>\n      <p>{{ related_article.excerpt_or_content | strip_html | truncate: 210 }}</p>\n      <a href=\"{{ related_article.url }}\">{% if request.locale.iso_code == 'en' %}Read before you choose →{% else %}Przeczytaj przed wyborem →{% endif %}</a>\n    </div>\n  </section>\n{% endif %}",
+        "background_color": "#30272B",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "soft_editorial": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{% if product.handle == 'soft-ritual-massager' %}\n<style>\n.amx-soft{padding:80px 0 96px}\n.amx-soft__kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8B6675;margin-bottom:18px}\n.amx-soft__title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(42px,5.5vw,72px);line-height:.94;font-weight:400;color:#4A102A;margin:0 0 46px;max-width:11ch}\n.amx-soft__story{display:grid;grid-template-columns:1.05fr .95fr;gap:58px;align-items:start}\n.amx-soft__media{position:sticky;top:120px;overflow:hidden;background:#E8DDD6}\n.amx-soft__media img{width:100%;display:block}\n.amx-soft__copy section{min-height:52vh;padding:34px 0;border-top:1px solid rgba(74,16,42,.16);display:flex;flex-direction:column;justify-content:center}\n.amx-soft__copy small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B6675;margin-bottom:12px}\n.amx-soft__copy h3{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,3.7vw,48px);line-height:1;font-weight:400;color:#4A102A;margin:0 0 14px}\n.amx-soft__copy p{font-size:15px;line-height:1.65;color:#3E3337;margin:0;max-width:33rem}\n.amx-soft__copy a{align-self:flex-start;margin-top:18px;color:#4A102A;text-decoration:none;border-bottom:1px solid #4A102A;padding-bottom:3px}\n@media(max-width:850px){.amx-soft__story{grid-template-columns:1fr}.amx-soft__media{position:relative;top:auto}.amx-soft__copy section{min-height:auto;padding:40px 0}}\n</style>\n<section class=\"amx-soft\">\n<p class=\"amx-soft__kicker\" data-amoura-reveal>{% if request.locale.iso_code == 'en' %}Soft Ritual, considered slowly{% else %}Soft Ritual, bez pośpiechu{% endif %}</p>\n<h2 class=\"amx-soft__title\" data-amoura-reveal>{% if request.locale.iso_code == 'en' %}A discreet object. A very personal use.{% else %}Dyskretny przedmiot. Bardzo osobisty sposób użycia.{% endif %}</h2>\n<div class=\"amx-soft__story\">\n  <div class=\"amx-soft__media\" data-amoura-mask><img data-amoura-parallax src=\"{{ product.featured_image | image_url: width: 1500 }}\" alt=\"{{ product.title | escape }}\"></div>\n  <div class=\"amx-soft__copy\">\n    <section data-amoura-reveal><small>01 · {% if request.locale.iso_code == 'en' %}for whom{% else %}dla kogo{% endif %}</small><h3>{% if request.locale.iso_code == 'en' %}For quiet curiosity.{% else %}Dla spokojnej ciekawości.{% endif %}</h3><p>{% if request.locale.iso_code == 'en' %}A discreet next step when you want to explore pleasure without turning it into another performance target.{% else %}Dyskretny kolejny krok, kiedy chcesz eksplorować przyjemność bez zamieniania jej w kolejny cel do osiągnięcia.{% endif %}</p></section>\n    <section data-amoura-reveal><small>02 · {% if request.locale.iso_code == 'en' %}how to begin{% else %}jak zacząć{% endif %}</small><h3>{% if request.locale.iso_code == 'en' %}Start where it feels natural.{% else %}Zacznij tam, gdzie czujesz się naturalnie.{% endif %}</h3><p>{% if request.locale.iso_code == 'en' %}Give yourself time, privacy and a setting in which nothing needs to happen. A good first experience is the one that feels natural, not impressive.{% else %}Daj sobie czas, prywatność i warunki, w których nic nie musi się wydarzyć. Dobre pierwsze doświadczenie to takie, które jest naturalne – nie spektakularne.{% endif %}</p></section>\n    <section data-amoura-reveal><small>03 · {% if request.locale.iso_code == 'en' %}read in context{% else %}doczytaj w kontekście{% endif %}</small><h3>{% if request.locale.iso_code == 'en' %}Pleasure changes. That can be a good thing.{% else %}Przyjemność się zmienia. I to może być dobra wiadomość.{% endif %}</h3><p>{% if request.locale.iso_code == 'en' %}Our guide on intimacy after 35 puts comfort, communication and changing needs before technique.{% else %}W materiale o bliskości po 35. stawiamy komfort, komunikację i zmieniające się potrzeby przed techniką.{% endif %}</p><a href=\"{% if request.locale.iso_code == 'en' %}/en/blogs/journal/intimacy-after-35{% else %}/blogs/wiedza/bliskosc-po-35{% endif %}\">{% if request.locale.iso_code == 'en' %}Read the guide →{% else %}Przeczytaj materiał →{% endif %}</a></section>\n  </div>\n</div>\n</section>\n{% endif %}",
+        "background_color": "#F4EDE7",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "trust_layer": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amx-trust{padding:72px 0 82px;border-top:1px solid rgba(74,16,42,.14)}\n.amx-trust__head{display:grid;grid-template-columns:.68fr 1.32fr;gap:58px;margin-bottom:28px}.amx-trust small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8B6675}.amx-trust h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(34px,4.5vw,56px);line-height:1;font-weight:400;color:#4A102A;margin:0 0 14px}.amx-trust p{font-size:14px;line-height:1.62;color:#3E3337;max-width:44rem;margin:0}\n.amx-trust__status{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(74,16,42,.14)}.amx-trust__card{background:#F4EDE7;padding:24px;min-height:180px}.amx-trust__card strong{display:block;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:#4A102A;margin:22px 0 8px}.amx-trust__card span{font-size:13px;line-height:1.55;color:#3E3337}.amx-trust__link{display:inline-block;margin-top:24px;color:#4A102A;text-decoration:none;border-bottom:1px solid #4A102A;padding-bottom:3px}\n@media(max-width:780px){.amx-trust__head,.amx-trust__status{grid-template-columns:1fr}}\n</style>\n<section class=\"amx-trust\"><div class=\"amx-trust__head\"><small>Amoura Standard</small><div><h2>{% if request.locale.iso_code == 'en' %}What we know. What we still need to prove.{% else %}Co wiemy. Co jeszcze musimy udowodnić.{% endif %}</h2><p>{% if request.locale.iso_code == 'en' %}This is a prototype product. We do not turn unverified supplier claims into benefits. Final commercial pages should show the result of material, safety, cleaning, ergonomics and warranty checks.{% else %}To produkt prototypowy. Nie zamieniamy niezweryfikowanych deklaracji dostawcy w korzyści. Finalna karta produktu powinna pokazywać wynik weryfikacji materiału, bezpieczeństwa, czyszczenia, ergonomii i gwarancji.{% endif %}</p></div></div>\n<div class=\"amx-trust__status\">\n<div class=\"amx-trust__card\"><span>{% if request.locale.iso_code == 'en' %}CURRENT STATUS{% else %}STATUS TERAZ{% endif %}</span><strong>{% if request.locale.iso_code == 'en' %}In validation{% else %}W walidacji{% endif %}</strong><span>{% if request.locale.iso_code == 'en' %}Price, supplier and specifications are still test content in this prototype.{% else %}Cena, dostawca i parametry są nadal treścią testową w tym prototypie.{% endif %}</span></div>\n<div class=\"amx-trust__card\"><span>{% if request.locale.iso_code == 'en' %}BEFORE SALE{% else %}PRZED SPRZEDAŻĄ{% endif %}</span><strong>{% if request.locale.iso_code == 'en' %}Evidence required{% else %}Wymagamy dowodów{% endif %}</strong><span>{% if request.locale.iso_code == 'en' %}Supplier documents, relevant compliance, cleaning instructions, warranty and physical product testing.{% else %}Dokumentacja dostawcy, właściwa zgodność, instrukcja czyszczenia, gwarancja i fizyczny test produktu.{% endif %}</span></div>\n<div class=\"amx-trust__card\"><span>{% if request.locale.iso_code == 'en' %}PRICE LOGIC{% else %}LOGIKA CENY{% endif %}</span><strong>{% if request.locale.iso_code == 'en' %}Premium must be earned{% else %}Premium trzeba uzasadnić{% endif %}</strong><span>{% if request.locale.iso_code == 'en' %}The final price should reflect materials, testing, warranty, service and selection, not the word premium itself.{% else %}Finalna cena ma wynikać z materiałów, testów, gwarancji, obsługi i selekcji, a nie z samego słowa premium.{% endif %}</span></div>\n</div>\n<a class=\"amx-trust__link\" data-amoura-track=\"standard_pdp\" href=\"{% if request.locale.iso_code == 'en' %}/en/pages/about-amoura#amoura-standard{% else %}/pages/o-amoura#amoura-standard{% endif %}\">{% if request.locale.iso_code == 'en' %}See the full Amoura Standard →{% else %}Zobacz pełny Standard Amoura →{% endif %}</a>\n</section>",
+        "background_color": "#F4EDE7",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "pairing": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amx-pair{padding:72px 0 82px;background:#EFE5DF}.amx-pair__head{display:grid;grid-template-columns:.7fr 1.3fr;gap:56px;margin-bottom:28px}.amx-pair small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8B6675}.amx-pair h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(32px,4vw,50px);font-weight:400;line-height:1;color:#4A102A;margin:0 0 12px}.amx-pair p{font-size:14px;line-height:1.6;color:#3E3337;margin:0;max-width:42rem}\n.amx-pair__grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.amx-pair__item{display:grid;grid-template-columns:150px 1fr;background:#F4EDE7;text-decoration:none;color:#4A102A;min-height:180px}.amx-pair__media{overflow:hidden;background:#E6D9D2}.amx-pair__media img{width:100%;height:100%;object-fit:cover}.amx-pair__copy{padding:22px}.amx-pair__copy small{font-size:9px}.amx-pair__copy h3{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;margin:22px 0 8px}.amx-pair__copy span{font-size:13px;color:#3E3337}\n@media(max-width:780px){.amx-pair__head,.amx-pair__grid{grid-template-columns:1fr}.amx-pair__item{grid-template-columns:120px 1fr}}\n</style>\n{% assign pair1 = nil %}{% assign pair2 = nil %}\n{% if product.tags contains 'core' or product.tags contains 'intimacy' %}\n  {% assign pair1 = all_products['perennial-lubricant-ha'] %}{% assign pair2 = all_products['perennial-calm-ritual-candle'] %}\n{% elsif product.tags contains 'comfort' or product.tags contains 'hormonal-change' %}\n  {% assign pair1 = all_products['soft-ritual-massager'] %}{% assign pair2 = all_products['renaissance-body-oil'] %}\n{% else %}\n  {% assign pair1 = all_products['perennial-ritual-oil'] %}{% assign pair2 = all_products['perennial-warm-body-stone'] %}\n{% endif %}\n<section class=\"amx-pair\"><div class=\"amx-pair__head\"><small>{% if request.locale.iso_code == 'en' %}Complete only if useful{% else %}Dobierz tylko, jeśli ma sens{% endif %}</small><div><h2>{% if request.locale.iso_code == 'en' %}Two adjacent choices, not an automatic upsell.{% else %}Dwie sąsiednie opcje, nie automatyczny upsell.{% endif %}</h2><p>{% if request.locale.iso_code == 'en' %}A larger basket is not the goal. These products are shown because they can support the same moment from a different angle.{% else %}Większy koszyk nie jest celem samym w sobie. Te produkty pojawiają się dlatego, że mogą wesprzeć ten sam moment z innej strony.{% endif %}</p></div></div>\n<div class=\"amx-pair__grid\">\n{% if pair1 and pair1.id != product.id %}<a class=\"amx-pair__item\" data-amoura-track=\"pdp_pair_1\" href=\"{{ pair1.url }}\"><div class=\"amx-pair__media\"><img src=\"{{ pair1.featured_image | image_url: width: 500 }}\" alt=\"{{ pair1.title | escape }}\"></div><div class=\"amx-pair__copy\"><small>{% if request.locale.iso_code == 'en' %}Consider alongside{% else %}Rozważ razem{% endif %}</small><h3>{{ pair1.title }}</h3><span>{{ pair1.price | money }}</span></div></a>{% endif %}\n{% if pair2 and pair2.id != product.id %}<a class=\"amx-pair__item\" data-amoura-track=\"pdp_pair_2\" href=\"{{ pair2.url }}\"><div class=\"amx-pair__media\"><img src=\"{{ pair2.featured_image | image_url: width: 500 }}\" alt=\"{{ pair2.title | escape }}\"></div><div class=\"amx-pair__copy\"><small>{% if request.locale.iso_code == 'en' %}Consider alongside{% else %}Rozważ razem{% endif %}</small><h3>{{ pair2.title }}</h3><span>{{ pair2.price | money }}</span></div></a>{% endif %}\n</div></section>",
+        "background_color": "#EFE5DF",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "pdp_discretion": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amx-pdp-private{padding:46px 0 58px;background:#30272B;color:#F4EDE7}.amx-pdp-private__inner{display:grid;grid-template-columns:.65fr 1.35fr;gap:58px}.amx-pdp-private small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.65}.amx-pdp-private h3{font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:400;color:#F4EDE7;margin:0 0 10px}.amx-pdp-private p{font-size:14px;line-height:1.62;opacity:.82;max-width:43rem;margin:0}@media(max-width:760px){.amx-pdp-private__inner{grid-template-columns:1fr;gap:16px}}\n</style>\n<section class=\"amx-pdp-private\"><div class=\"amx-pdp-private__inner\"><small>{% if request.locale.iso_code == 'en' %}Privacy standard{% else %}Standard dyskrecji{% endif %}</small><div><h3>{% if request.locale.iso_code == 'en' %}Exact shipping rules will be published before commercial launch.{% else %}Dokładne zasady wysyłki opublikujemy przed startem komercyjnym.{% endif %}</h3><p>{% if request.locale.iso_code == 'en' %}The target standard covers neutral outer packaging, restrained notification content and privacy-first customer communication. We will not present those points as verified until the final fulfilment process is tested end to end.{% else %}Docelowy standard obejmuje neutralne opakowanie zewnętrzne, oszczędne treści powiadomień i komunikację privacy-first. Nie pokażemy tych punktów jako zweryfikowanych, dopóki finalny proces fulfilmentu nie przejdzie testu end-to-end.{% endif %}</p></div></div></section>",
+        "background_color": "#30272B",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "soft_editorial",
+    "trust_layer",
+    "knowledge_bridge",
+    "product_story",
+    "pairing",
+    "pdp_discretion",
+    "product_recommendations_qggXJq"
+  ]
+}

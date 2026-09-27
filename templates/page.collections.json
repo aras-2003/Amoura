@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amoura-collections-hub{padding:72px 0 34px}\n.amoura-collections-hub small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#4A102A}\n.amoura-collections-hub h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(52px,7vw,92px);font-weight:400;line-height:.94;letter-spacing:-.05em;color:#4A102A;margin:16px 0 20px}\n.amoura-collections-hub p{font-size:18px;line-height:1.58;color:#4B2E25;max-width:42rem;margin:0}\n</style>\n{% if request.locale.iso_code == 'en' %}<section class=\"amoura-collections-hub\"><small>Amoura collections</small><h1>Start with what you need today.</h1><p>You do not need to know sexual wellness categories. Choose the context that feels closest to you – each collection leads to a different kind of experience.</p></section>{% else %}<section class=\"amoura-collections-hub\"><small>Kolekcje Amoura</small><h1>Zacznij od tego, czego dziś potrzebujesz.</h1><p>Nie musisz znać kategorii sexual wellness. Wybierz kontekst, który jest Ci najbliższy – każda kolekcja prowadzi do innego rodzaju doświadczenia.</p></section>{% endif %}",
+        "background_color": "#F4EDE7",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "grid": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amoura-hub-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:18px 0 74px}\n.amoura-hub-card{position:relative;min-height:430px;overflow:hidden;background:#4B2E25;text-decoration:none}\n.amoura-hub-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}\n.amoura-hub-card:after{content:\"\";position:absolute;inset:0;background:linear-gradient(to top,rgba(37,16,20,.82),rgba(37,16,20,.08) 65%)}\n.amoura-hub-card:hover img{transform:scale(1.03)}\n.amoura-hub-card__body{position:absolute;z-index:2;left:28px;right:28px;bottom:28px;color:#F4EDE7}\n.amoura-hub-card__body small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.82}\n.amoura-hub-card__body h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,3.7vw,48px);line-height:.98;font-weight:400;margin:10px 0 10px;color:#F4EDE7}\n.amoura-hub-card__body p{font-size:14px;line-height:1.5;max-width:31rem;margin:0;color:#F4EDE7}\n.amoura-hub-card__body span{display:inline-block;margin-top:18px;border-bottom:1px solid rgba(244,237,231,.7);padding-bottom:3px;font-size:13px}\n@media(max-width:749px){.amoura-hub-grid{grid-template-columns:1fr;padding-bottom:52px}.amoura-hub-card{min-height:360px}.amoura-hub-card__body{left:20px;right:20px;bottom:20px}}\n</style>\n<div class=\"amoura-hub-grid\">\n{% if request.locale.iso_code == 'en' %}\n<a class=\"amoura-hub-card\" href=\"/en/collections/renaissance\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-renaissance.png?v=1790241300\" alt=\"Rediscover Yourself\"><div class=\"amoura-hub-card__body\"><small>01 · gentle entry</small><h2>Rediscover Yourself</h2><p>For women who want to begin gently – with touch, atmosphere and products close to everyday self-care.</p><span>Explore collection →</span></div></a>\n<a class=\"amoura-hub-card\" href=\"/en/collections/midlife-premium-intimacy\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-midlife-premium.png?v=1790241305\" alt=\"Mature Intimacy\"><div class=\"amoura-hub-card__body\"><small>02 · premium intimacy</small><h2>Mature Intimacy</h2><p>Conscious intimacy with a premium standard of design, discretion and context.</p><span>Explore collection →</span></div></a>\n<a class=\"amoura-hub-card\" href=\"/en/collections/perennial-rituals\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-perennial-rituals.png?v=1790241312\" alt=\"Rituals for Yourself\"><div class=\"amoura-hub-card__body\"><small>03 · regular self-care</small><h2>Rituals for Yourself</h2><p>Everyday touch, presence and sensory wellbeing rituals you can return to without waiting for a special occasion.</p><span>Explore collection →</span></div></a>\n<a class=\"amoura-hub-card\" href=\"/en/collections/menopause-comfort-pleasure\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-menopause-comfort.png?v=1790241320\" alt=\"Comfort & Pleasure\"><div class=\"amoura-hub-card__body\"><small>04 · times of change</small><h2>Comfort & Pleasure</h2><p>Closeness and sensual wellbeing through hormonal change – without reducing the experience to symptoms.</p><span>Explore collection →</span></div></a>\n{% else %}\n<a class=\"amoura-hub-card\" href=\"/collections/renaissance\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-renaissance.png?v=1790241300\" alt=\"Powrót do siebie\"><div class=\"amoura-hub-card__body\"><small>01 · łagodne wejście</small><h2>Powrót do siebie</h2><p>Dla kobiet, które chcą zacząć spokojnie – od dotyku, atmosfery i produktów bliskich codziennemu self-care.</p><span>Poznaj kolekcję →</span></div></a>\n<a class=\"amoura-hub-card\" href=\"/collections/midlife-premium-intimacy\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-midlife-premium.png?v=1790241305\" alt=\"Świadoma bliskość\"><div class=\"amoura-hub-card__body\"><small>02 · intymność premium</small><h2>Świadoma bliskość</h2><p>Świadoma intymność w jakości premium – mniej przypadkowych produktów, więcej designu, dyskrecji i kontekstu.</p><span>Poznaj kolekcję →</span></div></a>\n<a class=\"amoura-hub-card\" href=\"/collections/perennial-rituals\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-perennial-rituals.png?v=1790241312\" alt=\"Rytuały dla siebie\"><div class=\"amoura-hub-card__body\"><small>03 · regularny self-care</small><h2>Rytuały dla siebie</h2><p>Codzienne rytuały dotyku, uważności i sensorycznego dobrostanu, do których można wracać bez specjalnej okazji.</p><span>Poznaj kolekcję →</span></div></a>\n<a class=\"amoura-hub-card\" href=\"/collections/menopause-comfort-pleasure\"><img src=\"https://cdn.shopify.com/s/files/1/1066/1570/1846/collections/amoura-collection-menopause-comfort.png?v=1790241320\" alt=\"Komfort i przyjemność\"><div class=\"amoura-hub-card__body\"><small>04 · okres zmian</small><h2>Komfort i przyjemność</h2><p>Bliskość i sensualny dobrostan w okresie zmian hormonalnych – bez redukowania doświadczenia do symptomów.</p><span>Poznaj kolekcję →</span></div></a>\n{% endif %}\n</div>",
+        "background_color": "#F4EDE7",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "guide": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.amoura-hub-guide{padding:56px 0 70px;border-top:1px solid rgba(74,16,42,.16)}\n.amoura-hub-guide__grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:58px}\n.amoura-hub-guide__label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8B6675}\n.amoura-hub-guide h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(34px,4.4vw,56px);line-height:1;font-weight:400;color:#4A102A;margin:0 0 16px}\n.amoura-hub-guide p{font-size:16px;line-height:1.65;color:#4B2E25;max-width:42rem;margin:0}\n.amoura-hub-guide a{display:inline-block;margin-top:24px;color:#4A102A;text-decoration:none;border-bottom:1px solid #4A102A;padding-bottom:3px}\n@media(max-width:749px){.amoura-hub-guide__grid{grid-template-columns:1fr;gap:20px}}\n</style>\n<section class=\"amoura-hub-guide\"><div class=\"amoura-hub-guide__grid\">\n<div class=\"amoura-hub-guide__label\">{% if request.locale.iso_code == 'en' %}How to read the collections{% else %}Jak czytać kolekcje{% endif %}</div>\n<div><h2>{% if request.locale.iso_code == 'en' %}A collection is a starting point, not a rigid category.{% else %}Kolekcja to punkt wejścia, nie sztywna kategoria.{% endif %}</h2><p>{% if request.locale.iso_code == 'en' %}The same product can belong in more than one context. That is intentional: Amoura supports choice based on needs and life stage instead of forcing you through technical product categories.{% else %}Ten sam produkt może pasować do więcej niż jednego kontekstu. To celowe: Amoura ma pomagać w wyborze według potrzeby i etapu życia, a nie zmuszać do poruszania się po technicznych kategoriach produktowych.{% endif %}</p><a href=\"{% if request.locale.iso_code == 'en' %}/en/collections/all{% else %}/collections/all{% endif %}\">{% if request.locale.iso_code == 'en' %}View all products →{% else %}Zobacz wszystkie produkty →{% endif %}</a></div>\n</div></section>",
+        "background_color": "#F4EDE7",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "grid",
+    "guide"
+  ]
+}
