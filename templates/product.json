@@ -68,7 +68,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 24,
+            "gap": 18,
             "sticky_details_desktop": true,
             "background_media": "none",
             "background_color": "",
@@ -79,8 +79,8 @@
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
-            "padding-block-start": 32,
-            "padding-block-end": 32,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -277,7 +277,7 @@
               "type": "text",
               "name": "t:names.product_description",
               "settings": {
-                "text": "{{ closest.product.description | strip_html | truncatewords: 55 }}",
+                "text": "{{ closest.product.description | strip_html | truncatewords: 36 }}",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
