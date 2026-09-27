@@ -109,7 +109,7 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
       viewport,
       severity: violation.impact === 'critical' ? 'critical' : 'serious',
       code: `axe:${violation.id}`,
-      detail: `${violation.help} (${violation.nodes.length} nodes)`
+      detail: `${violation.help} (${violation.nodes.length} nodes): ${violation.nodes.map((node) => node.target.join(' > ')).slice(0, 5).join(' | ')}`
     });
   }
 
