@@ -215,7 +215,7 @@
             "amoura": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Standard Amoura</a><br><a href=\"/pages/klub-amoura\">Founding 50</a></p>",
+                "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Standard Amoura</a><br><a href=\"/pages/klub-amoura\">Club Amoura</a></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
