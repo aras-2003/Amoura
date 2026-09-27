@@ -162,6 +162,19 @@
     .amoura-collection-guide__content h2{font-size:34px!important;line-height:1.04!important}
     .amoura-collection-guide__content p{font-size:16px!important;line-height:1.62!important}
   }
+  /* Global Amoura mobile ergonomics */
+  @media(max-width:749px){
+    .content-for-layout .button,
+    .content-for-layout button[type="submit"],
+    .content-for-layout input[type="submit"]{min-height:44px}
+    .content-for-layout [class*="amx-"] a:not(.amv2-product):not(.amv3-feed__article):not(.amv3-feed__product),
+    .content-for-layout [class*="amv2-"] a:not(.amv2-product):not(.amv3-feed__article):not(.amv3-feed__product),
+    .content-for-layout [class*="amv3-"] a:not(.amv2-product):not(.amv3-feed__article):not(.amv3-feed__product){padding-block:6px}
+    .content-for-layout [class*="amx-"] small,
+    .content-for-layout [class*="amv2-"] small,
+    .content-for-layout [class*="amv3-"] small{font-size:12px!important}
+    #header-group .header__row{min-height:56px}
+  }
   /* Rich product copy */
   .product-information .rte h3,.product-details .rte h3{font-family:Georgia,'Times New Roman',serif;font-size:1.45rem;line-height:1.1;font-weight:400;color:#4A102A;margin:30px 0 10px}
   .product-information .rte p,.product-information .rte li,.product-details .rte p,.product-details .rte li{line-height:1.62}
