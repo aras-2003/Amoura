@@ -60,7 +60,15 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
       .filter(visible)
       .map((el) => {
         const r = el.getBoundingClientRect();
-        return { w: r.width, h: r.height, text: (el.textContent || '').trim().slice(0, 80), tag: el.tagName };
+        const id = (el as HTMLElement).id ? `#${(el as HTMLElement).id}` : '';
+        const classes = [...(el as HTMLElement).classList].slice(0, 3).map((c) => `.${c}`).join('');
+        return {
+          w: r.width,
+          h: r.height,
+          text: (el.textContent || '').trim().slice(0, 80),
+          tag: el.tagName,
+          selector: `${el.tagName.toLowerCase()}${id}${classes}`
+        };
       })
       .filter((x) => x.w < 40 || x.h < 40)
       .slice(0, 20);
@@ -102,7 +110,7 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
     for (const target of metrics.touchTargets) {
       findings.push({
         route, viewport, severity: 'warning', code: 'small-touch-target',
-        detail: `${target.tag} ${Math.round(target.w)}x${Math.round(target.h)} "${target.text}"`
+        detail: `${target.selector} ${Math.round(target.w)}x${Math.round(target.h)} "${target.text}"`
       });
     }
   }
