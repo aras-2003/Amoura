@@ -162,6 +162,18 @@
     .amoura-collection-guide__content h2{font-size:34px!important;line-height:1.04!important}
     .amoura-collection-guide__content p{font-size:16px!important;line-height:1.62!important}
   }
+  /* Amoura wide-screen scaling: keep the site editorial rather than tiny on
+     ultra-wide viewports or when a desktop browser is zoomed out. */
+  @media(min-width:1600px){
+    body.page-width-normal{
+      --normal-page-width:min(1680px,88vw);
+    }
+  }
+  @media(min-width:2200px){
+    body.page-width-normal{
+      --normal-page-width:min(1840px,84vw);
+    }
+  }
   /* Global Amoura mobile ergonomics */
   @media(max-width:749px){
     .content-for-layout .button,
