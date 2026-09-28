@@ -55,6 +55,7 @@ jobs:
           node-version: "22"
 
       - name: Push current branch to unpublished TEST theme
+        id: push_theme
         run: bash scripts/theme-push.sh
 
       - name: Install storefront audit dependencies
@@ -65,7 +66,7 @@ jobs:
 
       - name: Audit deployed TEST theme
         env:
-          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=207539044694
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=${{ steps.push_theme.outputs.theme_id }}
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
           MAX_AUDIT_ROUTES: "30"
         run: npm run audit
