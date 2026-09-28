@@ -130,7 +130,7 @@
         "knowledge": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Wiedza</strong><br><a href=\"/blogs/wiedza\">Journal</a><br><a href=\"/blogs/wiedza/od-czego-zaczac\">Na początek</a></p>",
+            "text": "<p><strong>Wiedza</strong><br><a href=\"/blogs/wiedza\">Artykuły</a><br><a href=\"/blogs/wiedza/od-czego-zaczac\">Od czego zacząć</a></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -154,7 +154,7 @@
         "amoura": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Jak wybieramy produkty</a><br><a href=\"/pages/klub-amoura\">Club Amoura</a><br><a href=\"/pages/contact\">Kontakt</a></p>",
+            "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Jak wybieramy produkty</a><br><a href=\"/pages/klub-amoura\">Klub Amoura</a><br><a href=\"/pages/contact\">Kontakt</a></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -185,10 +185,10 @@
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 28,
+        "gap": 20,
         "background_color": "#F4EDE7",
-        "padding-block-start": 46,
-        "padding-block-end": 30,
+        "padding-block-start": 34,
+        "padding-block-end": 22,
         "editorial_footer": true
       }
     },
