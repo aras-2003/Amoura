@@ -225,7 +225,8 @@
           "settings": {
             "show_powered_by": false,
             "font_size": "0.75rem",
-            "case": "none"
+            "case": "none",
+            "text_color": "#48172C"
           },
           "blocks": {}
         },
@@ -233,7 +234,8 @@
           "type": "footer-policy-list",
           "settings": {
             "font_size": "0.75rem",
-            "case": "none"
+            "case": "none",
+            "text_color": "#48172C"
           },
           "blocks": {}
         },
