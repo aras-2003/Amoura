@@ -8,6 +8,7 @@ on:
       - "feature/amoura-daily-club"
       - "fix/header-section-rendering-diagnostics"
       - "refactor/about-amoura-story"
+      - "stabilize/backlog-dod"
     paths:
       - "assets/**"
       - "blocks/**"
@@ -71,6 +72,30 @@ jobs:
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
         run: npm run diagnose:sections
 
+      - name: Verify full-page screenshots
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+        run: npm run diagnose:screenshots
+
+      - name: Verify responsive touch targets
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+        run: npm run diagnose:touch
+
+      - name: Verify email flow separation
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+        run: npm run diagnose:email-flows
+
+      - name: Verify language consistency
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+        run: npm run diagnose:language
+
       - name: Audit deployed TEST theme
         env:
           AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
@@ -83,6 +108,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: amoura-deployed-test-${{ github.sha }}
-          path: reports/
+          path: |
+            reports/
+            test-results/
           if-no-files-found: warn
           retention-days: 14
