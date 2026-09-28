@@ -52,9 +52,14 @@ test('English storefront keeps English brand labels and live core routes', async
 
     expect(text, `${route}: missing translation`).not.toMatch(/translation missing/i);
     expect(text, `${route}: Polish Club label leaked into EN`).not.toContain('Klub Amoura');
-    expect(text, `${route}: legacy English Club label leaked into EN`).not.toContain('Amoura Club');
   }
 
   await gotoWithRetry(page, '/en/pages/klub-amoura');
+  const clubLinks = page.locator('header a, footer a').filter({ hasText: /Club|Klub/i });
   await expect(page.locator('header')).toContainText('Club Amoura');
+  await expect(page.locator('body')).toContainText('CLUB AMOURA');
+  const labels = (await clubLinks.allTextContents()).map((value) => value.trim()).filter(Boolean);
+  expect(labels, 'English Club links should not use legacy Amoura Club / Polish labels')
+    .not.toContain('Amoura Club');
+  expect(labels).not.toContain('Klub Amoura');
 });
