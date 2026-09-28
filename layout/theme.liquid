@@ -386,11 +386,28 @@
   })();
 </script><script id="amoura-locale-labels">
 (() => {
-  const clubLabel = {{ request.locale.iso_code | json }} === 'en' ? 'Club Amoura' : 'Klub Amoura';
-  document.querySelectorAll('a[href*="/pages/klub-amoura"], a[href*="/en/pages/klub-amoura"]').forEach((link) => {
-    const text = link.textContent.trim();
-    if (text === 'Club Amoura' || text === 'Klub Amoura') link.textContent = clubLabel;
-  });
+  const locale = {{ request.locale.iso_code | json }};
+  const clubLabel = locale === 'en' ? 'Club Amoura' : 'Klub Amoura';
+  const selector = 'a[href*="/pages/klub-amoura"], a[href*="/en/pages/klub-amoura"]';
+
+  const applyClubLabel = (root = document) => {
+    root.querySelectorAll?.(selector).forEach((link) => {
+      if (link.textContent.trim() !== clubLabel) link.textContent = clubLabel;
+    });
+  };
+
+  applyClubLabel();
+
+  const header = document.getElementById('header-group');
+  if (header) {
+    new MutationObserver(() => applyClubLabel(header)).observe(header, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+    });
+  }
+
+  document.addEventListener('shopify:section:load', (event) => applyClubLabel(event.target));
 })();
 </script><script id="amoura-interaction-tracking">
 (() => {
