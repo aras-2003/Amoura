@@ -52,7 +52,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Raz na jakiś czas – trochę mniej tabu.</h2>",
+                "text": "<h2>Amoura</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -76,7 +76,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Ekspercka wiedza, nowe rytuały i starannie wybrane rekomendacje. Bez spamu i bez niezręczności.</p>",
+                "text": "<p>Bliżej siebie. W swoim tempie.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -103,25 +103,23 @@
             "text_f9CFLH"
           ]
         },
-        "email_signup_crihX7": {
-          "type": "email-signup",
+        "shop": {
+          "type": "text",
           "settings": {
-            "width": "fill",
-            "custom_width": 100,
-            "heading_preset": "h3",
-            "border_style": "all",
-            "input_style": "custom",
-            "border_width": 1,
-            "border_radius": 0,
-            "input_background_color": "{{ settings.color_palette.background }}",
-            "input_text_color": "{{ settings.color_palette.color1 }}",
-            "input_border_color": "{{ settings.color_palette.color2 }}",
-            "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
-            "display_type": "arrow",
-            "label": "Chcę dołączyć",
-            "integrated_button": true,
-            "button_type_preset": "paragraph",
+            "text": "<p><strong>Sklep</strong><br><a href=\"/collections/all\">Produkty</a><br><a href=\"/pages/kolekcje\">Kolekcje</a></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -129,158 +127,94 @@
           },
           "blocks": {}
         },
-        "footer_nav": {
-          "type": "group",
+        "knowledge": {
+          "type": "text",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-start",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 24,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "open_in_new_tab": false,
-            "padding-block-start": 12,
+            "text": "<p><strong>Wiedza</strong><br><a href=\"/blogs/wiedza\">Journal</a><br><a href=\"/blogs/wiedza/od-czego-zaczac\">Na początek</a></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {
-            "shop": {
-              "type": "text",
-              "settings": {
-                "text": "<p><strong>Sklep</strong><br><a href=\"/collections/all\">Produkty</a><br><a href=\"/pages/kolekcje\">Kolekcje</a></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "knowledge": {
-              "type": "text",
-              "settings": {
-                "text": "<p><strong>Wiedza</strong><br><a href=\"/blogs/wiedza\">Journal</a><br><a href=\"/blogs/wiedza/od-czego-zaczac\">Na początek</a></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "amoura": {
-              "type": "text",
-              "settings": {
-                "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Standard Amoura</a><br><a href=\"/pages/klub-amoura\">Club Amoura</a></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "service": {
-              "type": "text",
-              "settings": {
-                "text": "<p><strong>Obsługa</strong><br><a href=\"/pages/contact\">Kontakt</a></p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
+          "blocks": {}
+        },
+        "amoura": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Standard Amoura</a><br><a href=\"/pages/klub-amoura\">Club Amoura</a></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
-          "block_order": [
-            "shop",
-            "knowledge",
-            "amoura",
-            "service"
-          ]
+          "blocks": {}
+        },
+        "service": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Obsługa</strong><br><a href=\"/pages/contact\">Kontakt</a></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "group_H6VpwJ",
-        "email_signup_crihX7",
-        "footer_nav"
+        "shop",
+        "knowledge",
+        "amoura",
+        "service"
       ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 20,
-        "background_color": "#30272B",
-        "padding-block-start": 42,
-        "padding-block-end": 42
+        "gap": 32,
+        "background_color": "#F4EDE7",
+        "padding-block-start": 64,
+        "padding-block-end": 48,
+        "editorial_footer": true
       }
     },
     "footer_utilities_jLGE8U": {
@@ -326,9 +260,9 @@
         "gap": 24,
         "divider_thickness": 1,
         "divider_color": "#C7A7B5",
-        "background_color": "#30272B",
+        "background_color": "#F4EDE7",
         "padding-block-start": 20,
-        "padding-block-end": 48
+        "padding-block-end": 24
       }
     }
   },
