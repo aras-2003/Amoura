@@ -71,13 +71,23 @@ jobs:
           MAX_AUDIT_ROUTES: "30"
         run: npm run qa:dod
 
-      - name: Upload deployed theme audit
+      - name: Upload lightweight QA reports
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: amoura-deployed-test-${{ github.sha }}
+          name: amoura-qa-reports-${{ github.sha }}
+          path: |
+            reports/ux/**/report.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: amoura-qa-failure-${{ github.sha }}
           path: |
             reports/
             test-results/
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 7
