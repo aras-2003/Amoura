@@ -154,31 +154,7 @@
         "amoura": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Standard Amoura</a><br><a href=\"/pages/klub-amoura\">Club Amoura</a></p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "0.875rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "service": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong>Obsługa</strong><br><a href=\"/pages/contact\">Kontakt</a></p>",
+            "text": "<p><strong>Amoura</strong><br><a href=\"/pages/o-amoura\">O Amoura</a><br><a href=\"/pages/o-amoura#amoura-standard\">Jak wybieramy produkty</a><br><a href=\"/pages/klub-amoura\">Club Amoura</a><br><a href=\"/pages/contact\">Kontakt</a></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -204,16 +180,15 @@
         "group_H6VpwJ",
         "shop",
         "knowledge",
-        "amoura",
-        "service"
+        "amoura"
       ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 32,
+        "gap": 28,
         "background_color": "#F4EDE7",
-        "padding-block-start": 64,
-        "padding-block-end": 48,
+        "padding-block-start": 46,
+        "padding-block-end": 30,
         "editorial_footer": true
       }
     },
@@ -259,12 +234,12 @@
       "name": "t:names.utilities",
       "settings": {
         "section_width": "page-width",
-        "gap": 24,
+        "gap": 18,
         "divider_thickness": 1,
         "divider_color": "#C7A7B5",
         "background_color": "#F4EDE7",
-        "padding-block-start": 20,
-        "padding-block-end": 24
+        "padding-block-start": 16,
+        "padding-block-end": 18
       }
     }
   },
