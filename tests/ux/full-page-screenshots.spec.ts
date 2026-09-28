@@ -35,8 +35,8 @@ test('full-page screenshots include the complete storefront', async ({ page }, t
     const shot = await captureFullPageScreenshot(page, path.join(dir, `${name}-full.png`));
     const viewport = page.viewportSize();
     expect(viewport).not.toBeNull();
-    expect(shot.width).toBe(viewport!.width);
-    expect(shot.height, `${route} should extend beyond one viewport`).toBeGreaterThan(viewport!.height + 200);
+    expect(Math.round(shot.cssWidth)).toBe(viewport!.width);
+    expect(shot.cssHeight, `${route} should extend beyond one viewport`).toBeGreaterThan(viewport!.height + 200);
     expect(shot.headerPosition).not.toBe('sticky');
 
     if (name === 'article') {
