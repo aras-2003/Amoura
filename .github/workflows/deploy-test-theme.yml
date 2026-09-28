@@ -54,7 +54,7 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Push current branch to unpublished TEST theme
+      - name: Push current branch to MAIN TEST theme
         id: push_theme
         run: bash scripts/theme-push.sh
 
@@ -66,13 +66,13 @@ jobs:
 
       - name: Diagnose section rendering
         env:
-          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=${{ steps.push_theme.outputs.theme_id }}
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
         run: npm run diagnose:sections
 
       - name: Audit deployed TEST theme
         env:
-          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=${{ steps.push_theme.outputs.theme_id }}
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
           MAX_AUDIT_ROUTES: "30"
         run: npm run audit
