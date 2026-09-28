@@ -185,10 +185,10 @@
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 20,
+        "gap": 16,
         "background_color": "#F4EDE7",
-        "padding-block-start": 34,
-        "padding-block-end": 22,
+        "padding-block-start": 24,
+        "padding-block-end": 16,
         "editorial_footer": true
       }
     },
@@ -213,33 +213,21 @@
             "text_color": "#48172C"
           },
           "blocks": {}
-        },
-        "social_links_Ew63Kq": {
-          "type": "social-links",
-          "settings": {
-            "facebook_url": "",
-            "instagram_url": "",
-            "youtube_url": "",
-            "tiktok_url": "",
-            "twitter_url": ""
-          },
-          "blocks": {}
         }
       },
       "block_order": [
         "footer_copyright_jweRK8",
-        "footer_policy_list_VCdnpa",
-        "social_links_Ew63Kq"
+        "footer_policy_list_VCdnpa"
       ],
       "name": "t:names.utilities",
       "settings": {
         "section_width": "page-width",
-        "gap": 18,
+        "gap": 12,
         "divider_thickness": 1,
         "divider_color": "#C7A7B5",
         "background_color": "#F4EDE7",
-        "padding-block-start": 16,
-        "padding-block-end": 18
+        "padding-block-start": 10,
+        "padding-block-end": 12
       }
     }
   },
