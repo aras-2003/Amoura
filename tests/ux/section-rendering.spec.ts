@@ -104,4 +104,58 @@ test.describe('section rendering diagnostics', () => {
 
     expect(relevant, JSON.stringify(relevant, null, 2)).toEqual([]);
   });
+
+  test('predictive search reset stress does not surface section-rendering errors', async ({ page }, testInfo) => {
+    const errors: string[] = [];
+    const sectionResponses: Array<{ url: string; status: number; contentType: string }> = [];
+
+    page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => {
+      if (message.type() === 'error') errors.push(message.text());
+    });
+    page.on('response', response => {
+      if (response.url().includes('section_id=')) {
+        sectionResponses.push({
+          url: response.url(),
+          status: response.status(),
+          contentType: response.headers()['content-type'] || '',
+        });
+      }
+    });
+
+    await page.goto(TARGET_ROUTES[0], { waitUntil: 'domcontentloaded' });
+    await unlockCookiesIfNeeded(page);
+
+    for (let cycle = 0; cycle < 8; cycle++) {
+      await page.keyboard.press(process.platform === 'darwin' ? 'Meta+K' : 'Control+K');
+
+      const input = page.locator('predictive-search-component input[type="search"]').first();
+      await expect(input).toBeVisible({ timeout: 5_000 });
+
+      await input.fill('soft');
+      await input.fill('soft ritual');
+      await input.fill('');
+      await input.fill('perennial');
+      await input.fill('');
+      await page.keyboard.press('Escape');
+    }
+
+    await page.waitForTimeout(750);
+
+    const relevantErrors = errors.filter(message =>
+      /section .*not found|No empty section markup found|header section missing/i.test(message)
+    );
+    const badResponses = sectionResponses.filter(
+      response => response.status !== 200 || !response.contentType.includes('text/html')
+    );
+
+    await testInfo.attach('predictive-search-section-responses', {
+      body: Buffer.from(JSON.stringify({ sectionResponses, badResponses, errors, relevantErrors }, null, 2)),
+      contentType: 'application/json',
+    });
+
+    expect(relevantErrors, JSON.stringify(relevantErrors, null, 2)).toEqual([]);
+    expect(badResponses, JSON.stringify(badResponses, null, 2)).toEqual([]);
+  });
+
 });
