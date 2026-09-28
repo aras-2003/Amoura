@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 import { stripShopifyPreviewChrome } from '../helpers/audit';
@@ -12,7 +12,7 @@ const ROUTES = [
   ['article', '/blogs/wiedza/od-czego-zaczac']
 ] as const;
 
-async function gotoWithRetry(page: Parameters<typeof test>[0] extends never ? never : any, route: string) {
+async function gotoWithRetry(page: Page, route: string) {
   for (let attempt = 1; attempt <= 3; attempt++) {
     const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
     if (response?.status() !== 429) return response;
