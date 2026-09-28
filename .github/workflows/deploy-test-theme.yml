@@ -72,7 +72,7 @@ jobs:
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
         run: npm run diagnose:sections
 
-      - name: Verify full-page screenshots
+      - name: Verify full-page screenshots (CSS-pixel normalized)
         env:
           AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
