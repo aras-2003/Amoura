@@ -384,6 +384,14 @@
     window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, {passive:true});
     update();
   })();
+</script><script id="amoura-locale-labels">
+(() => {
+  const clubLabel = {{ request.locale.iso_code | json }} === 'en' ? 'Club Amoura' : 'Klub Amoura';
+  document.querySelectorAll('a[href*="/pages/klub-amoura"], a[href*="/en/pages/klub-amoura"]').forEach((link) => {
+    const text = link.textContent.trim();
+    if (text === 'Club Amoura' || text === 'Klub Amoura') link.textContent = clubLabel;
+  });
+})();
 </script><script id="amoura-interaction-tracking">
 (() => {
   const emit = (name, detail = {}) => {
