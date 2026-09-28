@@ -24,8 +24,8 @@ on:
       - "package.json"
 
 concurrency:
-  group: amoura-test-theme-deploy
-  cancel-in-progress: false
+  group: amoura-test-theme-qa-dod
+  cancel-in-progress: true
 
 permissions:
   contents: read
