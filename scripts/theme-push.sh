@@ -36,13 +36,13 @@ if [[ -z "$THEME_NAME" ]]; then
   exit 1
 fi
 
-if [[ "$THEME_ROLE" != "main" ]]; then
-  echo "::error::Refusing deploy: theme $THEME_ID is '$THEME_ROLE', expected MAIN."
+if [[ "$THEME_ROLE" != "main" && "$THEME_ROLE" != "live" ]]; then
+  echo "::error::Refusing deploy: theme $THEME_ID is '$THEME_ROLE', expected MAIN/LIVE."
   exit 1
 fi
 
 echo "Deploying directly to MAIN test theme '$THEME_NAME' ($THEME_ID) on $STORE."
-"${CLI[@]}" push "${AUTH[@]}" --theme "$THEME_ID" --path . --json >/tmp/shopify-theme-push.json
+"${CLI[@]}" push "${AUTH[@]}" --theme "$THEME_ID" --allow-live --path . --json >/tmp/shopify-theme-push.json
 
 echo "MAIN test theme updated: $THEME_ID"
 if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
