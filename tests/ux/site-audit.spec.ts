@@ -81,7 +81,7 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
     findings.push(...await auditPage(page, route, project));
 
     const slug = route === '/' ? 'home' : route.replace(/^\//, '').replace(/[^a-z0-9]+/gi, '-').replace(/-+$/, '');
-    const shot = await captureFullPageScreenshot(page, path.join(screenshotDir, `${slug}.png`));
+    const shot = await captureFullPageScreenshot(page, path.join(screenshotDir, `${slug}.png`), { prepareMedia: false });
     const viewport = page.viewportSize();
     if (viewport && Math.max(shot.wrapperHeight, shot.documentHeight) > viewport.height + 200) {
       expect(shot.cssHeight, `Expected a full-page screenshot for ${route}`).toBeGreaterThan(viewport.height + 200);
