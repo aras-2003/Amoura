@@ -1184,6 +1184,19 @@
     align-items: center;
   }
 
+  @media screen and (max-width: 749px) {
+    .menu-drawer__menu-item:not(:has(> .menu-drawer__link-image)),
+    .menu-drawer__title {
+      min-height: 44px;
+    }
+
+    .menu-drawer__close-button,
+    .menu-drawer__back-button {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+
   .menu-drawer__menu-item:has(> .menu-drawer__link-image) {
     display: flex;
     flex-direction: column;
