@@ -127,7 +127,7 @@ test.describe('section rendering diagnostics', () => {
     await unlockCookiesIfNeeded(page);
 
     for (let cycle = 0; cycle < 8; cycle++) {
-      await page.keyboard.press(process.platform === 'darwin' ? 'Meta+K' : 'Control+K');
+      await page.keyboard.press('Meta+K');
 
       const input = page.locator('predictive-search-component input[type="search"]').first();
       await expect(input).toBeVisible({ timeout: 5_000 });
