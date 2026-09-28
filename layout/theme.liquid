@@ -388,11 +388,24 @@
 (() => {
   const locale = {{ request.locale.iso_code | json }};
   const clubLabel = locale === 'en' ? 'Club Amoura' : 'Klub Amoura';
-  const selector = 'a[href*="/pages/klub-amoura"], a[href*="/en/pages/klub-amoura"]';
+  const clubPath = '/pages/klub-amoura';
+  const knownLabels = new Set(['Club Amoura', 'Klub Amoura', 'Amoura Club']);
+
+  const isClubLink = (link) => {
+    try {
+      const path = new URL(link.href, window.location.origin).pathname.replace(/^\/en(?=\/)/, '');
+      return path === clubPath || path.startsWith(`${clubPath}/`);
+    } catch {
+      return false;
+    }
+  };
 
   const applyClubLabel = (root = document) => {
-    root.querySelectorAll?.(selector).forEach((link) => {
-      if (link.textContent.trim() !== clubLabel) link.textContent = clubLabel;
+    root.querySelectorAll?.('a').forEach((link) => {
+      const text = link.textContent.trim();
+      if (isClubLink(link) || knownLabels.has(text)) {
+        if (text !== clubLabel) link.textContent = clubLabel;
+      }
     });
   };
 
