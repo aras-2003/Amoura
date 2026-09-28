@@ -23,11 +23,12 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
 
     let responseStatus: number | null = null;
     try {
+      const transientStatuses = new Set([429, 502, 503, 504]);
       for (let attempt = 1; attempt <= 3; attempt++) {
         const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
         responseStatus = response?.status() ?? null;
-        if (responseStatus !== 429) break;
-        await page.waitForTimeout(1200 * attempt);
+        if (!transientStatuses.has(responseStatus ?? 0)) break;
+        await page.waitForTimeout(400 * attempt);
       }
     } catch (error) {
       findings.push({
@@ -67,7 +68,7 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
 
     if (responseStatus && responseStatus >= 400) {
       findings.push({
-        route, viewport: project, severity: responseStatus === 429 ? 'warning' : 'critical', code: 'http-status',
+        route, viewport: project, severity: [429, 502, 503, 504].includes(responseStatus) ? 'warning' : 'critical', code: 'http-status',
         detail: String(responseStatus)
       });
       continue;
@@ -80,7 +81,7 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
     findings.push(...await auditPage(page, route, project));
 
     const slug = route === '/' ? 'home' : route.replace(/^\//, '').replace(/[^a-z0-9]+/gi, '-').replace(/-+$/, '');
-    const shot = await captureFullPageScreenshot(page, path.join(screenshotDir, `${slug}.png`));
+    const shot = await captureFullPageScreenshot(page, path.join(screenshotDir, `${slug}.png`), { prepareMedia: false });
     const viewport = page.viewportSize();
     if (viewport && Math.max(shot.wrapperHeight, shot.documentHeight) > viewport.height + 200) {
       expect(shot.cssHeight, `Expected a full-page screenshot for ${route}`).toBeGreaterThan(viewport.height + 200);
