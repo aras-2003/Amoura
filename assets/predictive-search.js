@@ -32,6 +32,13 @@ class PredictiveSearchComponent extends Component {
   #emptyStateLoaded = false;
 
   /**
+   * Snapshot of the server-rendered empty state. Resets should restore this
+   * locally instead of requesting the same section again on every clear.
+   * @type {HTMLElement | null}
+   */
+  #emptyStateTemplate = null;
+
+  /**
    * Get the dialog component.
    * @returns {DialogComponent | null} The dialog component.
    */
@@ -48,6 +55,8 @@ class PredictiveSearchComponent extends Component {
     if (this.refs.searchInput.value.length > 0) {
       this.#showResetButton();
     }
+
+    this.#emptyStateTemplate = /** @type {HTMLElement} */ (this.refs.predictiveSearchResults.cloneNode(true));
 
     if (dialog) {
       document.addEventListener('keydown', this.#handleKeyboardShortcut, { signal });
@@ -403,58 +412,51 @@ class PredictiveSearchComponent extends Component {
 
   #resetSearch = async () => {
     const { predictiveSearchResults, searchInput } = this.refs;
-    const emptySectionId = 'predictive-search-empty';
 
     this.#currentIndex = -1;
     searchInput.value = '';
     this.#hideResetButton();
 
     const abortController = this.#createAbortController();
-    const url = new URL(window.location.href);
-    url.searchParams.delete('page');
+    const emptyState = this.#emptyStateTemplate?.cloneNode(true);
 
-    let emptySectionMarkup;
-    try {
-      emptySectionMarkup = await sectionRenderer.getSectionHTML(emptySectionId, false, url, abortController.signal);
-    } catch (error) {
-      if (abortController.signal.aborted) return;
-      throw error;
-    }
+    if (!(emptyState instanceof HTMLElement)) return;
 
-    if (abortController.signal.aborted) return;
-
-    const parsedEmptySectionMarkup = new DOMParser()
-      .parseFromString(emptySectionMarkup, 'text/html')
-      .querySelector('.predictive-search-empty-section');
-
-    if (!parsedEmptySectionMarkup) throw new Error('No empty section markup found');
-
-    /** This needs to be awaited and not .then so the DOM is already morphed
-     * when #closeResults is called and therefore the height is animated */
+    /** Reuse the server-rendered empty state locally. Only recently viewed
+     * products need a network request, which avoids hammering Shopify's
+     * Section Rendering API on every reset/close. */
     const viewedProducts = RecentlyViewed.getProducts();
 
     if (viewedProducts.length > 0) {
-      const recentlyViewedMarkup = await this.#getRecentlyViewedProductsMarkup(abortController.signal);
-      if (!recentlyViewedMarkup) return;
-
-      const parsedRecentlyViewedMarkup = new DOMParser().parseFromString(recentlyViewedMarkup, 'text/html');
-      const recentlyViewedProductsHtml = parsedRecentlyViewedMarkup.getElementById('predictive-search-products');
-      if (!recentlyViewedProductsHtml) return;
-
-      for (const child of recentlyViewedProductsHtml.children) {
-        if (child instanceof HTMLElement) {
-          child.setAttribute('ref', 'recentlyViewedWrapper');
-        }
+      let recentlyViewedMarkup;
+      try {
+        recentlyViewedMarkup = await this.#getRecentlyViewedProductsMarkup(abortController.signal);
+      } catch (error) {
+        if (abortController.signal.aborted) return;
+        // Keep the base empty state if the optional recently-viewed request fails.
+        recentlyViewedMarkup = null;
       }
 
-      const collectionElement = parsedEmptySectionMarkup.querySelector('#predictive-search-products');
-      if (!collectionElement) return;
-      collectionElement.prepend(...recentlyViewedProductsHtml.children);
+      if (recentlyViewedMarkup) {
+        const parsedRecentlyViewedMarkup = new DOMParser().parseFromString(recentlyViewedMarkup, 'text/html');
+        const recentlyViewedProductsHtml = parsedRecentlyViewedMarkup.getElementById('predictive-search-products');
+
+        if (recentlyViewedProductsHtml) {
+          for (const child of recentlyViewedProductsHtml.children) {
+            if (child instanceof HTMLElement) {
+              child.setAttribute('ref', 'recentlyViewedWrapper');
+            }
+          }
+
+          const collectionElement = emptyState.querySelector('#predictive-search-products');
+          collectionElement?.prepend(...recentlyViewedProductsHtml.children);
+        }
+      }
     }
 
     if (abortController.signal.aborted) return;
 
-    morph(predictiveSearchResults, parsedEmptySectionMarkup);
+    morph(predictiveSearchResults, emptyState);
     this.#resetScrollPositions();
   };
 }
