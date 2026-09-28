@@ -25,6 +25,8 @@
 {% stylesheet %}
   .utilities {
     width: 100%;
+    max-width: 920px;
+    margin-inline: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,7 +74,7 @@
 
     /* 2 blocks: Two equal columns, start and end aligned */
     .utilities--blocks-2 {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr auto;
     }
 
     .utilities--blocks-2 > *:nth-child(2) {
