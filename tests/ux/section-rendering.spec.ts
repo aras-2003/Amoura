@@ -127,9 +127,11 @@ test.describe('section rendering diagnostics', () => {
     await unlockCookiesIfNeeded(page);
 
     for (let cycle = 0; cycle < 8; cycle++) {
-      await page.keyboard.press('Meta+K');
+      const searchButton = page.locator('search-button button[aria-haspopup="dialog"]:visible').first();
+      await expect(searchButton).toBeVisible({ timeout: 5_000 });
+      await searchButton.click();
 
-      const input = page.locator('predictive-search-component input[type="search"]').first();
+      const input = page.locator('#search-modal dialog[open] predictive-search-component input[type="search"]').first();
       await expect(input).toBeVisible({ timeout: 5_000 });
 
       await input.fill('soft');
