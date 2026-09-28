@@ -2,7 +2,7 @@
 <section class="ac" aria-labelledby="ac-title-{{ section.id }}">
   <div class="ac-hero">
     <div class="ac-hero__copy">
-      <p class="ac-eyebrow">{{ 'amoura_club.kicker' | t }}</p>
+      <p class="ac-eyebrow amoura-eyebrow">{{ 'amoura_club.kicker' | t }}</p>
       {% if section.settings.teaser %}
         <h2 id="ac-title-{{ section.id }}">{{ 'amoura_club.teaser_title' | t }}</h2>
         <p class="ac-lead">{{ 'amoura_club.teaser_body' | t }}</p>
@@ -25,7 +25,7 @@
   </div>
   {% unless section.settings.teaser %}
   <div class="ac-ritual ac-wrap" id="ac-ritual-{{ section.id }}">
-    <div><p class="ac-eyebrow">{{ 'amoura_club.today' | t }}</p><h2>{{ 'amoura_club.ritual_title' | t }}</h2><p class="ac-lead">{{ 'amoura_club.ritual_lead' | t }}</p><p class="ac-note">{{ 'amoura_club.note' | t }}</p></div>
+    <div><p class="ac-eyebrow amoura-eyebrow">{{ 'amoura_club.today' | t }}</p><h2>{{ 'amoura_club.ritual_title' | t }}</h2><p class="ac-lead">{{ 'amoura_club.ritual_lead' | t }}</p><p class="ac-note">{{ 'amoura_club.note' | t }}</p></div>
     <div class="ac-rituals">
       {% for i in (1..3) %}
         {% case i %}{% when 1 %}{% assign duration = 'one' %}{% when 2 %}{% assign duration = 'two' %}{% else %}{% assign duration = 'three' %}{% endcase %}
@@ -40,11 +40,11 @@
     </div>
   </div>
   {% if section.settings.blog != blank and section.settings.blog.articles_count > 0 %}
-  <div class="ac-journal ac-wrap"><div class="ac-journal__heading"><p class="ac-eyebrow">{{ 'amoura_club.editorial' | t }}</p><h2>{{ 'amoura_club.editorial_title' | t }}</h2><a class="ac-link" href="{{ section.settings.blog.url }}">{{ 'amoura_club.all' | t }} ↗</a></div>
+  <div class="ac-journal ac-wrap"><div class="ac-journal__heading"><p class="ac-eyebrow amoura-eyebrow">{{ 'amoura_club.editorial' | t }}</p><h2>{{ 'amoura_club.editorial_title' | t }}</h2><a class="ac-link" href="{{ section.settings.blog.url }}">{{ 'amoura_club.all' | t }} ↗</a></div>
     <div class="ac-articles">{% for article in section.settings.blog.articles limit: 2 %}<a class="ac-article" href="{{ article.url }}">{% if article.image %}{{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 800', sizes: '(max-width: 760px) 100vw, 30vw' }}{% endif %}<h3>{{ article.title | escape }}</h3><span class="ac-link">{{ 'amoura_club.read' | t }} ↗</span></a>{% endfor %}</div>
   </div>{% endif %}
   <div class="ac-join" id="ac-join-{{ section.id }}"><div class="ac-wrap ac-join__inner">
-    <div><p class="ac-eyebrow">{{ 'amoura_club.status' | t }}</p><h2>{{ 'amoura_club.club_title' | t }}</h2><p class="ac-lead">{{ 'amoura_club.club_body' | t }}</p></div>
+    <div><p class="ac-eyebrow amoura-eyebrow amoura-eyebrow--light">{{ 'amoura_club.status' | t }}</p><h2>{{ 'amoura_club.club_title' | t }}</h2><p class="ac-lead">{{ 'amoura_club.club_body' | t }}</p></div>
     <div class="ac-signup">
     {% assign form_id = 'AmouraClub-' | append: section.id %}
     {% form 'contact', id: form_id %}
@@ -58,7 +58,7 @@
       {% endif %}
     {% endform %}
     </div>
-    <div class="ac-planned"><p class="ac-eyebrow">{{ 'amoura_club.planned' | t }}</p><div>{% for i in (1..3) %}{% assign pk = 'amoura_club.p' | append: i %}{% assign pb = pk | append: '_body' %}<article><span class="ac-number">0{{ i }}</span><h3>{{ pk | t }}</h3><p>{{ pb | t }}</p></article>{% endfor %}</div></div>
+    <div class="ac-planned"><p class="ac-eyebrow amoura-eyebrow amoura-eyebrow--light">{{ 'amoura_club.planned' | t }}</p><div>{% for i in (1..3) %}{% assign pk = 'amoura_club.p' | append: i %}{% assign pb = pk | append: '_body' %}<article><span class="ac-number">0{{ i }}</span><h3>{{ pk | t }}</h3><p>{{ pb | t }}</p></article>{% endfor %}</div></div>
   </div></div>
   {% endunless %}
 </section>
