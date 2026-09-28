@@ -401,7 +401,7 @@
     "status": "CLUB IN DEVELOPMENT",
     "email": "Your email address",
     "submit": "Notify me when it opens",
-    "privacy": "By providing your email, you request a message about the Club opening. This is not a paid membership.",
+    "privacy": "By providing your email, you request only a message about the Club opening. This form does not subscribe you to a newsletter or paid membership.",
     "policy": "Privacy policy",
     "success": "Thank you. Your request has been sent.",
     "error": "Check your email address and try again.",
