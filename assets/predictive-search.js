@@ -336,7 +336,7 @@ class PredictiveSearchComponent extends Component {
     );
 
     sectionRenderer
-      .getSectionHTML(this.dataset.sectionId, false, url)
+      .getSectionHTML(this.dataset.sectionId, false, url, abortController.signal)
       .then((resultsMarkup) => {
         if (!resultsMarkup) {
           deferredPromise.resolve({ totalCount: 0 });
@@ -367,7 +367,7 @@ class PredictiveSearchComponent extends Component {
    * Fetch the markup for the recently viewed products.
    * @returns {Promise<string | null>} The markup for the recently viewed products.
    */
-  async #getRecentlyViewedProductsMarkup() {
+  async #getRecentlyViewedProductsMarkup(signal) {
     if (!this.dataset.sectionId) return null;
 
     const viewedProducts = RecentlyViewed.getProducts();
@@ -377,7 +377,7 @@ class PredictiveSearchComponent extends Component {
     url.searchParams.set('q', viewedProducts.map(/** @param {string} id */ (id) => `id:${id}`).join(' OR '));
     url.searchParams.set('resources[type]', 'product');
 
-    return sectionRenderer.getSectionHTML(this.dataset.sectionId, false, url);
+    return sectionRenderer.getSectionHTML(this.dataset.sectionId, false, url, signal);
   }
 
   #hideResetButton() {
@@ -413,7 +413,16 @@ class PredictiveSearchComponent extends Component {
     const url = new URL(window.location.href);
     url.searchParams.delete('page');
 
-    const emptySectionMarkup = await sectionRenderer.getSectionHTML(emptySectionId, false, url);
+    let emptySectionMarkup;
+    try {
+      emptySectionMarkup = await sectionRenderer.getSectionHTML(emptySectionId, false, url, abortController.signal);
+    } catch (error) {
+      if (abortController.signal.aborted) return;
+      throw error;
+    }
+
+    if (abortController.signal.aborted) return;
+
     const parsedEmptySectionMarkup = new DOMParser()
       .parseFromString(emptySectionMarkup, 'text/html')
       .querySelector('.predictive-search-empty-section');
@@ -425,7 +434,7 @@ class PredictiveSearchComponent extends Component {
     const viewedProducts = RecentlyViewed.getProducts();
 
     if (viewedProducts.length > 0) {
-      const recentlyViewedMarkup = await this.#getRecentlyViewedProductsMarkup();
+      const recentlyViewedMarkup = await this.#getRecentlyViewedProductsMarkup(abortController.signal);
       if (!recentlyViewedMarkup) return;
 
       const parsedRecentlyViewedMarkup = new DOMParser().parseFromString(recentlyViewedMarkup, 'text/html');
