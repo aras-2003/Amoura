@@ -15,6 +15,19 @@ const WIDTHS = [
   { width: 1440, height: 1000 }
 ];
 
+async function gotoWithRetry(page: Page, route: string) {
+  const transient = new Set([429, 502, 503, 504]);
+  let response = null;
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+    if (!transient.has(response?.status() ?? 0)) return response;
+    await page.waitForTimeout(400 * attempt);
+  }
+
+  return response;
+}
+
 async function componentTargetOverlaps(page: Page) {
   return await page.evaluate(() => {
     const selector = [
@@ -58,7 +71,7 @@ for (const viewport of WIDTHS) {
     await page.setViewportSize(viewport);
 
     for (const route of ROUTES) {
-      const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+      const response = await gotoWithRetry(page, route);
       expect(response?.status() ?? 0, route).toBeLessThan(400);
       await page.waitForTimeout(350);
       await stripShopifyPreviewChrome(page);
@@ -101,7 +114,7 @@ test('key pages reflow at a 200% desktop zoom equivalent', async ({ page }) => {
   await page.setViewportSize({ width: 720, height: 500 });
 
   for (const route of ROUTES) {
-    const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+    const response = await gotoWithRetry(page, route);
     expect(response?.status() ?? 0, route).toBeLessThan(400);
     await stripShopifyPreviewChrome(page);
     await page.waitForTimeout(150);
