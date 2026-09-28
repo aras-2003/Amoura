@@ -149,7 +149,27 @@ class SectionRenderer {
       if (cachedHTML) return cachedHTML;
     }
 
-    pendingPromise = fetch(sectionUrl, { signal }).then((response) => {
+    pendingPromise = fetch(sectionUrl, { signal }).then(async (response) => {
+      if (!response.ok) {
+        const existingElement = document.getElementById(buildSectionSelector(sectionId));
+
+        // A transient Section Rendering API failure (notably 429 throttling)
+        // must never replace a valid section with an error document.
+        if (existingElement) {
+          return existingElement.outerHTML;
+        }
+
+        throw new Error(`Section rendering request failed (${response.status}) for ${sectionId}`);
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      if (!contentType.includes('text/html')) {
+        const existingElement = document.getElementById(buildSectionSelector(sectionId));
+        if (existingElement) return existingElement.outerHTML;
+
+        throw new Error(`Invalid section rendering content type for ${sectionId}: ${contentType || 'unknown'}`);
+      }
+
       return response.text();
     });
 
@@ -190,10 +210,11 @@ const SECTION_ID_PREFIX = 'shopify-section-';
  * @returns {string} The section rendering URL
  */
 function buildSectionRenderingURL(sectionId, url = new URL(window.location.href)) {
-  url.searchParams.set('section_id', normalizeSectionId(sectionId));
-  url.searchParams.sort();
+  const sectionUrl = new URL(url.toString());
+  sectionUrl.searchParams.set('section_id', normalizeSectionId(sectionId));
+  sectionUrl.searchParams.sort();
 
-  return url.toString();
+  return sectionUrl.toString();
 }
 
 /**
