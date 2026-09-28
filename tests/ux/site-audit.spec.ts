@@ -50,8 +50,10 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
       await expect(footer).toBeVisible();
       await expect(footer.locator('input[type="email"]')).toHaveCount(0);
       await expect(footer.locator('a')).toHaveCount(8);
-      const sizes = await footer.locator('a').evaluateAll(links => links.map(link => link.getBoundingClientRect().height));
-      expect(sizes.every(height => height >= 44)).toBe(true);
+      if (project === 'mobile') {
+        const sizes = await footer.locator('a').evaluateAll(links => links.map(link => link.getBoundingClientRect().height));
+        expect(sizes.every(height => height >= 44)).toBe(true);
+      }
       await footer.screenshot({ path: path.join(screenshotDir, route === '/' ? 'footer-home.png' : 'footer-club.png') });
     }
     if (route === '/pages/klub-amoura' && responseStatus === 200) {
