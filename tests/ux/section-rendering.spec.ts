@@ -175,6 +175,40 @@ test.describe('section rendering diagnostics', () => {
     await expect(page.locator('#header-group .shopify-section').first()).toBeVisible();
   });
 
+  test('header menu search and cart remain functional', async ({ page }) => {
+    await page.goto(TARGET_ROUTES[0], { waitUntil: 'domcontentloaded' });
+    await unlockCookiesIfNeeded(page);
+
+    const drawerTrigger = page.locator('#Details-menu-drawer-container > summary:visible').first();
+    if (await drawerTrigger.isVisible().catch(() => false)) {
+      await drawerTrigger.click();
+      await expect(page.locator('#Details-menu-drawer-container')).toHaveAttribute('open', '');
+      await page.keyboard.press('Escape');
+    } else {
+      const navLinks = page.locator('#header-group .menu-list__link:visible, #header-group nav a:visible');
+      expect(await navLinks.count(), 'Expected visible desktop navigation links').toBeGreaterThan(0);
+    }
+
+    const searchButton = page.locator('search-button button[aria-haspopup="dialog"]:visible').first();
+    await expect(searchButton).toBeVisible();
+    await searchButton.click();
+    await expect(page.locator('#search-modal dialog[open] input[type="search"]').first()).toBeVisible();
+    await page.keyboard.press('Escape');
+
+    const cartTrigger = page.locator('[data-testid="cart-drawer-trigger"]:visible').first();
+    if (await cartTrigger.isVisible().catch(() => false)) {
+      await cartTrigger.click();
+      await expect(page.locator('#cart-drawer[open]')).toBeVisible();
+      const close = page.locator('#cart-drawer .theme-drawer__close-button:visible').first();
+      if (await close.isVisible().catch(() => false)) {
+        await close.click();
+        await expect(page.locator('#cart-drawer[open]')).toHaveCount(0);
+      }
+    } else {
+      await expect(page.locator('a[href*="/cart"]:visible').first()).toBeVisible();
+    }
+  });
+
   test('predictive search reset stress does not surface section-rendering errors', async ({ page }, testInfo) => {
     const errors: string[] = [];
     const sectionResponses: Array<{ url: string; status: number; contentType: string }> = [];
