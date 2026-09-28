@@ -8,6 +8,7 @@ on:
       - "feature/amoura-daily-club"
       - "fix/header-section-rendering-diagnostics"
       - "refactor/about-amoura-story"
+      - "fix/reliable-full-page-screenshots"
     paths:
       - "assets/**"
       - "blocks/**"
@@ -70,6 +71,12 @@ jobs:
           AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
         run: npm run diagnose:sections
+
+      - name: Verify full-page screenshots
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+        run: npm run diagnose:screenshots
 
       - name: Audit deployed TEST theme
         env:
