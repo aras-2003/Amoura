@@ -22,7 +22,7 @@ if [[ "$THEME_ID" != "$EXPECTED_THEME_ID" ]]; then
   exit 1
 fi
 
-CLI=(npx --yes @shopify/cli@latest theme)
+CLI=(npx --yes @shopify/cli@4.8.2 theme)
 AUTH=(--store "$STORE" --password "$SHOPIFY_CLI_THEME_TOKEN")
 
 THEMES_JSON="$("${CLI[@]}" list "${AUTH[@]}" --json)"
