@@ -13,12 +13,21 @@ const ROUTES = [
 ] as const;
 
 async function gotoWithRetry(page: Page, route: string) {
+  const transient = new Set([429, 502, 503, 504]);
   for (let attempt = 1; attempt <= 3; attempt++) {
     const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
-    if (response?.status() !== 429) return response;
-    await page.waitForTimeout(1200 * attempt);
+    if (!transient.has(response?.status() ?? 0)) return response;
+    await page.waitForTimeout(400 * attempt);
   }
   return null;
+}
+
+async function closeCookiesIfVisible(page: Page) {
+  const rejectCookies = page.getByRole('button', { name: /^(Odrzuć|Reject|Reject all)$/i });
+  if (await rejectCookies.isVisible().catch(() => false)) {
+    await rejectCookies.click();
+    await rejectCookies.waitFor({ state: 'hidden' });
+  }
 }
 
 test('full-page screenshots include the complete storefront', async ({ page }, testInfo) => {
@@ -31,6 +40,7 @@ test('full-page screenshots include the complete storefront', async ({ page }, t
 
     await page.waitForTimeout(500);
     await stripShopifyPreviewChrome(page);
+    await closeCookiesIfVisible(page);
 
     const shot = await captureFullPageScreenshot(page, path.join(dir, `${name}-full.png`));
     const viewport = page.viewportSize();
