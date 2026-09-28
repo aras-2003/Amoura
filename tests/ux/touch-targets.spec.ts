@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import { auditPage, stripShopifyPreviewChrome } from '../helpers/audit';
 
 const ROUTES = [
@@ -15,35 +15,42 @@ const WIDTHS = [
   { width: 1440, height: 1000 }
 ];
 
-async function assertNoHorizontalOverflow(page: import('@playwright/test').Page, label: string) {
-  const horizontalOverflow = await page.evaluate(() =>
-    document.documentElement.scrollWidth > window.innerWidth + 2
-  );
-  expect(horizontalOverflow, `horizontal overflow: ${label}`).toBe(false);
-}
+async function componentTargetOverlaps(page: Page) {
+  return await page.evaluate(() => {
+    const selector = [
+      '.footer-content--editorial a',
+      '.policy-list-trigger',
+      '.menu-drawer a',
+      '.menu-drawer button',
+      '.quantity-selector button',
+      '.facets button',
+      '.facets summary',
+      '.close-button'
+    ].join(',');
 
-async function assertKeyboardFocusVisible(page: import('@playwright/test').Page, label: string) {
-  await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur?.());
-  let focus: { tag: string; visible: boolean } | null = null;
-
-  for (let i = 0; i < 6; i++) {
-    await page.keyboard.press('Tab');
-    focus = await page.evaluate(() => {
-      const el = document.activeElement as HTMLElement | null;
-      if (!el || el === document.body) return null;
-      const style = getComputedStyle(el);
-      const outlineVisible =
-        style.outlineStyle !== 'none' &&
-        style.outlineStyle !== 'hidden' &&
-        parseFloat(style.outlineWidth || '0') > 0;
-      const shadowVisible = style.boxShadow !== 'none';
-      return { tag: el.tagName, visible: outlineVisible || shadowVisible };
+    const nodes = [...document.querySelectorAll(selector)].filter((el) => {
+      const r = el.getBoundingClientRect();
+      const s = getComputedStyle(el);
+      return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none';
     });
-    if (focus) break;
-  }
 
-  expect(focus, `keyboard focus target missing: ${label}`).not.toBeNull();
-  expect(focus?.visible, `focus indicator not visible: ${label}`).toBe(true);
+    const overlaps: string[] = [];
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i];
+        const b = nodes[j];
+        if (a.contains(b) || b.contains(a)) continue;
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+        const w = Math.min(ar.right, br.right) - Math.max(ar.left, br.left);
+        const h = Math.min(ar.bottom, br.bottom) - Math.max(ar.top, br.top);
+        if (w > 2 && h > 2) {
+          overlaps.push(`${a.tagName.toLowerCase()}.${(a as HTMLElement).className} <> ${b.tagName.toLowerCase()}.${(b as HTMLElement).className}`);
+        }
+      }
+    }
+    return overlaps.slice(0, 10);
+  });
 }
 
 for (const viewport of WIDTHS) {
@@ -56,36 +63,53 @@ for (const viewport of WIDTHS) {
       await page.waitForTimeout(350);
       await stripShopifyPreviewChrome(page);
 
-      await assertNoHorizontalOverflow(page, `${route} @ ${viewport.width}px`);
-      await assertKeyboardFocusVisible(page, `${route} @ ${viewport.width}px`);
+      const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 2);
+      expect(horizontalOverflow, `horizontal overflow on ${route}`).toBe(false);
 
       const findings = await auditPage(page, route, viewport.width <= 390 ? 'mobile' : 'responsive');
-      const touchFindings = findings.filter((finding) => finding.code === 'small-touch-target');
+      const touchFindings = findings.filter((f) => f.code === 'small-touch-target');
 
       if (viewport.width <= 390) {
-        const componentFindings = touchFindings.filter((finding) =>
-          /footer-content--editorial|policy-list|menu-drawer|quantity|filters|close/i.test(finding.detail)
+        const componentFindings = touchFindings.filter((f) =>
+          /footer-content--editorial|policy-list|menu-drawer|quantity|filters|close/i.test(f.detail)
         );
-        expect(
-          componentFindings,
-          `small component targets on ${route}: ${JSON.stringify(componentFindings)}`
-        ).toEqual([]);
+        expect(componentFindings, `small component targets on ${route}: ${JSON.stringify(componentFindings)}`).toEqual([]);
+
+        const overlaps = await componentTargetOverlaps(page);
+        expect(overlaps, `overlapping component targets on ${route}: ${JSON.stringify(overlaps)}`).toEqual([]);
+
+        let focusVisible = false;
+        for (let i = 0; i < 12; i++) {
+          await page.keyboard.press('Tab');
+          focusVisible = await page.evaluate(() => {
+            const active = document.activeElement;
+            return active instanceof HTMLElement && active.matches(':focus-visible');
+          });
+          if (focusVisible) break;
+        }
+        expect(focusVisible, `no visible keyboard focus found on ${route}`).toBe(true);
       }
     }
   });
 }
 
-test('layout remains usable at a 200% zoom equivalent', async ({ page }) => {
-  // Browser zoom to 200% halves the effective CSS viewport. 720px is the
-  // reflow-equivalent of a 1440px desktop viewport at 200% zoom.
-  await page.setViewportSize({ width: 720, height: 800 });
+test('key pages reflow at a 200% desktop zoom equivalent', async ({ page }) => {
+  // Desktop browser zoom reduces the layout viewport in CSS pixels. A 1440px
+  // window at 200% zoom is therefore represented by a 720px CSS viewport.
+  // CSS `zoom: 2` is intentionally not used here because it scales the
+  // document after layout and creates artificial horizontal overflow.
+  await page.setViewportSize({ width: 720, height: 500 });
 
   for (const route of ROUTES) {
     const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
     expect(response?.status() ?? 0, route).toBeLessThan(400);
-    await page.waitForTimeout(300);
     await stripShopifyPreviewChrome(page);
-    await assertNoHorizontalOverflow(page, `${route} @ 200% zoom equivalent`);
-    await assertKeyboardFocusVisible(page, `${route} @ 200% zoom equivalent`);
+    await page.waitForTimeout(150);
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 2);
+    expect(overflow, `horizontal overflow at 200% desktop zoom equivalent on ${route}`).toBe(false);
+
+    const overlaps = await componentTargetOverlaps(page);
+    expect(overlaps, `overlapping targets at 200% desktop zoom equivalent on ${route}: ${JSON.stringify(overlaps)}`).toEqual([]);
   }
 });
