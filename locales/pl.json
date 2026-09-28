@@ -370,13 +370,13 @@
   "amoura_club": {
     "kicker": "KLUB AMOURA",
     "title": "Dobrze być\nu siebie.",
-    "lead": "Chwila dla ciała. Coś dobrego do przeczytania. Rozmowy, w których możesz być sobą.",
-    "cta": "Znajdź swoją chwilę",
+    "lead": "Wiedza, małe rytuały i rozmowy o tym, co naprawdę ma znaczenie. Bez presji i bez udawania.",
+    "cta": "Zacznij od siebie",
     "join": "Poznaj Klub",
     "caption": "Małe przyjemności mają swoje miejsce.",
     "today": "TWOJA CHWILA",
     "ritual_title": "Od czego dziś zaczniesz?",
-    "ritual_lead": "Wybierz tyle czasu, ile masz. Reszta może poczekać.",
+    "ritual_lead": "Dwie, pięć albo dziesięć minut. Wybierz tyle czasu, ile naprawdę masz.",
     "one": "2 minuty",
     "two": "5 minut",
     "three": "10 minut",
@@ -391,8 +391,8 @@
     "editorial_title": "Ciekawość jest\ndobrym początkiem.",
     "read": "Otwórz artykuł",
     "all": "Cała wiedza Amoura",
-    "club_title": "Twoje miejsce\nw Amourze.",
-    "club_body": "Tworzymy Klub wokół wiedzy, przyjemności i spotkań. Zapisz się, jeśli chcesz dostać wiadomość o jego otwarciu i pierwszych inicjatywach.",
+    "club_title": "Klub Amoura\njest w przygotowaniu.",
+    "club_body": "Budujemy miejsce wokół wiedzy, bliskości i rozmów, których często brakuje. Zostaw e-mail, jeśli chcesz dostać wiadomość o otwarciu Klubu i pierwszych spotkaniach.",
     "status": "KLUB W PRZYGOTOWANIU",
     "email": "Twój adres e-mail",
     "submit": "Powiadom mnie o otwarciu",
@@ -405,11 +405,11 @@
     "teaser_body": "Kilka minut dla siebie. Dobra lektura. Początek czegoś bliskiego.",
     "teaser_cta": "Wejdź do Klubu Amoura",
     "planned": "W planach Klubu",
-    "p1": "Rozmowy",
-    "p1_body": "Kameralne formaty wokół bliskości, przyjemności i codzienności.",
+    "p1": "Spotkania i rozmowy",
+    "p1_body": "Kameralne spotkania o bliskości, przyjemności i zmianach, które przychodzą z wiekiem.",
     "p2": "Wiedza",
-    "p2_body": "Tematy, które pomagają lepiej rozumieć siebie i swoje potrzeby.",
+    "p2_body": "Rzetelne treści, które pomagają lepiej rozumieć ciało, potrzeby i dostępne możliwości.",
     "p3": "Współtworzenie",
-    "p3_body": "Miejsce na Twój głos w rozwoju Amoury, bez obowiązku publikowania."
+    "p3_body": "Możliwość wpływu na tematykę Klubu, wydarzenia i kolejne elementy oferty Amoura."
 }
 }
