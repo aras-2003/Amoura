@@ -10,7 +10,8 @@
     "audit:desktop": "playwright test tests/ux/site-audit.spec.ts --project=desktop",
     "visual": "playwright test tests/visual/core-pages.spec.ts",
     "visual:update": "playwright test tests/visual/core-pages.spec.ts --update-snapshots",
-    "test": "npm run audit"
+    "test": "npm run audit",
+    "diagnose:sections": "playwright test tests/ux/section-rendering.spec.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
