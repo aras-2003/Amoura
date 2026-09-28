@@ -8,6 +8,7 @@ on:
       - "feature/amoura-daily-club"
       - "fix/header-section-rendering-diagnostics"
       - "refactor/about-amoura-story"
+      - "fix/email-signup-flows"
     paths:
       - "assets/**"
       - "blocks/**"
@@ -70,6 +71,12 @@ jobs:
           AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
         run: npm run diagnose:sections
+
+      - name: Verify email flow separation
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+        run: npm run diagnose:email-flows
 
       - name: Audit deployed TEST theme
         env:
