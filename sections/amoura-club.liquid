@@ -50,7 +50,7 @@
     {% form 'contact', id: form_id %}
       {% if form.posted_successfully? %}<p class="ac-message" role="status" tabindex="-1">{{ 'amoura_club.success' | t }}</p>{% else %}
       {% if form.errors %}<div class="ac-message" role="alert">{{ 'amoura_club.error' | t }} {{ form.errors | default_errors }}</div>{% endif %}
-      <input type="hidden" name="contact[body]" value="Request for an Amoura Club opening notification">
+      <input type="hidden" name="contact[body]" value="Request for an Amoura Club opening notification only — not a newsletter subscription or paid membership">
       <label for="ac-email-{{ section.id }}">{{ 'amoura_club.email' | t }}</label>
       <input id="ac-email-{{ section.id }}" name="contact[email]" type="email" autocomplete="email" required value="{{ form.email | escape }}" aria-describedby="ac-privacy-{{ section.id }}" {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}>
       <button class="ac-button" type="submit">{{ 'amoura_club.submit' | t }} <span aria-hidden="true">↗</span></button>
