@@ -191,3 +191,38 @@ Po czterech tygodniach warto sprawdzić: otwarcia rytuałów, kliknięcia do Wie
 - Aktualny stan Shopify: 8 opublikowanych artykułów bloga „Wiedza Amoura”.
 - Aktualne `locales/pl.json`: trzy istniejące rytuały 2/5/10 minut.
 
+
+
+## 7. Definition of Done dla zadania #6
+
+Draft można uznać za redakcyjnie gotowy do akceptacji, jeśli:
+- zawiera dokładnie 12 propozycji, po 3 na tydzień,
+- każdy tydzień ma wariant 2 / 5 / 10 minut,
+- każde ćwiczenie da się wykonać bez zakupu,
+- każde CTA prowadzi do istniejącego artykułu,
+- żaden tekst nie obiecuje efektu zdrowotnego ani terapeutycznego,
+- treści wymagające eksperckiej oceny są jawnie oznaczone,
+- nie ma sfabrykowanych cytatów ani ekspertów,
+- język pozostaje dorosły i nieinfantylizujący,
+- publikacja nie jest częścią tego zadania.
+
+### Samokontrola draftu
+
+| Kryterium | Wynik |
+| --- | --- |
+| 12 propozycji | ✅ |
+| 4 tygodnie × 3 rytuały | ✅ |
+| 2 / 5 / 10 minut w każdym tygodniu | ✅ |
+| Bez konieczności zakupu | ✅ |
+| Linki wyłącznie do istniejących artykułów Shopify | ✅ |
+| Brak obietnic zdrowotnych | ✅ |
+| Treści wymagające review oznaczone | ✅ |
+| Brak wymyślonych ekspertów | ✅ |
+| Brak automatycznej publikacji | ✅ |
+
+### Otwarte decyzje przed publikacją
+
+1. Czy termin „sexual wellness” pozostaje w publicznym polskim tytule artykułu `od-czego-zaczac`.
+2. Kto formalnie zatwierdza treści #3, #8, #10 i #11.
+3. Czy rotacja ma być ręczna raz w tygodniu, czy później sterowana z danych Shopify.
+4. Czy po pierwszych 4 tygodniach mierzymy wyłącznie anonimowe zdarzenia nawigacyjne (otwarcie rytuału / klik do artykułu), bez zbierania odpowiedzi użytkowniczek.
