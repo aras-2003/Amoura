@@ -11,7 +11,11 @@
     "visual": "playwright test tests/visual/core-pages.spec.ts",
     "visual:update": "playwright test tests/visual/core-pages.spec.ts --update-snapshots",
     "test": "npm run audit",
-    "diagnose:sections": "playwright test tests/ux/section-rendering.spec.ts"
+    "diagnose:sections": "playwright test tests/ux/section-rendering.spec.ts",
+    "diagnose:screenshots": "playwright test tests/ux/full-page-screenshots.spec.ts",
+    "diagnose:touch": "playwright test tests/ux/touch-targets.spec.ts --project=desktop",
+    "diagnose:email-flows": "playwright test tests/ux/email-flows.spec.ts --project=desktop",
+    "diagnose:language": "playwright test tests/ux/language-consistency.spec.ts --project=desktop"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
