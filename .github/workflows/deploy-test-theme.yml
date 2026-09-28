@@ -4,11 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - "feature/playwright-ux-audit"
-      - "feature/amoura-daily-club"
-      - "fix/header-section-rendering-diagnostics"
-      - "refactor/about-amoura-story"
       - "stabilize/backlog-dod"
+      - "content/**"
+      - "maintenance/**"
     paths:
       - "assets/**"
       - "blocks/**"
@@ -41,7 +39,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Validate Theme Access token
         shell: bash
@@ -52,7 +50,7 @@ jobs:
           fi
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
@@ -61,7 +59,7 @@ jobs:
         run: bash scripts/theme-push.sh
 
       - name: Install storefront audit dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
@@ -75,7 +73,7 @@ jobs:
 
       - name: Upload deployed theme audit
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: amoura-deployed-test-${{ github.sha }}
           path: |
