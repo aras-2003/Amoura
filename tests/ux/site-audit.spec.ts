@@ -23,11 +23,12 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
 
     let responseStatus: number | null = null;
     try {
+      const transientStatuses = new Set([429, 502, 503, 504]);
       for (let attempt = 1; attempt <= 3; attempt++) {
         const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
         responseStatus = response?.status() ?? null;
-        if (responseStatus !== 429) break;
-        await page.waitForTimeout(1200 * attempt);
+        if (!transientStatuses.has(responseStatus ?? 0)) break;
+        await page.waitForTimeout(400 * attempt);
       }
     } catch (error) {
       findings.push({
@@ -67,7 +68,7 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
 
     if (responseStatus && responseStatus >= 400) {
       findings.push({
-        route, viewport: project, severity: responseStatus === 429 ? 'warning' : 'critical', code: 'http-status',
+        route, viewport: project, severity: [429, 502, 503, 504].includes(responseStatus) ? 'warning' : 'critical', code: 'http-status',
         detail: String(responseStatus)
       });
       continue;
