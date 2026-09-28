@@ -52,6 +52,7 @@ test('English storefront keeps English brand labels and live core routes', async
 
     expect(text, `${route}: missing translation`).not.toMatch(/translation missing/i);
     expect(text, `${route}: Polish Club label leaked into EN`).not.toContain('Klub Amoura');
+    expect(text, `${route}: legacy English Club label leaked into EN`).not.toContain('Amoura Club');
   }
 
   await gotoWithRetry(page, '/en/pages/klub-amoura');
