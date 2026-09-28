@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { discoverRoutes } from '../helpers/routes';
 import { auditPage, stripShopifyPreviewChrome, type AuditFinding } from '../helpers/audit';
+import { captureFullPageScreenshot } from '../helpers/full-page-screenshot';
 
 test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo) => {
   const project = testInfo.project.name;
@@ -77,11 +78,12 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
     findings.push(...await auditPage(page, route, project));
 
     const slug = route === '/' ? 'home' : route.replace(/^\//, '').replace(/[^a-z0-9]+/gi, '-').replace(/-+$/, '');
-    await page.screenshot({
-      path: path.join(screenshotDir, `${slug}.png`),
-      fullPage: true,
-      animations: 'disabled'
-    });
+    const shot = await captureFullPageScreenshot(page, path.join(screenshotDir, `${slug}.png`));
+    const viewport = page.viewportSize();
+    if (viewport && Math.max(shot.wrapperHeight, shot.documentHeight) > viewport.height + 200) {
+      expect(shot.height, `Expected a full-page screenshot for ${route}`).toBeGreaterThan(viewport.height + 200);
+    }
+    expect(shot.headerPosition).not.toBe('sticky');
   }
 
   const report = {
