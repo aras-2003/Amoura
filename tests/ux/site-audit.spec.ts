@@ -38,6 +38,19 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
 
     await page.waitForTimeout(650);
     await stripShopifyPreviewChrome(page);
+    const rejectCookies = page.getByRole('button', { name: /^(Odrzuć|Reject|Reject all)$/i });
+    if (await rejectCookies.isVisible().catch(() => false)) {
+      await rejectCookies.click();
+      await rejectCookies.waitFor({ state: 'hidden' });
+    }
+    if (route === '/pages/klub-amoura' && responseStatus === 200) {
+      await expect(page.locator('.ac h1')).toContainText('Dobrze być');
+      await expect(page.locator('.ac-ritual-card')).toHaveCount(3);
+      await page.locator('.ac-ritual-card summary').nth(1).click();
+      await expect(page.locator('.ac-ritual-card').nth(1)).toHaveAttribute('open', '');
+      await page.locator('.ac-ritual-card summary').nth(1).click();
+      await expect(page.locator('.ac-signup input[type="email"]')).toHaveAttribute('required', '');
+    }
 
     if (responseStatus && responseStatus >= 400) {
       findings.push({
