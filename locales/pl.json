@@ -396,7 +396,7 @@
     "status": "KLUB W PRZYGOTOWANIU",
     "email": "Twój adres e-mail",
     "submit": "Powiadom mnie o otwarciu",
-    "privacy": "Podając e-mail, prosisz o wiadomość dotyczącą otwarcia Klubu. Zapis nie jest płatnym członkostwem.",
+    "privacy": "Podając e-mail, prosisz wyłącznie o wiadomość dotyczącą otwarcia Klubu. Ten formularz nie zapisuje Cię do newslettera ani płatnego członkostwa.",
     "policy": "Polityka prywatności",
     "success": "Dziękujemy. Twoje zgłoszenie zostało wysłane.",
     "error": "Sprawdź adres e-mail i spróbuj ponownie.",
