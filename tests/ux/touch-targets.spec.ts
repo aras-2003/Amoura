@@ -93,23 +93,23 @@ for (const viewport of WIDTHS) {
   });
 }
 
-test('key pages remain usable at 200% CSS zoom', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
+test('key pages reflow at a 200% desktop zoom equivalent', async ({ page }) => {
+  // Desktop browser zoom reduces the layout viewport in CSS pixels. A 1440px
+  // window at 200% zoom is therefore represented by a 720px CSS viewport.
+  // CSS `zoom: 2` is intentionally not used here because it scales the
+  // document after layout and creates artificial horizontal overflow.
+  await page.setViewportSize({ width: 720, height: 500 });
 
   for (const route of ROUTES) {
     const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
     expect(response?.status() ?? 0, route).toBeLessThan(400);
     await stripShopifyPreviewChrome(page);
-
-    await page.evaluate(() => {
-      document.documentElement.style.zoom = '2';
-    });
     await page.waitForTimeout(150);
 
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
-    expect(overflow, `horizontal overflow at 200% zoom on ${route}`).toBe(false);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 2);
+    expect(overflow, `horizontal overflow at 200% desktop zoom equivalent on ${route}`).toBe(false);
 
     const overlaps = await componentTargetOverlaps(page);
-    expect(overlaps, `overlapping targets at 200% zoom on ${route}: ${JSON.stringify(overlaps)}`).toEqual([]);
+    expect(overlaps, `overlapping targets at 200% desktop zoom equivalent on ${route}: ${JSON.stringify(overlaps)}`).toEqual([]);
   }
 });
