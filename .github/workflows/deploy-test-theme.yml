@@ -6,6 +6,7 @@ on:
     branches:
       - "feature/playwright-ux-audit"
       - "feature/amoura-daily-club"
+      - "fix/header-section-rendering-diagnostics"
     paths:
       - "assets/**"
       - "blocks/**"
@@ -17,6 +18,8 @@ on:
       - "templates/**"
       - "scripts/theme-push.sh"
       - ".github/workflows/deploy-test-theme.yml"
+      - "tests/**"
+      - "package.json"
 
 concurrency:
   group: amoura-test-theme-deploy
@@ -66,6 +69,12 @@ jobs:
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
           MAX_AUDIT_ROUTES: "30"
         run: npm run audit
+
+      - name: Diagnose section rendering
+        env:
+          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=207539044694
+          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
+        run: npm run diagnose:sections
 
       - name: Upload deployed theme audit
         if: always()
