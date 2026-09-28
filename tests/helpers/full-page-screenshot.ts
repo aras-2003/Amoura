@@ -53,7 +53,8 @@ export async function captureFullPageScreenshot(page: Page, path: string) {
       return {
         wrapperHeight: wrapper?.scrollHeight ?? 0,
         documentHeight: document.documentElement.scrollHeight,
-        headerPosition: header ? getComputedStyle(header).position : null
+        headerPosition: header ? getComputedStyle(header).position : null,
+        devicePixelRatio: window.devicePixelRatio || 1
       };
     });
 
@@ -64,8 +65,12 @@ export async function captureFullPageScreenshot(page: Page, path: string) {
 
     fs.writeFileSync(path, buffer);
 
+    const dimensions = pngDimensions(buffer);
+
     return {
-      ...pngDimensions(buffer),
+      ...dimensions,
+      cssWidth: dimensions.width / layout.devicePixelRatio,
+      cssHeight: dimensions.height / layout.devicePixelRatio,
       ...layout
     };
   } finally {
