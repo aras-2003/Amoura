@@ -8,6 +8,7 @@ on:
       - "feature/amoura-daily-club"
       - "fix/header-section-rendering-diagnostics"
       - "refactor/about-amoura-story"
+      - "qa/backlog-dod"
     paths:
       - "assets/**"
       - "blocks/**"
@@ -24,7 +25,7 @@ on:
 
 concurrency:
   group: amoura-test-theme-deploy
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -65,24 +66,20 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Diagnose section rendering
-        env:
-          AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
-          SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
-        run: npm run diagnose:sections
-
-      - name: Audit deployed TEST theme
+      - name: Verify backlog Definition of Done
         env:
           AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
           SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
           MAX_AUDIT_ROUTES: "30"
-        run: npm run audit
+        run: npm run qa:dod
 
       - name: Upload deployed theme audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: amoura-deployed-test-${{ github.sha }}
-          path: reports/
+          path: |
+            reports/
+            test-results/
           if-no-files-found: warn
           retention-days: 14
