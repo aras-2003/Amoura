@@ -17,6 +17,8 @@ test('authoritative review docs describe the current main-based state', async ()
   expect(model).not.toContain('feature/amoura-daily-club');
   expect(backlog).toContain('Branch: `main`');
   expect(backlog).toContain('#7 SEO basics — CLOSED');
+  expect(backlog).toContain('**3/3 focused checks**\n- PL/EN core routes');
+  expect(finalReview).toContain('0 critical, 0 serious i 0 standalone touch-target warnings');
   expect(backlog).not.toContain('Branch: `stabilize/backlog-dod`');
   expect(finalReview).not.toContain('actions/checkout@v4');
   expect(hygiene).toContain('`main` — jedyny canonical branch');
@@ -137,6 +139,7 @@ test('serious accessibility findings remain blocking for Astra readiness', async
   const audit = read('tests/ux/site-audit.spec.ts');
   const helper = read('tests/helpers/audit.ts');
   const packet = read('docs/ASTRA_REVIEW_PACKET.md');
+  const evidence = read('docs/ASTRA_TASK_EVIDENCE.md');
 
   expect(audit).toContain("f.severity === 'critical'");
   expect(audit).toContain("f.severity === 'serious'");
@@ -144,4 +147,6 @@ test('serious accessibility findings remain blocking for Astra readiness', async
   expect(helper).toContain(".filter((x) => x.w < 44 || x.h < 44)");
   expect(helper).toContain("x.tag === 'A' && x.display === 'inline'");
   expect(packet).toContain('0 critical + 0 serious + 0 standalone touch warnings');
+  expect(evidence).toContain('zero standalone `small-touch-target` warnings');
+  expect(evidence).not.toContain('warning-level standalone touch targets remain visible');
 });
