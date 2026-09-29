@@ -1,19 +1,14 @@
-name: Bootstrap Shopify TEST Theme
+name: Manual Shopify TEST Theme Snapshot
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "feature/playwright-ux-audit"
-    paths:
-      - ".github/workflows/bootstrap-theme.yml"
-      - "scripts/theme-pull.sh"
 
 permissions:
   contents: write
 
 jobs:
   pull-theme:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     env:
       SHOPIFY_STORE: jksgiq-r4.myshopify.com
@@ -21,10 +16,10 @@ jobs:
       SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
 
     steps:
-      - name: Checkout current branch
-        uses: actions/checkout@v4
+      - name: Checkout main
+        uses: actions/checkout@v7
         with:
-          ref: ${{ github.ref_name }}
+          ref: main
 
       - name: Validate Theme Access token
         shell: bash
@@ -35,14 +30,14 @@ jobs:
           fi
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
-      - name: Pull current unpublished TEST theme
+      - name: Pull approved TEST theme snapshot
         run: bash scripts/theme-pull.sh
 
-      - name: Commit theme snapshot
+      - name: Commit snapshot only if Shopify differs
         shell: bash
         run: |
           git config user.name "amoura-theme-bot"
@@ -52,5 +47,5 @@ jobs:
             echo "Theme already matches repository snapshot."
             exit 0
           fi
-          git commit -m "Sync Shopify TEST theme snapshot"
-          git push
+          git commit -m "Sync approved Shopify TEST theme snapshot"
+          git push origin HEAD:main
