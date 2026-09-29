@@ -30,6 +30,7 @@ test('authoritative review docs describe the current main-based state', async ()
   expect(packet).toContain('docs/ASTRA_TASK_EVIDENCE.md');
   expect(packet).toContain('docs/SOURCE_TRACEABILITY.md');
   expect(packet).toContain('Deployment integrity');
+  expect(packet).toContain('strict deployment gate');
   expect(packet).not.toContain('Od czego naprawdę zacząć z sexual wellness?');
 });
 
