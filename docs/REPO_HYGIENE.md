@@ -4,11 +4,8 @@ Updated: 2026-09-28
 
 ## Active branches
 
-- `main` — repository mainline; not used for direct TEST theme work unless explicitly decided.
-- `stabilize/backlog-dod` — current verified technical baseline; DoD #1–#5 green on run `36488768357`.
-- `content/club-4-week-rhythm` — editorial work for Klub Amoura; based on the stabilized baseline.
-- `maintenance/ci-repo-hygiene` — CI/runtime/repository maintenance.
-- `review/final-backlog-review` — bounded review notes only; no storefront code changes expected.
+- `main` — canonical branch and the only automatic deploy source for the TEST theme.
+- `main` includes the verified technical baseline, CI maintenance, repository hygiene and current Klub content draft/review docs.
 
 ## Historical branches — no longer allowed to auto-deploy
 
@@ -34,9 +31,7 @@ Draft PRs #3 and #4 were closed as superseded. They must not be merged after con
 ## Deployment rule
 
 Automatic pushes to the approved MAIN TEST theme are restricted to:
-- `stabilize/backlog-dod`
-- `content/**`
-- `maintenance/**`
+- `main`
 
 The deployment script additionally hard-checks:
 - store: `jksgiq-r4.myshopify.com`
