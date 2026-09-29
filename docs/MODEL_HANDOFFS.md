@@ -29,7 +29,8 @@ Zadanie techniczne uznajemy za zamknięte wyłącznie wtedy, gdy:
 1. ma skupiony test odbiorowy,
 2. test przechodzi w `npm run qa:dod`,
 3. pełny storefront audit przechodzi na tym samym SHA,
-4. ograniczenia i rzeczy nieweryfikowane są zapisane w dokumentacji.
+4. pełny audit ma 0 critical, 0 serious i 0 standalone touch-target warnings poniżej 44 px,
+5. ograniczenia i rzeczy nieweryfikowane są zapisane w dokumentacji.
 
 Zadanie redakcyjne #6 ma osobny DoD: komplet 12 propozycji, realne istniejące artykuły, brak obietnic zdrowotnych, oznaczone pozycje do review eksperckiego i brak automatycznej publikacji.
 
@@ -51,7 +52,7 @@ Zadanie redakcyjne #6 ma osobny DoD: komplet 12 propozycji, realne istniejące a
 
 **Cel:** usunąć małe cele dotykowe w problematycznych komponentach bez globalnego hacka.
 
-**Wdrożone:** footer, policy links, drawer items i drawer controls; testy 360 / 390 / 768 / 1440 oraz reflow odpowiadający 200% zoom, fokus klawiatury i brak poziomego scrolla.
+**Wdrożone:** footer, policy links, drawer items/controls, mobile menu trigger i logo link, quantity input, Club/editorial CTA oraz usunięcie niepotrzebnego accelerated checkout z prototypowego PDP; testy 360 / 390 / 768 / 1440 oraz reflow odpowiadający 200% zoom, fokus klawiatury i brak poziomego scrolla.
 
 ## 4. Zapisy e-mail i zgody
 
@@ -63,7 +64,7 @@ Zadanie redakcyjne #6 ma osobny DoD: komplet 12 propozycji, realne istniejące a
 
 **Cel:** stabilne `Klub Amoura / Club Amoura`, spójna nazwa Wiedzy, brak oczywistych anglicyzmów w PL i brak missing translations.
 
-**Wdrożone:** słownik marki, poprawki copy, stabilizacja labela po hydration oraz test PL/EN.
+**Wdrożone:** słownik marki, poprawki copy, stabilizacja labela po hydration oraz test PL/EN obejmujący core routes i wszystkie 8 opublikowanych polskich artykułów Wiedzy. Live CMS inventory: `docs/SHOPIFY_CONTENT_STATE.md`.
 
 ## 6. Rytm treści Klubu
 
