@@ -100,3 +100,34 @@ test('stale historical baseline IDs are absent from acceptance docs', async () =
   expect(acceptanceDocs).not.toContain('a068c9eca747478552f1852d135ee70fb0d598ef');
   expect(acceptanceDocs).toContain('head_sha');
 });
+
+
+test('Astra runtime evidence is generated only after deploy and DoD success', async () => {
+  const workflow = read('.github/workflows/deploy-test-theme.yml');
+  const push = read('scripts/theme-push.sh');
+  const deployProof = read('scripts/write-deploy-proof.sh');
+  const evidence = read('scripts/build-astra-evidence.sh');
+  const packet = read('docs/ASTRA_REVIEW_PACKET.md');
+  const prompt = read('docs/ASTRA_REVIEW_PROMPT.md');
+
+  expect(push).toContain('bash scripts/write-deploy-proof.sh');
+  expect(deployProof).toContain('deployment_integrity: "passed"');
+  expect(deployProof).toContain('rejected_files: false');
+  expect(evidence).toContain('reports/astra/deploy-proof.json');
+  expect(evidence).toContain('review-manifest.json');
+  expect(evidence).toContain('GITHUB_RUN_ID');
+  expect(evidence).toContain('GITHUB_SHA');
+
+  const qaIndex = workflow.indexOf('Verify backlog Definition of Done');
+  const evidenceIndex = workflow.indexOf('Build Astra review evidence');
+  const uploadIndex = workflow.indexOf('Upload lightweight QA reports');
+  expect(qaIndex).toBeGreaterThan(-1);
+  expect(evidenceIndex).toBeGreaterThan(qaIndex);
+  expect(uploadIndex).toBeGreaterThan(evidenceIndex);
+  expect(workflow).toContain('reports/astra/**');
+
+  expect(packet).toContain('reports/astra/deploy-proof.json');
+  expect(packet).toContain('reports/astra/review-manifest.json');
+  expect(prompt).toContain('reports/astra/deploy-proof.json');
+  expect(prompt).toContain('artifact');
+});
