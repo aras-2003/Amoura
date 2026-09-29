@@ -41,7 +41,11 @@
 
 `tests/ux/language-consistency.spec.ts` obejmuje PL/EN landing pages, FAQ, Klub labels po hydration i missing translations.
 
-Zielony baseline przed ostatnim rozszerzeniem: run `36565669479`, **2/2 passed**. Bieżący `qa:dod` ponownie waliduje rozszerzoną macierz.
+Focused language contract: **2/2 passed** w finalnym `qa:dod`, obejmując PL/EN core routes, FAQ, Club hydration i missing translations.
+
+## Supported locales
+
+Shopify Admin potwierdza obecnie dwa opublikowane storefront locales: `pl` (primary) i `en`. Dlatego strict Theme Check jest utrzymywany tylko dla tych dwóch storefront locale payloadów; schema locale files pozostają dla theme editora.
 
 ## Domknięta decyzja redakcyjna
 
