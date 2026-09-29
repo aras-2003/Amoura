@@ -9,7 +9,7 @@
 {% stylesheet %}
   /* Quantity selector */
   .quantity-selector {
-    --quantity-selector-width: 124px;
+    --quantity-selector-width: 136px;
 
     display: flex;
     justify-content: space-between;
@@ -84,7 +84,8 @@
   .quantity-selector input[type='number'] {
     margin: 0;
     width: calc(var(--quantity-selector-width) - var(--minimum-touch-target) * 2);
-    min-width: 3ch;
+    min-width: 44px;
+    min-height: 44px;
     padding-inline: 0;
     text-align: center;
     border: none;
