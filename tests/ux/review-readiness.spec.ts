@@ -36,5 +36,9 @@ test('individual handoffs expose final status without stale blockers', async () 
   ];
   for (const doc of docs) expect(doc).toMatch(/DONE/);
   expect(docs[0]).not.toContain('Aktualny TEST Shopify jest niedostępny');
-  expect(read('docs/HANDOFF_06_CLUB_CONTENT_RHYTHM.md')).toContain('DONE jako deliverable redakcyjny');
+  const h6 = read('docs/HANDOFF_06_CLUB_CONTENT_RHYTHM.md');
+  expect(h6).toContain('DONE jako deliverable redakcyjny');
+  expect((h6.match(/\*\*Tekst ćwiczenia:\*\*/g) ?? []).length).toBe(12);
+  expect((h6.match(/\*\*CTA:\*\*/g) ?? []).length).toBe(12);
+  expect((h6.match(/\*\*Weryfikacja ekspercka:\*\*/g) ?? []).length).toBe(12);
 });
