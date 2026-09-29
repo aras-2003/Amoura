@@ -43,7 +43,7 @@ Po wykryciu problemu:
 | 5 | PL/EN consistency | Klub/Club hydration, missing translations, copy hygiene, core routes + 8 live PL articles | 3 testy |
 | 6 | Klub content rhythm | 12 rytuałów, 4 tygodnie × 2/5/10 min, real articles, expert flags | dokument + redakcyjny DoD |
 | 7 | SEO basics | server HTML: title, one H1, canonical, OG, no accidental noindex | 14 tras PL/EN |
-| QA | Full storefront audit | crawl + runtime/accessibility/screenshots; 0 critical + 0 serious | mobile/tablet/desktop |
+| QA | Full storefront audit | crawl + runtime/accessibility/screenshots; 0 critical + 0 serious + 0 standalone touch warnings | mobile/tablet/desktop |
 | Cross-cutting | Review readiness | docs↔code consistency, deploy contract, supported locales | `tests/ux/review-readiness.spec.ts` |
 
 ## Deployment integrity
