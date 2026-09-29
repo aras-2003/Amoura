@@ -43,7 +43,6 @@ Niezależnie zweryfikować, czy zadania #1–#7 zostały wykonane zgodnie z ich 
 - Club #3/#8/#10/#11 wymagają review eksperckiego przed publikacją,
 - 4-tygodniowy rytm nie został opublikowany,
 - historyczne branche nadal istnieją, ale nie deployują,
-- jeden tytuł artykułu Shopify zawiera „sexual wellness” — decyzja redakcyjna marki.
 
 ## Instrukcja dla Astry
 
