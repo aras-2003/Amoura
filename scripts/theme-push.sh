@@ -76,6 +76,13 @@ if ! jq -e '.theme.id and (.theme.id|tostring) == "'"$THEME_ID"'"' "$PUSH_STDOUT
 fi
 
 cp "$PUSH_STDOUT" /tmp/shopify-theme-push.json
+
+AMOURA_DEPLOY_STORE="$STORE" \
+AMOURA_DEPLOY_THEME_ID="$THEME_ID" \
+AMOURA_DEPLOY_THEME_NAME="$THEME_NAME" \
+AMOURA_DEPLOY_THEME_ROLE="$THEME_ROLE" \
+bash scripts/write-deploy-proof.sh
+
 echo "MAIN test theme updated without rejected files: $THEME_ID"
 if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
   echo "theme_id=$THEME_ID" >> "$GITHUB_OUTPUT"
