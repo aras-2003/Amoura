@@ -14,12 +14,23 @@
 
 ## Zmiany
 
+Pierwszy pass naprawił źródłowe komponenty:
 - footer: 44 px minimum na mobile,
 - policy popover: linki minimum 44 px,
 - menu drawer: item/title minimum 44 px,
 - drawer back/close: minimum 44×44,
 - audit raportuje selector,
 - brak globalnego min-height na wszystkie linki.
+
+Końcowy hardening przed review Astry objął dodatkowo problemy znalezione przez pełny crawl:
+- hamburger menu: jawne minimum 44×44,
+- logo/home link na mobile: minimum 44 px wysokości,
+- quantity input na PDP: minimum 44×44 i szerszy selector,
+- samodzielne editorial CTA na home/PDP/article: minimum 44 px,
+- Club links i privacy link: minimum 44 px,
+- accelerated checkout usunięty z prototypowego PDP, ponieważ zewnętrzny iframe generował niedostępne elementy i nie jest potrzebny do walidacji obecnego konceptu.
+
+Audit 44 px świadomie wyłącza zwykłe linki inline osadzone w bieżącym tekście; nadal obejmuje samodzielne kontrolki i CTA.
 
 ## Dowód
 
@@ -30,4 +41,8 @@ Focused contract: **5/5 passed** w finalnym `qa:dod`; dowód wybieramy po zgodno
 
 ## Redukcja problemów
 
-Zamiast raportować surową liczbę powtarzających się warningów, pogrupowano je do **4 unikalnych źródeł komponentowych**: footer links, policy links, drawer items oraz drawer back/close controls. Po poprawkach focused audit nie zwraca żadnego findingu dla poprawianych selektorów na 360/390 px, a reflow/focus/overflow przechodzą na całej macierzy. To jest właściwa miara redukcji, bo pierwotne warningi wielokrotnie powtarzały te same komponenty.
+Pierwotne warningi były silnie zduplikowane między trasami. Końcowy odbiór nie opiera się już na historycznej liczbie warningów, tylko na dwóch warstwach:
+1. focused test: macierz 360/390/768/1440 + reflow/focus/overflow,
+2. pełny storefront audit: brak findingów `critical` i `serious` na mobile/tablet/desktop.
+
+Dodatkowo standalone touch targets poniżej 44 px pozostają raportowane jako warning i mają być przejrzane w finalnym artifact przed przekazaniem Astrze.
