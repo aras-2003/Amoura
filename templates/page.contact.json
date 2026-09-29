@@ -15,7 +15,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<p class=\"amoura-eyebrow\">Kontakt z Amoura</p><h1>Porozmawiajmy</h1>",
+            "text": "<h1>Porozmawiajmy</h1>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -68,7 +68,7 @@
         "content_direction": "column",
         "gap": 20,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 64,
+        "padding-block-start": 18,
         "padding-block-end": 0
       }
     },
@@ -146,9 +146,20 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "contact_eyebrow": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{% if request.locale.iso_code == 'en' %}<div class=\"amoura-eyebrow\">Contact Amoura</div>{% else %}<div class=\"amoura-eyebrow\">Kontakt z Amoura</div>{% endif %}",
+        "background_color": "{{ settings.color_palette.background }}",
+        "section_width": "page-width",
+        "padding-block-start": 64,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
+    "contact_eyebrow",
     "main",
     "form",
     "contact_note"
