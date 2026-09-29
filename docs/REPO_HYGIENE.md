@@ -53,18 +53,21 @@ Draft PR #3 i #4 są zamknięte jako superseded i nie powinny być mergowane.
 
 Dostępny connector GitHub nie udostępnia operacji delete branch. Branche historyczne są zdezaktywowane operacyjnie, a nie fikcyjnie oznaczone jako usunięte.
 
+## Supported locales
 
-## Supported storefront locales
-
-Current Shopify state was verified through Admin GraphQL:
+Current Shopify storefront state was verified through Admin GraphQL:
 - `pl` — primary, published,
 - `en` — published.
 
-Only `locales/pl.json` and `locales/en.default.json` are therefore kept as storefront locale payloads. Unpublished storefront locale JSON files were removed because they made strict Theme Check fail after Amoura-specific keys were added.
+Amoura intentionally keeps only four locale files:
+- `locales/pl.json`
+- `locales/pl.schema.json`
+- `locales/en.default.json`
+- `locales/en.default.schema.json`
 
-Locale schema files (`*.schema.json`) remain because they describe theme-editor translations rather than published storefront language payloads.
+The extra Shopify stock locale payloads and theme-editor schema translations are not used by this project and are removed from the repository. `scripts/theme-pull.sh` prunes every snapshot back to the four approved PL/EN files, so a future manual Shopify snapshot cannot silently reintroduce Arabic or other unused locales.
 
-Before publishing another storefront locale in Shopify, add/restore the matching storefront locale JSON and make it pass `MatchingTranslations`.
+Before publishing another storefront language or supporting another theme-editor language, explicitly add/restore its locale files and make them pass Theme Check.
 
 ## Manual workflows
 
