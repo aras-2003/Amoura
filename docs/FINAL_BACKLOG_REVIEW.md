@@ -35,7 +35,8 @@ Pakiet jest przygotowany tak, aby końcowy reviewer sprawdził:
 - source traceability,
 - privacy principles,
 - deployment integrity,
-- pełny storefront audit.
+- pełny storefront audit z 0 critical i 0 serious findings,
+- live Shopify CMS article copy objęte testem language consistency.
 
 ## Świadome ograniczenia
 
@@ -55,7 +56,7 @@ Pakiet jest przygotowany tak, aby końcowy reviewer sprawdził:
 - strict theme validation/deploy,
 - manual snapshot i manual UX workflow bez starych auto-triggerów,
 - draft PR #3 i #4 zamknięte jako superseded,
-- success artifact zawiera raporty + kluczowe full-page screenshots,
+- success artifact zawiera runtime deploy proof, review manifest, raporty + kluczowe full-page screenshots,
 - failure artifact zawiera pełną diagnostykę,
 - PR template z DoD,
 - source traceability,
