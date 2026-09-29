@@ -25,7 +25,7 @@
 
 `tests/ux/touch-targets.spec.ts`: 360 / 390 / 768 / 1440 px, reflow 200%-equivalent, keyboard focus, brak horizontal overflow.
 
-Run `36565669479`: **5/5 passed**.
+Focused contract: **5/5 passed** w finalnym `qa:dod`; dowód wybieramy po zgodności `head_sha` runu z aktualnym `main`.
 
 
 ## Redukcja problemów
