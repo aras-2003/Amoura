@@ -69,12 +69,17 @@ jobs:
           MAX_AUDIT_ROUTES: "30"
         run: npm run qa:dod
 
+      - name: Build Astra review evidence
+        if: success()
+        run: bash scripts/build-astra-evidence.sh
+
       - name: Upload lightweight QA reports
         if: success()
         uses: actions/upload-artifact@v7
         with:
           name: amoura-qa-reports-${{ github.sha }}
           path: |
+            reports/astra/**
             reports/ux/**/report.json
             reports/screenshots/**/home-full.png
             reports/screenshots/**/club-full.png
