@@ -4,9 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - "stabilize/backlog-dod"
-      - "content/**"
-      - "maintenance/**"
+      - "main"
     paths:
       - "assets/**"
       - "blocks/**"
