@@ -131,3 +131,15 @@ test('Astra runtime evidence is generated only after deploy and DoD success', as
   expect(prompt).toContain('reports/astra/deploy-proof.json');
   expect(prompt).toContain('artifact');
 });
+
+
+test('serious accessibility findings remain blocking for Astra readiness', async () => {
+  const audit = read('tests/ux/site-audit.spec.ts');
+  const helper = read('tests/helpers/audit.ts');
+  const packet = read('docs/ASTRA_REVIEW_PACKET.md');
+
+  expect(audit).toContain("f.severity === 'critical' || f.severity === 'serious'");
+  expect(helper).toContain(".filter((x) => x.w < 44 || x.h < 44)");
+  expect(helper).toContain("x.tag === 'A' && x.display === 'inline'");
+  expect(packet).toContain('0 critical + 0 serious');
+});
