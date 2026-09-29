@@ -17,7 +17,7 @@ Wniosek: obecny zestaw jest bezpieczny i prosty, ale wszystkie trzy ćwiczenia s
 
 ### Faktycznie istniejące artykuły w Shopify — blog „Wiedza Amoura”
 
-1. **Od czego naprawdę zacząć z sexual wellness?**  
+1. **Od czego zacząć, gdy chcesz lepiej zadbać o swoją intymność?**  
    `/blogs/wiedza/od-czego-zaczac`
 2. **Bliskość po 35.: własne tempo, inne potrzeby**  
    `/blogs/wiedza/bliskosc-po-35`
@@ -54,7 +54,7 @@ Strategia Amoura zakłada kolejność **zaufanie → edukacja → produkty**, a 
 **Tekst ćwiczenia:**  
 Usiądź tak, jak jest Ci wygodnie. Nie poprawiaj niczego dookoła. Zauważ trzy rzeczy, które są dziś przyjemne albo choć trochę łagodniejsze niż reszta dnia: temperaturę, światło, materiał ubrania, ciszę, zapach. Nie musisz nic z tym robić.
 
-**Pasujący artykuł:** „Od czego naprawdę zacząć z sexual wellness?”  
+**Pasujący artykuł:** „Od czego zacząć, gdy chcesz lepiej zadbać o swoją intymność?”  
 **CTA:** „Jeśli chcesz, zacznij od potrzeb, nie od kategorii.”  
 **Weryfikacja ekspercka:** nie wymaga.
 
@@ -101,7 +101,7 @@ Dokończ dwa zdania: „Chciałabym lepiej rozumieć…” oraz „Nie muszę je
 **Tekst ćwiczenia:**  
 Wypisz pięć słów, które dobrze opisują to, czego chcesz więcej: np. spokój, ciepło, bliskość, intensywność, czas, lekkość. Skreśl te, które brzmią jak oczekiwania innych. Zostaw trzy własne.
 
-**Pasujący artykuł:** „Od czego naprawdę zacząć z sexual wellness?”  
+**Pasujący artykuł:** „Od czego zacząć, gdy chcesz lepiej zadbać o swoją intymność?”  
 **CTA:** „Zobacz, jak potrzeby mogą być lepszym punktem wejścia niż etykiety.”  
 **Weryfikacja ekspercka:** nie wymaga.
 
