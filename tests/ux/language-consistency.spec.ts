@@ -10,6 +10,17 @@ const PL_ROUTES = [
   '/pages/contact'
 ];
 
+const PL_ARTICLE_ROUTES = [
+  '/blogs/wiedza/od-czego-zaczac',
+  '/blogs/wiedza/bliskosc-po-35',
+  '/blogs/wiedza/sensualny-self-care-15-minut',
+  '/blogs/wiedza/jak-rozmawiac-o-potrzebach',
+  '/blogs/wiedza/jak-wybrac-pierwszy-produkt-intymny',
+  '/blogs/wiedza/komfort-intymny-po-40',
+  '/blogs/wiedza/przyjemnosc-bez-celu',
+  '/blogs/wiedza/rytual-bliskosci-we-dwoje'
+];
+
 const EN_ROUTES = [
   '/en/',
   '/en/pages/o-amoura',
@@ -66,4 +77,19 @@ test('English storefront keeps English brand labels and live core routes', async
   expect(labels, 'English Club links should not use legacy Amoura Club / Polish labels')
     .not.toContain('Amoura Club');
   expect(labels).not.toContain('Klub Amoura');
+});
+
+
+test('published Polish knowledge content keeps the approved language standard', async ({ page }) => {
+  for (const route of PL_ARTICLE_ROUTES) {
+    const response = await gotoWithRetry(page, route);
+    expect(response?.status() ?? 0, route).toBeLessThan(400);
+    const text = (await page.locator('main, .content-for-layout').first().innerText()).replace(/\s+/g, ' ');
+
+    expect(text, `${route}: self-care anglicism`).not.toMatch(/\bself-care\b/i);
+    expect(text, `${route}: feedback anglicism`).not.toMatch(/\bfeedback\b/i);
+    expect(text, `${route}: upsell anglicism`).not.toMatch(/\bupsell\b/i);
+    expect(text, `${route}: review anglicism`).not.toMatch(/\breview\b/i);
+    expect(text, `${route}: missing translation`).not.toMatch(/translation missing/i);
+  }
 });
