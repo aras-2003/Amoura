@@ -73,3 +73,20 @@ test('deployment and locale review contract is current', async () => {
     .sort();
   expect(storefrontLocales).toEqual(['en.default.json', 'pl.json']);
 });
+
+
+test('stale historical baseline IDs are absent from acceptance docs', async () => {
+  const acceptanceDocs = [
+    read('docs/BACKLOG_DOD_STATUS.md'),
+    read('docs/FINAL_BACKLOG_REVIEW.md'),
+    read('docs/HANDOFF_01_DIAGNOSIS.md'),
+    read('docs/HANDOFF_02_SCREENSHOTS.md'),
+    read('docs/HANDOFF_03_TOUCH_TARGETS.md'),
+    read('docs/HANDOFF_04_EMAIL_FLOWS.md'),
+    read('docs/HANDOFF_05_LANGUAGE_CONSISTENCY.md'),
+  ].join('\n');
+
+  expect(acceptanceDocs).not.toContain('36565669479');
+  expect(acceptanceDocs).not.toContain('a068c9eca747478552f1852d135ee70fb0d598ef');
+  expect(acceptanceDocs).toContain('head_sha');
+});
