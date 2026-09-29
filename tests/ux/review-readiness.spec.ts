@@ -44,7 +44,7 @@ test('individual handoffs expose final status without stale blockers', async () 
   ];
   for (const doc of docs) expect(doc).toMatch(/DONE/);
   expect(docs[0]).not.toContain('Aktualny TEST Shopify jest niedostępny');
-  expect(docs[2]).toContain('4 unikalnych źródeł komponentowych');
+  expect(docs[2]).toContain('Końcowy hardening przed review Astry');
   expect(docs[4]).toContain('Zrealizowany pakiet niespójności');
   expect(docs[4]).toContain('Plik / miejsce');
   const h6 = read('docs/HANDOFF_06_CLUB_CONTENT_RHYTHM.md');
@@ -138,8 +138,10 @@ test('serious accessibility findings remain blocking for Astra readiness', async
   const helper = read('tests/helpers/audit.ts');
   const packet = read('docs/ASTRA_REVIEW_PACKET.md');
 
-  expect(audit).toContain("f.severity === 'critical' || f.severity === 'serious'");
+  expect(audit).toContain("f.severity === 'critical'");
+  expect(audit).toContain("f.severity === 'serious'");
+  expect(audit).toContain("f.code === 'small-touch-target'");
   expect(helper).toContain(".filter((x) => x.w < 44 || x.h < 44)");
   expect(helper).toContain("x.tag === 'A' && x.display === 'inline'");
-  expect(packet).toContain('0 critical + 0 serious');
+  expect(packet).toContain('0 critical + 0 serious + 0 standalone touch warnings');
 });
