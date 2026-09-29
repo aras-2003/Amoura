@@ -1,14 +1,10 @@
-name: Amoura UX Audit
+name: Manual Amoura UX Audit
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "feature/**"
-      - "staging"
 
 concurrency:
-  group: amoura-ux-audit-${{ github.ref }}
+  group: amoura-manual-ux-audit
   cancel-in-progress: true
 
 permissions:
@@ -16,16 +12,19 @@ permissions:
 
 jobs:
   audit:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/?preview_theme_id=207539044694
+      AMOURA_BASE_URL: https://jksgiq-r4.myshopify.com/
       SHOPIFY_STOREFRONT_PASSWORD: ${{ secrets.SHOPIFY_STOREFRONT_PASSWORD }}
       MAX_AUDIT_ROUTES: "30"
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout main
+        uses: actions/checkout@v7
+        with:
+          ref: main
 
       - name: Validate required secret
         shell: bash
@@ -36,24 +35,26 @@ jobs:
           fi
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "22"
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
-      - name: Install Playwright browsers
+      - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
       - name: Run rendered UX audit
         run: npm run audit
 
-      - name: Upload UX reports and full-page screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Upload UX reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v7
         with:
-          name: amoura-ux-audit-${{ github.run_number }}
-          path: reports/
+          name: amoura-manual-ux-audit-${{ github.run_number }}
+          path: |
+            reports/
+            test-results/
           if-no-files-found: warn
-          retention-days: 14
+          retention-days: 7
