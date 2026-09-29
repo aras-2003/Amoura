@@ -173,12 +173,13 @@ test.describe('section rendering diagnostics', () => {
 
     const productLink = page.locator('a[href*="/products/"]:visible').first();
     await expect(productLink).toBeVisible({ timeout: 5_000 });
-    await Promise.all([
-      page.waitForURL(/\/products\//, { timeout: 10_000 }),
-      productLink.click(),
-    ]);
-    await page.waitForLoadState('domcontentloaded');
-    await page.goBack({ waitUntil: 'domcontentloaded' });
+    await productLink.click();
+    await expect(page).toHaveURL(/\/products\//, { timeout: 10_000 });
+    await page.waitForTimeout(500);
+
+    await page.goBack({ waitUntil: 'commit' }).catch(() => null);
+    await expect(page).toHaveURL(/\/collections\//, { timeout: 10_000 });
+    await page.waitForTimeout(300);
 
     const relevant = errors.filter(message =>
       /section .*not found|No empty section markup found|header section missing/i.test(message)
