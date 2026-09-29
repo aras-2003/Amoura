@@ -7,7 +7,14 @@ const CORE_ROUTES = [
   '/pages/kolekcje',
   '/blogs/wiedza',
   '/pages/faq',
-  '/pages/contact'
+  '/pages/contact',
+  '/en/',
+  '/en/pages/o-amoura',
+  '/en/pages/klub-amoura',
+  '/en/pages/collections',
+  '/en/blogs/journal',
+  '/en/pages/faq',
+  '/en/pages/contact'
 ];
 
 function attribute(tag: string, name: string) {
@@ -80,6 +87,14 @@ for (const route of CORE_ROUTES) {
       attribute(ogDescriptionTag ?? '', 'content').trim().length,
       `${route}: empty og:description`
     ).toBeGreaterThan(10);
+
+    const ogUrl = new URL(attribute(ogUrlTag ?? '', 'content'));
+    expect(ogUrl.protocol, `${route}: og:url must use HTTPS`).toBe('https:');
+    expect(ogUrl.searchParams.has('preview_theme_id'), `${route}: og:url must not expose preview params`).toBe(false);
+    expect(
+      ogUrl.pathname.replace(/\/$/, ''),
+      `${route}: og:url and canonical path should match`
+    ).toBe(canonicalURL.pathname.replace(/\/$/, ''));
 
     const robotsTag = findTag(html, 'meta', 'name', 'robots');
     const robots = attribute(robotsTag ?? '', 'content').toLowerCase();
