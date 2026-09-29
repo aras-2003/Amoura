@@ -22,6 +22,6 @@
 
 ## Dowód
 
-`tests/ux/email-flows.spec.ts`, run `36565669479`: **2/2 passed**.
+`tests/ux/email-flows.spec.ts`: **2/2 passed** w finalnym `qa:dod`; real delivery pozostaje jawnie poza zakresem.
 
 Faktyczne dostarczenie wiadomości nie było testowane i pozostaje jawnie poza DoD.
