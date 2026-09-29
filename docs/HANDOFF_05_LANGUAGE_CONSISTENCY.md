@@ -43,6 +43,6 @@
 
 Zielony baseline przed ostatnim rozszerzeniem: run `36565669479`, **2/2 passed**. Bieżący `qa:dod` ponownie waliduje rozszerzoną macierz.
 
-## Świadoma decyzja redakcyjna
+## Domknięta decyzja redakcyjna
 
-Publiczny tytuł jednego artykułu Shopify nadal zawiera „sexual wellness”. Jest to jawna decyzja do zatwierdzenia przez właściciela marki, nie przypadkowy missing translation ani tekst zaszyty w motywie.
+Tytuł artykułu `od-czego-zaczac` został ujednolicony do: „Od czego zacząć, gdy chcesz lepiej zadbać o swoją intymność?”. Handle pozostał bez zmian.
