@@ -29,6 +29,14 @@ Niezależnie zweryfikować, czy zadania #1–#7 zostały wykonane zgodnie z ich 
 
 ## Pliki do review
 
+### Zasady i źródła repo
+- `AGENTS.md`
+- `docs/PRODUCT.md`
+- `docs/BRAND_PRINCIPLES.md`
+- `docs/UX_PRINCIPLES.md`
+- `docs/PRIVACY_PRINCIPLES.md`
+
+### Zadania, rezultaty i dowody
 - `docs/MODEL_HANDOFFS.md`
 - `docs/HANDOFF_01_DIAGNOSIS.md` … `HANDOFF_06_CLUB_CONTENT_RHYTHM.md`
 - `docs/BACKLOG_DOD_STATUS.md`
