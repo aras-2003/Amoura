@@ -6,6 +6,7 @@ const PL_ROUTES = [
   '/pages/klub-amoura',
   '/pages/kolekcje',
   '/blogs/wiedza',
+  '/pages/faq',
   '/pages/contact'
 ];
 
@@ -15,16 +16,19 @@ const EN_ROUTES = [
   '/en/pages/klub-amoura',
   '/en/pages/collections',
   '/en/blogs/journal',
+  '/en/pages/faq',
   '/en/pages/contact'
 ];
 
 async function gotoWithRetry(page: Page, route: string) {
+  const transient = new Set([429, 502, 503, 504]);
+  let response = null;
   for (let attempt = 1; attempt <= 3; attempt++) {
-    const response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
-    if (response?.status() !== 429) return response;
-    await page.waitForTimeout(900 * attempt);
+    response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+    if (!transient.has(response?.status() ?? 0)) return response;
+    await page.waitForTimeout(500 * attempt);
   }
-  return null;
+  return response;
 }
 
 test('Polish storefront avoids known language regressions', async ({ page }) => {
