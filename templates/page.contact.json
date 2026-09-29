@@ -15,7 +15,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>Porozmawiajmy</h1>",
+            "text": "<p class=\"amoura-eyebrow\">Kontakt z Amoura</p><h1>Porozmawiajmy</h1>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -39,7 +39,7 @@
           "type": "text",
           "name": "t:names.content",
           "settings": {
-            "text": "<p>Masz pytanie o Amoura, współpracę, eksperckie treści albo przyszłą ofertę? Napisz. Jesteśmy na etapie budowania koncepcji i chcemy słuchać uważnie.</p>",
+            "text": "<p>Masz pytanie o Amoura, współpracę, treści eksperckie albo przyszłą ofertę? Napisz. Jesteśmy na etapie rozwijania koncepcji i chcemy słuchać uważnie.</p>",
             "width": "100%",
             "max_width": "narrow",
             "alignment": "left",
