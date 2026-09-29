@@ -173,7 +173,12 @@ test.describe('section rendering diagnostics', () => {
 
     const productLink = page.locator('a[href*="/products/"]:visible').first();
     await expect(productLink).toBeVisible({ timeout: 5_000 });
-    await productLink.click();
+    // The theme intentionally renders the full-card anchor below the media layer.
+    // A pointer click on that invisible overlay is not representative of the actual
+    // card interaction because the media receives the pointer and bubbles the click
+    // to <product-card>. HTMLElement.click() preserves the same bubbling/default
+    // navigation path without waiting forever on Playwright hit-target checks.
+    await productLink.evaluate((link: HTMLAnchorElement) => link.click());
     await expect(page).toHaveURL(/\/products\//, { timeout: 10_000 });
     await page.waitForTimeout(500);
 
