@@ -8,7 +8,7 @@ const ROUTES = [
   ['home', '/', 'main'],
   ['club', '/pages/klub-amoura', 'main'],
   ['collection', '/collections/menopause-comfort-pleasure', '.amoura-collection-intro'],
-  ['product', '/products/soft-ritual-massager', '.product-information, [data-product-id], .amx-context'],
+  ['product', '/products/soft-ritual-massager', '.amx-context'],
   ['article', '/blogs/wiedza/od-czego-zaczac', 'article, .article, main']
 ] as const;
 
