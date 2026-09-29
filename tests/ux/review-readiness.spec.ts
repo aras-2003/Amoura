@@ -24,6 +24,8 @@ test('authoritative review docs describe the current main-based state', async ()
   }
   expect(packet).toContain('Known limitations');
   expect(packet).toContain('workflow run: `36565669479`');
+  expect(packet).toContain('docs/PRIVACY_PRINCIPLES.md');
+  expect(packet).not.toContain('Od czego naprawdę zacząć z sexual wellness?');
 });
 
 test('individual handoffs expose final status without stale blockers', async () => {
@@ -41,6 +43,7 @@ test('individual handoffs expose final status without stale blockers', async () 
   expect(docs[4]).toContain('Plik / miejsce');
   const h6 = read('docs/HANDOFF_06_CLUB_CONTENT_RHYTHM.md');
   expect(h6).toContain('DONE jako deliverable redakcyjny');
+  expect(h6).not.toContain('Od czego naprawdę zacząć z sexual wellness?');
   expect((h6.match(/\*\*Tekst ćwiczenia:\*\*/g) ?? []).length).toBe(12);
   expect((h6.match(/\*\*CTA:\*\*/g) ?? []).length).toBe(12);
   expect((h6.match(/\*\*Weryfikacja ekspercka:\*\*/g) ?? []).length).toBe(12);
