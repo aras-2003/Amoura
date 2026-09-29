@@ -5,11 +5,11 @@ import { stripShopifyPreviewChrome } from '../helpers/audit';
 import { captureFullPageScreenshot } from '../helpers/full-page-screenshot';
 
 const ROUTES = [
-  ['home', '/'],
-  ['club', '/pages/klub-amoura'],
-  ['collection', '/collections/menopause-comfort-pleasure'],
-  ['product', '/products/soft-ritual-massager'],
-  ['article', '/blogs/wiedza/od-czego-zaczac']
+  ['home', '/', 'main'],
+  ['club', '/pages/klub-amoura', 'main'],
+  ['collection', '/collections/menopause-comfort-pleasure', '.amoura-collection-intro'],
+  ['product', '/products/soft-ritual-massager', '.product-information, [data-product-id], .amx-context'],
+  ['article', '/blogs/wiedza/od-czego-zaczac', 'article, .article, main']
 ] as const;
 
 async function gotoWithRetry(page: Page, route: string) {
@@ -34,7 +34,7 @@ test('full-page screenshots include the complete storefront', async ({ page }, t
   const dir = path.join('reports', 'screenshots', testInfo.project.name);
   fs.mkdirSync(dir, { recursive: true });
 
-  for (const [name, route] of ROUTES) {
+  for (const [name, route, contentSelector] of ROUTES) {
     const response = await gotoWithRetry(page, route);
     expect(response?.status() ?? 0, route).toBeLessThan(400);
 
@@ -42,11 +42,22 @@ test('full-page screenshots include the complete storefront', async ({ page }, t
     await stripShopifyPreviewChrome(page);
     await closeCookiesIfVisible(page);
 
+    await expect(page.locator(contentSelector).first(), `${route} should render its primary content`).toBeVisible();
+
     const shot = await captureFullPageScreenshot(page, path.join(dir, `${name}-full.png`));
     const viewport = page.viewportSize();
     expect(viewport).not.toBeNull();
     expect(Math.round(shot.cssWidth)).toBe(viewport!.width);
-    expect(shot.cssHeight, `${route} should extend beyond one viewport`).toBeGreaterThan(viewport!.height + 200);
+
+    // A legitimate page can be shorter than "viewport + 200px" at some
+    // responsive breakpoints. The actual contract is that the full-page
+    // screenshot covers the complete document, not that every route has an
+    // arbitrary minimum length.
+    expect(shot.documentHeight, `${route} document should fill at least the viewport`).toBeGreaterThanOrEqual(viewport!.height);
+    expect(
+      Math.abs(shot.cssHeight - shot.documentHeight),
+      `${route} screenshot height should match the document height`
+    ).toBeLessThanOrEqual(2);
     expect(shot.headerPosition).not.toBe('sticky');
 
     if (name === 'article') {
