@@ -23,9 +23,11 @@
 - kontrakt odpowiedzi,
 - rapid navigation,
 - predictive-search reset stress,
+- real internal navigation,
+- header menu i cart controls,
 - mobile / tablet / desktop.
 
-Zielony baseline: run `36565669479`, **9/9 passed**.
+Finalny focused contract: **15/15** — 5 scenariuszy × mobile / tablet / desktop. Końcowy dowód to najnowszy successful deploy run dla dokładnego SHA aktualnego `main`.
 
 ## Pliki główne
 
