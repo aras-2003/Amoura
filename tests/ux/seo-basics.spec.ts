@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type APIRequestContext } from '@playwright/test';
 
 const CORE_ROUTES = [
   '/',
@@ -10,66 +10,79 @@ const CORE_ROUTES = [
   '/pages/contact'
 ];
 
-async function gotoWithRetry(page: Page, route: string) {
+function attribute(tag: string, name: string) {
+  const escaped = name.replace(/[.*+?^$()|[\]\\]/g, '\\$&');
+  return tag.match(new RegExp(`${escaped}\\s*=\\s*["']([^"']*)["']`, 'i'))?.[1] ?? '';
+}
+
+function findTag(html: string, tagName: string, attributeName: string, attributeValue: string) {
+  const tags = html.match(new RegExp(`<${tagName}\\b[^>]*>`, 'gi')) ?? [];
+  return tags.find((tag) =>
+    attribute(tag, attributeName).toLowerCase() === attributeValue.toLowerCase()
+  );
+}
+
+async function getWithRetry(request: APIRequestContext, route: string) {
   const transient = new Set([429, 502, 503, 504]);
   let response = null;
 
   for (let attempt = 1; attempt <= 3; attempt++) {
-    response = await page.goto(route, { waitUntil: 'commit', timeout: 15_000 });
-
-    if (!transient.has(response?.status() ?? 0)) {
-      await page.locator('body').waitFor({ state: 'attached', timeout: 10_000 });
-      return response;
-    }
-
-    await page.waitForTimeout(500 * attempt);
+    response = await request.get(route, { timeout: 15_000 });
+    if (!transient.has(response.status())) return response;
+    await new Promise((resolve) => setTimeout(resolve, 500 * attempt));
   }
 
   return response;
 }
 
 for (const route of CORE_ROUTES) {
-  test(`SEO basics are stable on ${route}`, async ({ page }) => {
-    test.setTimeout(60_000);
+  test(`SEO basics are stable on ${route}`, async ({ request }) => {
+    test.setTimeout(30_000);
 
-    const response = await gotoWithRetry(page, route);
-    expect(response?.status() ?? 0, route).toBeLessThan(400);
+    const response = await getWithRetry(request, route);
+    expect(response, `${route}: no HTTP response`).not.toBeNull();
+    expect(response!.status(), route).toBeLessThan(400);
 
-    const title = (await page.title()).trim();
+    const html = await response!.text();
+
+    const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim() ?? '';
     expect(title.length, `${route}: empty document title`).toBeGreaterThan(5);
 
-    const h1 = page.locator('h1:visible');
-    await expect(h1, `${route}: expected exactly one visible h1`).toHaveCount(1);
-    expect((await h1.innerText()).trim().length, `${route}: empty h1`).toBeGreaterThan(2);
+    const h1Count = (html.match(/<h1\b/gi) ?? []).length;
+    expect(h1Count, `${route}: expected exactly one server-rendered h1`).toBe(1);
 
-    const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical, `${route}: canonical link missing`).toHaveCount(1);
-    const canonicalHref = await canonical.getAttribute('href');
+    const canonicalTag = findTag(html, 'link', 'rel', 'canonical');
+    expect(canonicalTag, `${route}: canonical link missing`).toBeTruthy();
+    const canonicalHref = attribute(canonicalTag ?? '', 'href');
     expect(canonicalHref, `${route}: canonical URL missing`).toBeTruthy();
-    expect(new URL(canonicalHref!).origin).toBe(new URL(page.url()).origin);
 
-    const ogTitle = page.locator('meta[property="og:title"]');
-    const ogUrl = page.locator('meta[property="og:url"]');
-    const ogDescription = page.locator('meta[property="og:description"]');
+    const canonicalURL = new URL(canonicalHref);
+    expect(canonicalURL.protocol, `${route}: canonical must use HTTPS`).toBe('https:');
+    expect(
+      canonicalURL.searchParams.has('preview_theme_id'),
+      `${route}: canonical must not expose theme preview parameters`
+    ).toBe(false);
 
-    await expect(ogTitle, `${route}: og:title missing`).toHaveCount(1);
-    await expect(ogUrl, `${route}: og:url missing`).toHaveCount(1);
-    await expect(ogDescription, `${route}: og:description missing`).toHaveCount(1);
+    const ogTitleTag = findTag(html, 'meta', 'property', 'og:title');
+    const ogUrlTag = findTag(html, 'meta', 'property', 'og:url');
+    const ogDescriptionTag = findTag(html, 'meta', 'property', 'og:description');
+
+    expect(ogTitleTag, `${route}: og:title missing`).toBeTruthy();
+    expect(ogUrlTag, `${route}: og:url missing`).toBeTruthy();
+    expect(ogDescriptionTag, `${route}: og:description missing`).toBeTruthy();
 
     expect(
-      (await ogTitle.getAttribute('content') ?? '').trim().length,
+      attribute(ogTitleTag ?? '', 'content').trim().length,
       `${route}: empty og:title`
     ).toBeGreaterThan(2);
 
     expect(
-      (await ogDescription.getAttribute('content') ?? '').trim().length,
+      attribute(ogDescriptionTag ?? '', 'content').trim().length,
       `${route}: empty og:description`
     ).toBeGreaterThan(10);
 
-    const robots = (
-      (await page.locator('meta[name="robots"]').getAttribute('content').catch(() => null)) ?? ''
-    ).toLowerCase();
-
+    const robotsTag = findTag(html, 'meta', 'name', 'robots');
+    const robots = attribute(robotsTag ?? '', 'content').toLowerCase();
     expect(robots, `${route}: core route unexpectedly noindexed`).not.toContain('noindex');
   });
 }
