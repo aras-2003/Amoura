@@ -69,7 +69,7 @@ The helper temporarily converts the custom scroll container to normal document f
 - `tests/ux/touch-targets.spec.ts`
 - `docs/HANDOFF_03_TOUCH_TARGETS.md`
 
-The documented causes are footer links, policy links, drawer items and drawer back/close controls. Quantity selector was intentionally not changed without evidence.
+The initial component fixes covered footer links, policy links and drawer controls. The final broad crawl then supplied evidence for additional fixes: menu trigger, mobile logo link, quantity input, Club/editorial CTAs and the accelerated-checkout iframe. Those later issues are documented in `docs/HANDOFF_03_TOUCH_TARGETS.md`.
 
 ## 4 — Email flows / consent semantics
 
@@ -165,7 +165,7 @@ This cross-cutting gate must pass before any run can be used as Astra evidence.
 
 ## Final storefront audit
 
-`tests/ux/site-audit.spec.ts` is the broad regression pass after all focused suites. It covers the discovered storefront routes on mobile, tablet and desktop, including runtime errors, HTTP failures, accessibility findings and screenshots.
+`tests/ux/site-audit.spec.ts` is the broad regression pass after all focused suites. It covers the discovered storefront routes on mobile, tablet and desktop, including runtime errors, HTTP failures, accessibility findings and screenshots. Final acceptance requires **zero critical and zero serious findings**; warning-level standalone touch targets remain visible in the JSON report for final reviewer inspection.
 
 ## Files Astra should compare for contradictions
 
