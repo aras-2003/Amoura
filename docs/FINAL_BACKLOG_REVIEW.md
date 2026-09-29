@@ -17,8 +17,7 @@ Nie znaleziono blockerów dla:
 
 1. **Dostarczenie e-maila:** nie wykonano realnego wysłania testowej wiadomości. Zadanie #4 sprawdza formularz, walidację, semantykę i UI.
 2. **Klub #6:** 4/12 propozycji (#3, #8, #10, #11) wymaga eksperckiego review przed publikacją. Draft nie jest opublikowany.
-3. **Tytuł artykułu z „sexual wellness”:** pozostaje decyzją redakcyjną marki. Copy landing pages nie wymusza tego terminu po polsku.
-4. **Historyczne branche:** pozostają w repo jako historia, ale nie mogą automatycznie deployować. Canonical branch to `main`.
+3. **Historyczne branche:** pozostają w repo jako historia, ale nie mogą automatycznie deployować. Canonical branch to `main`.
 
 ## Rzeczy uporządkowane
 
