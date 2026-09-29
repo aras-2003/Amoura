@@ -1,32 +1,24 @@
 # Handoff 02 — wiarygodne zrzuty całych stron
 
+## Final status
+
+**DONE.**
+
 ## Przyczyna
 
-Na desktopie realnym kontenerem przewijania jest `.page-wrapper`, podczas gdy dokument używa ograniczonego overflow. Samo `page.screenshot({ fullPage: true })` nie gwarantowało więc objęcia całej zawartości. Na urządzeniu mobilnym dodatkowo PNG jest zapisywany w pikselach urządzenia, więc surowy wymiar obrazu nie może być porównywany 1:1 z szerokością CSS viewportu.
+Na desktopie realnym kontenerem przewijania jest `.page-wrapper`, a dokument ma ograniczony overflow. Samo `page.screenshot({ fullPage: true })` nie gwarantowało całej strony. PNG na urządzeniach high-DPR ma też fizyczne piksele inne niż CSS px.
 
 ## Rozwiązanie
 
 `tests/helpers/full-page-screenshot.ts`:
-- na czas zrzutu przełącza dokument i `.page-wrapper` na normalny document flow,
-- ustawia header jako niesticky wyłącznie na czas zrzutu,
-- resetuje scroll do góry,
-- zapisuje pełny PNG,
-- normalizuje wymiar PNG przez `devicePixelRatio`,
-- usuwa tymczasowe style po zrzucie.
+- przełącza dokument i `.page-wrapper` na normalny flow tylko na czas capture,
+- ustawia header jako non-sticky tylko na czas capture,
+- resetuje scroll,
+- normalizuje wymiary przez `devicePixelRatio`,
+- przywraca stan po zrzucie.
 
-Nie zmienia to zachowania sklepu dla użytkownika.
+## Dowód
 
-## DoD
+`tests/ux/full-page-screenshots.spec.ts`: home, Klub, kolekcja, produkt, artykuł na mobile / tablet / desktop.
 
-Dedykowany test obejmuje:
-- home,
-- Klub Amoura,
-- kolekcję,
-- produkt,
-- artykuł,
-- projekty Playwright mobile / tablet / desktop,
-- kontrolę pełnej wysokości w CSS px,
-- kontrolę, że header nie jest sticky w pełnym zrzucie,
-- osobne zrzuty góry i dołu artykułu.
-
-Status zadania jest **zamknięty dopiero po zielonym przebiegu CI na branchu stabilizacyjnym**.
+Run `36565669479`: **3/3 passed**.

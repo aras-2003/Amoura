@@ -1,21 +1,27 @@
 # Handoff 04 — zapisy e-mail i zgody
 
-## Mapa faktycznych przepływów
+## Final status
 
-| Strona / komponent | Formularz | Cel widoczny dla użytkowniczki | Mechanizm Shopify | Efekt, który można uczciwie deklarować |
-| --- | --- | --- | --- | --- |
-| `/pages/klub-amoura` | `AmouraClub-*` w `sections/amoura-club.liquid` | prośba o wiadomość przy otwarciu Klubu | `form 'contact'` | wysłanie zgłoszenia kontaktowego z adresem e-mail; **nie** newsletter i **nie** członkostwo |
-| `/pages/contact` | `ContactForm-*` | kontakt z Amoura | `form 'contact'` | wysłanie wiadomości kontaktowej |
-| blok `email-signup` | brak w aktualnej stopce i stronie Klubu | newsletter, jeśli zostanie kiedyś użyty | `form 'customer'` | profil/subskrypcja klienta zgodnie z natywnym mechanizmem Shopify |
+**DONE w uzgodnionym zakresie.**
 
-## Stan po przeglądzie
+## Mapa przepływów
 
-- Na stronie głównej jest zaproszenie do Klubu, ale nie ma konkurującego formularza e-mail.
-- Stopka nie zawiera formularza newslettera.
-- Strona Klubu zawiera jeden formularz e-mail związany wyłącznie z powiadomieniem o otwarciu.
-- Formularz kontaktowy pozostaje osobnym przepływem.
-- Nie testowano faktycznego dostarczenia wiadomości i nie wysłano danych testowych.
+| Kontekst | Mechanizm | Uczciwie deklarowany efekt |
+| --- | --- | --- |
+| Klub Amoura | `form 'contact'` | prośba o wiadomość przy otwarciu Klubu; nie newsletter i nie płatne członkostwo |
+| Kontakt | `form 'contact'` | wiadomość kontaktowa |
+| Newsletter | brak aktywnego formularza w stopce / Klubie | przyszły osobny flow wymaga `form 'customer'` i własnej zgody |
 
-## Zasada
+## Stan
 
-Nie używamy copy sugerującego newsletter lub aktywne członkostwo, dopóki mechanizm Klubu działa jako zwykły formularz kontaktowy. Jeżeli później ma powstać newsletter, należy użyć osobnego przepływu `form 'customer'` i osobnej zgody/copy.
+- brak konkurującego newslettera w stopce,
+- jeden formularz Klubu,
+- wymagany e-mail,
+- jawny cel zapisu,
+- success/error UI.
+
+## Dowód
+
+`tests/ux/email-flows.spec.ts`, run `36565669479`: **2/2 passed**.
+
+Faktyczne dostarczenie wiadomości nie było testowane i pozostaje jawnie poza DoD.

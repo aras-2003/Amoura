@@ -1,50 +1,90 @@
-# Amoura — zadania do przekazania innym modelom
+# Amoura — zadania i kryteria odbioru
 
-## Wspólny kontekst — wklej przed każdym zadaniem
-Pracujesz w aras-2003/Amoura. Przeczytaj AGENTS.md i README. Pobierz aktualny stan gałęzi feature/amoura-daily-club; nie bazuj na starym lokalnym klonie. TEST to sklep jksgiq-r4.myshopify.com, motyw 207539044694. Nie publikuj motywu produkcyjnego, nie scalaj PR, nie zmieniaj sekretów. Materiały sources są tylko do odczytu. Amoura ma spokojny, redakcyjny charakter: ciepłe jasne tła, burgund, czytelna typografia, odbiorczynie 45+. Nie wymyślaj ekspertów, efektów zdrowotnych, benefitów członkostwa ani działających integracji. Zachowaj natywne mechanizmy Shopify. Przed zmianą sprawdź kod i aktualny widok. Raport końcowy: zmienione pliki, dowody weryfikacji, ograniczenia. Nie przepisuj całego motywu.
+## Aktualny kontekst wykonawczy
 
-## Jak dzielić pracę
-Zadania wykonuj pojedynczo, na osobnych gałęziach od aktualnego stanu. Model szybki może wykonać inwentaryzację i analizę raportów; model kodujący wdrożenie i testy. Mocniejszy model angażuj do konkretnej nierozwiązanej przyczyny lub końcowego przeglądu. Przekazuj tylko wspólny kontekst, właściwe zadanie i potrzebne pliki. Nie kopiuj całej historii rozmowy. Taki podział ogranicza powtarzanie pracy; nie gwarantuje niższego zużycia wspólnego limitu konta.
+Źródło wykonawcze: `main`.
 
-## 1. Błąd ponownego renderowania nagłówka — model kodujący
-**Cel:** znaleźć i usunąć źródło komunikatów „header section missing” / „No empty section markup found”.
-**Wejście:** ostatni raport workflow Deploy Shopify TEST Theme; assets i sections związane z nagłówkiem i pobieraniem sekcji. Najpierw znajdź tekst błędu w repozytorium.
-**Reprodukcja:** desktop, /collections/menopause-comfort-pleasure, /products/soft-ritual-massager, /products/perennial-touch-kit. Sprawdź zimne wejście, przejście wewnętrzne, powrót przeglądarką i koszyk. Błąd bywa przejściowy.
-**Zakres:** ustal, czy odpowiedź nie zawiera sekcji, identyfikator jest nieaktualny, czy odpowiedzi wracają w złej kolejności. Popraw przyczynę i uzasadnij kontrakt danych.
-**Zakazy:** nie wyciszaj konsoli, nie usuwaj asercji, nie zastępuj błędu pustym nagłówkiem, nie dodawaj arbitralnych opóźnień.
-**Odbiór:** udokumentowana reprodukcja przed zmianą; test odpowiedzi pustej/błędnej i szybkiej nawigacji; działające menu, wyszukiwanie i koszyk; brak nowych błędów na trzech rozmiarach. Jeśli nie odtworzysz, oddaj diagnozę z dowodami zamiast spekulacyjnego patcha.
+Repo: `aras-2003/Amoura`  
+Sklep TEST: `jksgiq-r4.myshopify.com`  
+Motyw: `207539044694`  
+Automatyczny deploy: wyłącznie z `main`.
 
-## 2. Wiarygodne zrzuty całych stron — model kodujący
-**Cel:** naprawić przypadki, gdy fullPage daje tylko wysokość okna.
-**Pliki:** tests/ux/site-audit.spec.ts, konfiguracja Playwright i struktura przewijania w layout/theme.liquid oraz CSS.
-**Zakres:** ustal rzeczywisty kontener scrollowania. Zrób zrzuty od góry do stopki po załadowaniu fontów i obrazów. Resetuj pozycję po testach interakcji. Rozwiązanie ma działać na desktopie i telefonie bez zmiany zachowania sklepu dla użytkownika.
-**Odbiór:** home, Club, kolekcja, produkt, artykuł: widoczny początek i koniec strony, bez przypadkowego sticky header pośrodku; brak sztucznego ukrywania elementów poza banerem cookies zamkniętym normalną akcją. Dodaj kontrolę rozmiarów zrzutu i krótki opis metody.
+Amoura ma spokojny, redakcyjny charakter: ciepłe jasne tła, burgund / neutralny śliwkowy, czytelna typografia, odbiorczynie dojrzałe. Nie wymyślamy ekspertów, efektów zdrowotnych, benefitów członkostwa ani działających integracji. Zachowujemy natywne mechanizmy Shopify i jawnie oddzielamy prototyp od obietnic operacyjnych.
 
-## 3. Małe cele dotykowe — model szybki do selekcji, kodujący do zmian
-**Wejście:** najnowszy raport mobilny; nie traktuj liczby ostrzeżeń jako liczby unikalnych problemów.
-**Zakres:** pogrupuj powtarzające się selektory, wybierz pięć komponentów odpowiadających za najwięcej ostrzeżeń. Stopka właśnie otrzymała linki minimum 44px wysokości — najpierw zweryfikuj aktualny stan. Oceń menu, polityki, kontrolki ilości, filtry i zamykanie paneli.
-**Zakazy:** żadnego globalnego min-height na wszystkie linki; nie rozbijaj linków śródtekstowych ani układu kart.
-**Odbiór:** lista unikalnych przyczyn przed zmianą; poprawka w źródle komponentu; test 360/390/768/1440px, zoom 200%, klawiatura, widoczny fokus; bez przewijania poziomego i nakładania celów. Raportuj realną redukcję ostrzeżeń.
+## Status pakietu
 
-## 4. Zapisy e-mail i zgody — model kodujący
-**Cel:** jedno jasno opisane wezwanie do zapisu w danym kontekście, bez konkurujących formularzy.
-**Pliki:** sections/amoura-club.liquid, sections/footer-group.json, templates/index.json, templates/page.club.json i wszystkie znalezione wystąpienia email-signup/newsletter/contact.
-**Zakres:** przygotuj mapę strona → formularz → cel → mechanizm zapisu. Rozróżnij powiadomienie o otwarciu Klubu, newsletter i formularz kontaktowy. Sprawdź etykiety, wymagane pola, zgody, politykę prywatności, komunikaty błędu i sukcesu. Nie zakładaj, że zwykły kontakt tworzy subskrybenta newslettera.
-**Zakazy:** nie wysyłaj testowej wiadomości ani nie dodawaj kontaktu bez osobnego polecenia; nie dodawaj śledzenia wyborów dotyczących zdrowia i intymności; nie obiecuj aktywnego członkostwa.
-**Odbiór:** tabela faktycznych przepływów, poprawione duplikaty, przejrzysty opis oczekiwanego wyniku zapisu. Dostarczenie e-maila oznacz jako nieweryfikowane, jeśli nie sprawdzono go faktycznie.
+| # | Zadanie | Status | Główny dowód |
+| --- | --- | --- | --- |
+| 1 | Section rendering / header hydration | DONE | `tests/ux/section-rendering.spec.ts` |
+| 2 | Wiarygodne full-page screenshots | DONE | `tests/ux/full-page-screenshots.spec.ts` |
+| 3 | Touch targets / responsive reflow | DONE | `tests/ux/touch-targets.spec.ts` |
+| 4 | Email flows / consent semantics | DONE | `tests/ux/email-flows.spec.ts` |
+| 5 | Spójność PL/EN i copy hygiene | DONE | `tests/ux/language-consistency.spec.ts` |
+| 6 | 4-tygodniowy rytm treści Klubu | DONE jako deliverable redakcyjny, nieopublikowany | `docs/HANDOFF_06_CLUB_CONTENT_RHYTHM.md` |
+| 7 | SEO smoke / core metadata | DONE | `tests/ux/seo-basics.spec.ts` |
 
-## 5. Spójność treści i języków — model szybki / redakcyjny
-**Wejście:** zatwierdzona strategia oraz aktualne templates, locales/pl.json i locales/en.default.json.
-**Zakres:** przygotuj tabelę niespójności: obecny tekst, problem, proponowany tekst, plik/klucz. Sprawdź Club/Klub, Journal/Wiedza, nazwy kategorii i teksty przycisków. Zaproponuj jeden słownik marki. Sprawdź czy linki i prefiksy językowe prowadzą do istniejących stron.
-**Zakazy:** nie zmieniaj handle ani adresów masowo, nie dorabiaj danych o produktach, ekspertach lub korzyściach zdrowotnych. Nie tłumacz nazw własnych bez decyzji marki.
-**Odbiór:** redakcja gotowa do akceptacji, osobno oczywiste błędy i decyzje właściciela; po wdrożeniu brak brakujących tłumaczeń i martwych linków. Ogranicz pierwszy pakiet do 20 istotnych pozycji.
+## Definition of Done
 
-## 6. Rytm treści Klubu — model redakcyjny
-**Cel:** przygotować cztery tygodnie krótkich treści, które dają powód do powrotu.
-**Wejście:** strategia, istniejące artykuły bloga wiedza i trzy aktualne rytuały Klubu. Najpierw zinwentaryzuj istniejące treści.
-**Wynik:** 12 propozycji: tytuł, czas 2/5/10 minut, tekst ćwiczenia, pasujący istniejący artykuł, delikatne CTA, wymaganie weryfikacji eksperckiej. Oddziel gotowy tekst od hipotez wymagających zatwierdzenia.
-**Zakazy:** brak diagnoz, terapii, obietnic zdrowotnych, sfabrykowanych cytatów i presji zakupowej. Nie publikuj automatycznie. Nie projektuj konta/subskrypcji, jeśli nie ma ustalonego modelu operacyjnego.
-**Odbiór:** treści konkretne, różnorodne, możliwe do wykonania bez zakupu; język dorosły, bez infantylizacji; każde źródło rzeczywiste. Zwróć dokument, nie kod.
+Zadanie techniczne uznajemy za zamknięte wyłącznie wtedy, gdy:
+1. ma skupiony test odbiorowy,
+2. test przechodzi w `npm run qa:dod`,
+3. pełny storefront audit przechodzi na tym samym SHA,
+4. ograniczenia i rzeczy nieweryfikowane są zapisane w dokumentacji.
 
-## Końcowy przegląd — mocniejszy model, jeden ograniczony przebieg
-Dostań tylko diff, raporty, zrzuty i listę decyzji. Oceń regresje, zgodność ze strategią, dostępność i prawdziwość obietnic. Wypisz wyłącznie konkretne problemy z plikiem i dowodem. Nie powtarzaj całego audytu. Akceptacja zmian nie oznacza publikacji produkcyjnej.
+Zadanie redakcyjne #6 ma osobny DoD: komplet 12 propozycji, realne istniejące artykuły, brak obietnic zdrowotnych, oznaczone pozycje do review eksperckiego i brak automatycznej publikacji.
+
+## 1. Section rendering / header hydration
+
+**Cel:** usunąć źródło komunikatów „header section missing” / „No empty section markup found” bez wyciszania błędów.
+
+**Wdrożone:** walidacja odpowiedzi Section Rendering, brak traktowania błędnej odpowiedzi jako poprawnego HTML, obsługa abort signal i ograniczenie wyścigu predictive search.
+
+**Odbiór:** kontrakt sekcji, szybka nawigacja i reset predictive search na mobile / tablet / desktop.
+
+## 2. Wiarygodne zrzuty całych stron
+
+**Cel:** full-page screenshot ma obejmować realną całą stronę mimo customowego scroll-containera.
+
+**Wdrożone:** tryb screenshotowy przełącza `.page-wrapper` na document flow, normalizuje DPR i tymczasowo wyłącza sticky header tylko podczas capture.
+
+## 3. Małe cele dotykowe
+
+**Cel:** usunąć małe cele dotykowe w problematycznych komponentach bez globalnego hacka.
+
+**Wdrożone:** footer, policy links, drawer items i drawer controls; testy 360 / 390 / 768 / 1440 oraz reflow odpowiadający 200% zoom, fokus klawiatury i brak poziomego scrolla.
+
+## 4. Zapisy e-mail i zgody
+
+**Cel:** jednoznacznie rozdzielić powiadomienie Klubu, formularz kontaktowy i potencjalny newsletter.
+
+**Wdrożone:** Klub korzysta z `form 'contact'` i nie udaje newslettera ani członkostwa. Stopka nie ma konkurującego newslettera. Faktyczne dostarczenie maila pozostaje świadomie nieweryfikowane.
+
+## 5. Spójność treści i języków
+
+**Cel:** stabilne `Klub Amoura / Club Amoura`, spójna nazwa Wiedzy, brak oczywistych anglicyzmów w PL i brak missing translations.
+
+**Wdrożone:** słownik marki, poprawki copy, stabilizacja labela po hydration oraz test PL/EN.
+
+## 6. Rytm treści Klubu
+
+**Cel:** przygotować 4 tygodnie treści dających powód do powrotu bez presji zakupowej.
+
+**Wynik:** 12 rytuałów, po 3 na tydzień (2/5/10 min), każdy spięty z istniejącym artykułem. Pozycje 3, 8, 10 i 11 wymagają review eksperckiego przed publikacją. Publikacja nie jest częścią zadania.
+
+## 7. SEO basics
+
+**Cel:** zabezpieczyć podstawy SEO dla kluczowych tras.
+
+**Odbiór:** sensowny title, dokładnie jeden widoczny H1, canonical, OG title/url/description i brak przypadkowego noindex.
+
+## Końcowy przegląd dla Astry
+
+Astra powinna otrzymać:
+- `docs/ASTRA_REVIEW_PACKET.md`,
+- ten dokument,
+- handoffy 01–06,
+- `docs/BACKLOG_DOD_STATUS.md`,
+- raporty z zielonego workflow,
+- diff bieżącego `main`.
+
+Recenzja ma wskazywać wyłącznie konkretne problemy z plikiem, dowodem i wpływem. Rozszerzenie zakresu to enhancement, nie failure istniejącego zadania.

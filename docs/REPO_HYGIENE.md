@@ -1,16 +1,16 @@
 # Repository hygiene
 
-Updated: 2026-09-28
+Updated: 2026-09-29
 
-## Active branches
+## Canonical state
 
-- `main` — canonical branch and the only automatic deploy source for the TEST theme.
-- `main` includes the verified technical baseline, CI maintenance, repository hygiene and current Klub content draft/review docs.
+- `main` — jedyny canonical branch.
+- automatic TEST-theme deploy source: wyłącznie `main`.
+- zweryfikowany technical/content baseline oraz dokumentacja #1–#7 są na `main`.
 
-## Historical branches — no longer allowed to auto-deploy
+## Historical branches
 
-These branches are retained only as history and should not be used as deploy sources:
-
+Historyczne branche pozostają wyłącznie jako ślad prac i nie są źródłem deployu:
 - `feature/playwright-ux-audit`
 - `feature/amoura-daily-club`
 - `feature/project-instructions-2026-09-22`
@@ -21,34 +21,33 @@ These branches are retained only as history and should not be used as deploy sou
 - `fix/content-language-consistency`
 - `qa/backlog-dod`
 - `refactor/about-amoura-story`
+- `stabilize/backlog-dod`
+- `maintenance/ci-repo-hygiene`
+- `review/final-backlog-review`
+- `content/club-4-week-rhythm`
 
-Relevant changes from these branches were consolidated into `stabilize/backlog-dod`.
+Ich istotna zawartość została skonsolidowana do `main`.
 
 ## Pull requests
 
-Draft PRs #3 and #4 were closed as superseded. They must not be merged after consolidation.
+Draft PR #3 i #4 są zamknięte jako superseded i nie powinny być mergowane.
 
-## Deployment rule
+## Deployment guardrails
 
-Automatic pushes to the approved MAIN TEST theme are restricted to:
-- `main`
-
-The deployment script additionally hard-checks:
+`scripts/theme-push.sh` twardo weryfikuje:
 - store: `jksgiq-r4.myshopify.com`
 - theme ID: `207539044694`
 - role: MAIN/LIVE
 
-This is intentional because the user explicitly approved direct work on the TEST theme even though it is the store's MAIN theme.
+## CI
 
-## CI maintenance
-
-GitHub Actions runtime dependencies were moved from the deprecated Node-20 generation:
-- `actions/checkout@v7`
-- `actions/setup-node@v7`
-- `actions/upload-artifact@v7`
-
-Node for project tests remains pinned to 22.
+- GitHub Actions v7,
+- Node 22,
+- Shopify CLI przypięte do wersji,
+- `npm run qa:dod` jako centralny gate,
+- lekkie raporty przy success,
+- pełne diagnostyki przy failure.
 
 ## Branch deletion
 
-Historical branches are safe to remove after a final manual check. The connected GitHub action set available in this chat does not expose branch deletion, so they are intentionally left in place rather than pretending they were deleted.
+Dostępny connector GitHub nie udostępnia operacji delete branch. Branche historyczne są zdezaktywowane operacyjnie, a nie fikcyjnie oznaczone jako usunięte.

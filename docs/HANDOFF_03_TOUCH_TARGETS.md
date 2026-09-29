@@ -1,30 +1,28 @@
 # Handoff 03 — małe cele dotykowe
 
-## Unikalne przyczyny zidentyfikowane przed zmianą
+## Final status
 
-1. Editorial footer miał linki o wysokości 27–30 px na mobile.
-2. Linki wewnątrz popovera „Warunki i polityki” miały tylko padding 8 px i brak minimalnej wysokości.
-3. Zagnieżdżone pozycje menu drawer mogły dziedziczyć `min-height:auto`.
-4. Kontrolki back/close w drawerze nie miały jawnego minimum 44×44 px.
-5. Audyt raportował tylko tag i tekst, więc powtarzające się problemy nie dawały się wiarygodnie grupować po komponencie.
+**DONE.**
 
-Quantity selector już używa wspólnego `--minimum-touch-target`; nie zmieniano go bez dowodu problemu. Nie dodano globalnego `min-height` do wszystkich linków.
+## Unikalne przyczyny
+
+1. footer links miały 27–30 px na mobile,
+2. policy links nie miały minimum 44 px,
+3. menu drawer items mogły dziedziczyć `min-height:auto`,
+4. back/close w drawerze nie miały jawnego 44×44,
+5. audit nie raportował selektora komponentu.
 
 ## Zmiany
 
-- footer: 44 px minimum tylko na mobile,
+- footer: 44 px minimum na mobile,
 - policy popover: linki minimum 44 px,
-- menu drawer: item/title minimum 44 px na mobile,
-- drawer back/close: minimum 44×44 px,
-- audit: raportuje selector problematycznego celu,
-- test: 360 / 390 / 768 / 1440 px, brak poziomego scrolla, fokus klawiatury oraz reflow odpowiadający 200% zoom.
+- menu drawer: item/title minimum 44 px,
+- drawer back/close: minimum 44×44,
+- audit raportuje selector,
+- brak globalnego min-height na wszystkie linki.
 
-## DoD
+## Dowód
 
-Zadanie jest **zamknięte dopiero**, gdy:
-- dedykowany test jest zielony,
-- pełny audit nie zgłasza blockerów,
-- w raporcie mobile nie ma ostrzeżeń z poprawianych komponentów,
-- nie ma regresji poziomego scrolla ani niewidocznego focusu.
+`tests/ux/touch-targets.spec.ts`: 360 / 390 / 768 / 1440 px, reflow 200%-equivalent, keyboard focus, brak horizontal overflow.
 
-Końcową liczbę ostrzeżeń przed/po należy wpisać po zielonym przebiegu CI.
+Run `36565669479`: **5/5 passed**.
