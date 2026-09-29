@@ -20,6 +20,15 @@ Pracujesz jako niezależny, adversarial reviewer repozytorium `aras-2003/Amoura`
    - aktualnym storefrontem TEST.
 4. Zweryfikuj zadania #1–#7 wyłącznie wobec ich własnych kryteriów odbioru. Nową sugestię spoza zakresu oznacz jako enhancement, nie failure.
 
+## Runtime evidence
+
+Z najnowszego successful runu pasującego do aktualnego `main` pobierz artifact i zacznij od:
+- `reports/astra/deploy-proof.json`,
+- `reports/astra/review-manifest.json`,
+- `reports/astra/REVIEW_SUMMARY.md`.
+
+Sprawdź, czy SHA i run ID w manifeście odpowiadają repo i workflow, które recenzujesz. Dopiero wtedy traktuj screenshoty i raporty w tym samym artifact jako dowód.
+
 ## Najważniejsza zasada dowodowa
 
 Nie uznawaj samego zielonego browser auditu za dowód wdrożenia.
