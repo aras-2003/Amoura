@@ -5,12 +5,15 @@ const read = (path: string) => fs.readFileSync(path, 'utf8');
 
 test('authoritative review docs describe the current main-based state', async () => {
   const model = read('docs/MODEL_HANDOFFS.md');
+  const agents = read('AGENTS.md');
   const backlog = read('docs/BACKLOG_DOD_STATUS.md');
   const finalReview = read('docs/FINAL_BACKLOG_REVIEW.md');
   const hygiene = read('docs/REPO_HYGIENE.md');
   const packet = read('docs/ASTRA_REVIEW_PACKET.md');
 
   expect(model).toContain('Źródło wykonawcze: `main`');
+  expect(agents).toContain('## Git and current execution mode');
+  expect(agents).toContain('`main` is the canonical working branch');
   expect(model).not.toContain('feature/amoura-daily-club');
   expect(backlog).toContain('Branch: `main`');
   expect(backlog).toContain('#7 SEO basics — CLOSED');
@@ -23,8 +26,10 @@ test('authoritative review docs describe the current main-based state', async ()
     expect(packet, `review packet should cover task #${task}`).toContain(`| ${task} |`);
   }
   expect(packet).toContain('Known limitations');
-  expect(packet).toContain('workflow run: `36565669479`');
   expect(packet).toContain('docs/PRIVACY_PRINCIPLES.md');
+  expect(packet).toContain('docs/ASTRA_TASK_EVIDENCE.md');
+  expect(packet).toContain('docs/SOURCE_TRACEABILITY.md');
+  expect(packet).toContain('Deployment integrity');
   expect(packet).not.toContain('Od czego naprawdę zacząć z sexual wellness?');
 });
 
