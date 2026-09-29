@@ -60,6 +60,7 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
       .filter(visible)
       .map((el) => {
         const r = el.getBoundingClientRect();
+        const style = getComputedStyle(el);
         const id = (el as HTMLElement).id ? `#${(el as HTMLElement).id}` : '';
         const classes = [...(el as HTMLElement).classList].slice(0, 3).map((c) => `.${c}`).join('');
         return {
@@ -67,10 +68,14 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
           h: r.height,
           text: (el.textContent || '').trim().slice(0, 80),
           tag: el.tagName,
+          display: style.display,
           selector: `${el.tagName.toLowerCase()}${id}${classes}`
         };
       })
-      .filter((x) => x.w < 40 || x.h < 40)
+      // WCAG allows an exception for links embedded inline in running text.
+      // Keep the stricter 44px product standard for standalone controls/CTAs.
+      .filter((x) => !(x.tag === 'A' && x.display === 'inline'))
+      .filter((x) => x.w < 44 || x.h < 44)
       .slice(0, 20);
 
     return {
