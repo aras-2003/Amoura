@@ -183,3 +183,16 @@ This cross-cutting gate must pass before any run can be used as Astra evidence.
 12. current `main` diff / commit history
 
 Astra should treat any documentation↔code mismatch, false-positive test, rejected Shopify theme file, hidden prototype limitation or unsupported claim as a genuine issue.
+
+
+## Runtime evidence chain
+
+The successful deployment workflow generates evidence only after the full `qa:dod` gate passes:
+
+1. `scripts/theme-push.sh` performs strict deployment validation.
+2. `scripts/write-deploy-proof.sh` writes `reports/astra/deploy-proof.json` only after target confirmation and rejected-file checks pass.
+3. All focused suites and the full storefront audit run through `npm run qa:dod`.
+4. `scripts/build-astra-evidence.sh` refuses to build the final manifest unless deploy proof exists and is marked passed.
+5. The success artifact retains the deploy proof, review manifest, UX JSON reports and key full-page screenshots.
+
+This avoids a documentation-only claim of success: the final artifact is bound to the workflow SHA and run ID at runtime.
