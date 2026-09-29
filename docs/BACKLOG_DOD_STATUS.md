@@ -87,8 +87,9 @@ The final broad audit must pass:
 - **3/3 projects**,
 - **0 critical findings**,
 - **0 serious findings**,
+- **0 standalone touch-target warnings** below the 44 px product standard,
 
-after all focused suites in the same workflow run. Warning-level standalone touch findings remain reviewable evidence and are not silently discarded.
+after all focused suites in the same workflow run. Inline links embedded in running text use the WCAG inline-text exception and are intentionally not treated as standalone controls.
 
 ## Success evidence artifact
 
