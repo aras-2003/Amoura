@@ -40,7 +40,7 @@ Do not use a browser-only green run as proof if the deploy log contains a reject
 - PL/EN core routes
 - Klub Amoura / Club Amoura stable after hydration
 - no missing-translation regressions
-- Polish copy-hygiene guards
+- Polish copy-hygiene guards on core routes and all 8 published PL knowledge articles
 - published storefront locales intentionally limited to PL + EN
 
 ### #6 Klub content rhythm — CLOSED AS EDITORIAL DELIVERABLE
@@ -85,8 +85,10 @@ The final broad audit must pass:
 - tablet,
 - desktop,
 - **3/3 projects**,
+- **0 critical findings**,
+- **0 serious findings**,
 
-after all focused suites in the same workflow run.
+after all focused suites in the same workflow run. Warning-level standalone touch findings remain reviewable evidence and are not silently discarded.
 
 ## Success evidence artifact
 
