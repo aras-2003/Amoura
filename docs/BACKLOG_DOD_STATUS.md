@@ -36,7 +36,7 @@ Do not use a browser-only green run as proof if the deploy log contains a reject
 - actual e-mail delivery intentionally not tested
 
 ### #5 Language consistency — CLOSED
-- **2/2 focused checks**
+- **3/3 focused checks**
 - PL/EN core routes
 - Klub Amoura / Club Amoura stable after hydration
 - no missing-translation regressions
