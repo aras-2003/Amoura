@@ -41,10 +41,42 @@ if [[ "$THEME_ROLE" != "main" && "$THEME_ROLE" != "live" ]]; then
   exit 1
 fi
 
-echo "Deploying directly to MAIN test theme '$THEME_NAME' ($THEME_ID) on $STORE."
-"${CLI[@]}" push "${AUTH[@]}" --theme "$THEME_ID" --allow-live --path . --json >/tmp/shopify-theme-push.json
+echo "Validating theme before deploy."
+"${CLI[@]}" check --path . --fail-level error
 
-echo "MAIN test theme updated: $THEME_ID"
+echo "Deploying directly to MAIN test theme '$THEME_NAME' ($THEME_ID) on $STORE."
+PUSH_STDOUT="$(mktemp)"
+PUSH_STDERR="$(mktemp)"
+trap 'rm -f "$PUSH_STDOUT" "$PUSH_STDERR"' EXIT
+
+set +e
+"${CLI[@]}" push "${AUTH[@]}" --theme "$THEME_ID" --allow-live --strict --path . --json >"$PUSH_STDOUT" 2>"$PUSH_STDERR"
+PUSH_STATUS=$?
+set -e
+
+cat "$PUSH_STDERR" >&2
+
+if [[ $PUSH_STATUS -ne 0 ]]; then
+  echo "::error::Shopify theme push exited with status $PUSH_STATUS."
+  exit "$PUSH_STATUS"
+fi
+
+# Shopify CLI can finish with exit code 0 even when an individual theme file
+# is rejected by remote schema validation. Treat any rendered CLI error panel
+# or known rejection wording as a failed deploy.
+if grep -Eqi '╭─ error|Setting .+ is invalid|failed to (upload|push)|theme push.*error' "$PUSH_STDERR"; then
+  echo "::error::Shopify reported one or more rejected theme files."
+  exit 1
+fi
+
+if ! jq -e '.theme.id and (.theme.id|tostring) == "'"$THEME_ID"'"' "$PUSH_STDOUT" >/dev/null 2>&1; then
+  echo "::error::Theme push did not return the expected target theme confirmation."
+  cat "$PUSH_STDOUT"
+  exit 1
+fi
+
+cp "$PUSH_STDOUT" /tmp/shopify-theme-push.json
+echo "MAIN test theme updated without rejected files: $THEME_ID"
 if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
   echo "theme_id=$THEME_ID" >> "$GITHUB_OUTPUT"
 fi
