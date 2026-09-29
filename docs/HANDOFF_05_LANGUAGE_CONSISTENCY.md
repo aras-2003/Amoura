@@ -39,9 +39,9 @@
 
 ## Dowód
 
-`tests/ux/language-consistency.spec.ts` obejmuje PL/EN landing pages, FAQ, Klub labels po hydration i missing translations.
+`tests/ux/language-consistency.spec.ts` obejmuje PL/EN landing pages, FAQ, Klub labels po hydration, missing translations oraz wszystkie 8 opublikowanych polskich artykułów Wiedzy.
 
-Focused language contract: **2/2 passed** w finalnym `qa:dod`, obejmując PL/EN core routes, FAQ, Club hydration i missing translations.
+Focused language contract składa się z **3 testów**: PL core routes, EN core routes oraz 8 live PL knowledge articles. Finalny wynik należy odczytać z runu o `head_sha` równym aktualnemu `main`.
 
 ## Supported locales
 
@@ -50,3 +50,5 @@ Shopify Admin potwierdza obecnie dwa opublikowane storefront locales: `pl` (prim
 ## Domknięta decyzja redakcyjna
 
 Tytuł artykułu `od-czego-zaczac` został ujednolicony do: „Od czego zacząć, gdy chcesz lepiej zadbać o swoją intymność?”. Handle pozostał bez zmian.
+
+Dodatkowo live CMS copy w artykułach `sensualny-self-care-15-minut` i `komfort-intymny-po-40` zostało oczyszczone z konsumenckiego użycia „self-care”. Legacy handle pozostaje bez zmian, aby nie wykonywać nieuzasadnionej migracji URL. Stan CMS dokumentuje `docs/SHOPIFY_CONTENT_STATE.md`.
