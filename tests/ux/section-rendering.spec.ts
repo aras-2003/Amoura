@@ -161,6 +161,31 @@ test.describe('section rendering diagnostics', () => {
   });
 
 
+  test('internal storefront navigation does not surface section-rendering errors', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => {
+      if (message.type() === 'error') errors.push(message.text());
+    });
+
+    await page.goto(TARGET_ROUTES[0], { waitUntil: 'domcontentloaded' });
+    await unlockCookiesIfNeeded(page);
+
+    const productLink = page.locator('a[href*="/products/"]:visible').first();
+    await expect(productLink).toBeVisible({ timeout: 5_000 });
+    await Promise.all([
+      page.waitForURL(/\/products\//, { timeout: 10_000 }),
+      productLink.click(),
+    ]);
+    await page.waitForLoadState('domcontentloaded');
+    await page.goBack({ waitUntil: 'domcontentloaded' });
+
+    const relevant = errors.filter(message =>
+      /section .*not found|No empty section markup found|header section missing/i.test(message)
+    );
+    expect(relevant, JSON.stringify(relevant, null, 2)).toEqual([]);
+  });
+
   test('header menu and cart controls remain usable', async ({ page }) => {
     await page.goto(TARGET_ROUTES[0], { waitUntil: 'domcontentloaded' });
     await unlockCookiesIfNeeded(page);
