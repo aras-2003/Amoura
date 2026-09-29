@@ -16,7 +16,8 @@
     "diagnose:touch": "playwright test tests/ux/touch-targets.spec.ts --project=desktop",
     "diagnose:email-flows": "playwright test tests/ux/email-flows.spec.ts --project=desktop",
     "diagnose:language": "playwright test tests/ux/language-consistency.spec.ts --project=desktop",
-    "qa:dod": "npm run diagnose:sections && npm run diagnose:screenshots && npm run diagnose:touch && npm run diagnose:email-flows && npm run diagnose:language && npm run audit"
+    "qa:dod": "npm run diagnose:sections && npm run diagnose:screenshots && npm run diagnose:touch && npm run diagnose:email-flows && npm run diagnose:language && npm run diagnose:seo && npm run audit",
+    "diagnose:seo": "playwright test tests/ux/seo-basics.spec.ts --project=desktop"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
