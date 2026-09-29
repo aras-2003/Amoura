@@ -160,4 +160,34 @@ test.describe('section rendering diagnostics', () => {
     expect(badResponses, JSON.stringify(badResponses, null, 2)).toEqual([]);
   });
 
+
+  test('header menu and cart controls remain usable', async ({ page }) => {
+    await page.goto(TARGET_ROUTES[0], { waitUntil: 'domcontentloaded' });
+    await unlockCookiesIfNeeded(page);
+
+    const cartTrigger = page.locator('[data-testid="cart-drawer-trigger"]:visible').first();
+    if (await cartTrigger.count()) {
+      await expect(cartTrigger).toBeVisible();
+      await cartTrigger.click();
+      const cartDialog = page.locator('#cart-drawer dialog, dialog#cart-drawer').first();
+      await expect(cartDialog).toBeVisible({ timeout: 5_000 });
+      await page.keyboard.press('Escape');
+      await expect(cartDialog).not.toBeVisible({ timeout: 5_000 });
+    } else {
+      const cartLink = page.locator('a[data-testid="cart-icon"], a[aria-label*="cart" i]:visible').first();
+      await expect(cartLink).toBeVisible();
+    }
+
+    const viewport = page.viewportSize();
+    if (viewport && viewport.width < 990) {
+      const menuSummary = page.locator('#Details-menu-drawer-container > summary:visible').first();
+      await expect(menuSummary).toBeVisible();
+      await menuSummary.click();
+      await expect(page.locator('#Details-menu-drawer-container')).toHaveAttribute('open', '');
+      await page.keyboard.press('Escape');
+    } else {
+      await expect(page.locator('#header-group header-menu:visible').first()).toBeVisible();
+    }
+  });
+
 });
