@@ -21,4 +21,4 @@ Na desktopie realnym kontenerem przewijania jest `.page-wrapper`, a dokument ma 
 
 `tests/ux/full-page-screenshots.spec.ts`: home, Klub, kolekcja, produkt, artykuł na mobile / tablet / desktop.
 
-Run `36565669479`: **3/3 passed**.
+Focused contract: **3/3 Playwright projects passed** w finalnym `qa:dod`; dowód wybieramy po zgodności `head_sha` runu z aktualnym `main`.
