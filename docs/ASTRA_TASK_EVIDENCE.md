@@ -165,7 +165,7 @@ This cross-cutting gate must pass before any run can be used as Astra evidence.
 
 ## Final storefront audit
 
-`tests/ux/site-audit.spec.ts` is the broad regression pass after all focused suites. It covers the discovered storefront routes on mobile, tablet and desktop, including runtime errors, HTTP failures, accessibility findings and screenshots. Final acceptance requires **zero critical and zero serious findings**; warning-level standalone touch targets remain visible in the JSON report for final reviewer inspection.
+`tests/ux/site-audit.spec.ts` is the broad regression pass after all focused suites. It covers the discovered storefront routes on mobile, tablet and desktop, including runtime errors, HTTP failures, accessibility findings and screenshots. Final acceptance requires **zero critical findings, zero serious findings and zero standalone `small-touch-target` warnings**. Other warning-level findings may remain visible in the JSON report for reviewer inspection.
 
 ## Files Astra should compare for contradictions
 
