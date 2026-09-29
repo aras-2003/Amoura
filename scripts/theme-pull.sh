@@ -22,6 +22,23 @@ if [[ "$THEME_ID" != "$EXPECTED_THEME_ID" ]]; then
   exit 1
 fi
 
-npx --yes @shopify/cli@4.8.2 theme pull   --store "$STORE"   --theme "$THEME_ID"   --path .   --password "$SHOPIFY_CLI_THEME_TOKEN"
+npx --yes @shopify/cli@4.8.2 theme pull \
+  --store "$STORE" \
+  --theme "$THEME_ID" \
+  --path . \
+  --password "$SHOPIFY_CLI_THEME_TOKEN"
 
-echo "Pulled approved Shopify TEST theme $THEME_ID from $STORE into repository root."
+# Amoura supports only PL + EN. Shopify's source theme may contain stock
+# storefront/theme-editor translations; prune them after every snapshot pull.
+for locale_file in locales/*.json; do
+  [[ -e "$locale_file" ]] || continue
+  case "$locale_file" in
+    locales/en.default.json|locales/en.default.schema.json|locales/pl.json|locales/pl.schema.json)
+      ;;
+    *)
+      rm -f "$locale_file"
+      ;;
+  esac
+done
+
+echo "Pulled approved Shopify TEST theme $THEME_ID from $STORE and retained only PL/EN locale files."

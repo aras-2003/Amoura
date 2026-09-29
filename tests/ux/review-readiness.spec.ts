@@ -68,10 +68,20 @@ test('deployment and locale review contract is current', async () => {
   expect(contact.sections.main.blocks.title.settings.text).toBe('<h1>Porozmawiajmy</h1>');
   expect(contact.sections.contact_eyebrow.type).toBe('custom-liquid');
 
-  const storefrontLocales = fs.readdirSync('locales')
-    .filter((name) => name.endsWith('.json') && !name.endsWith('.schema.json'))
+  const pull = read('scripts/theme-pull.sh');
+  expect(pull).toContain('en.default.schema.json');
+  expect(pull).toContain('pl.schema.json');
+  expect(pull).toContain('retained only PL/EN locale files');
+
+  const localeFiles = fs.readdirSync('locales')
+    .filter((name) => name.endsWith('.json'))
     .sort();
-  expect(storefrontLocales).toEqual(['en.default.json', 'pl.json']);
+  expect(localeFiles).toEqual([
+    'en.default.json',
+    'en.default.schema.json',
+    'pl.json',
+    'pl.schema.json',
+  ]);
 });
 
 
