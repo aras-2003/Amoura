@@ -107,6 +107,6 @@ test('crawl and audit the rendered Amoura storefront', async ({ page }, testInfo
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   await testInfo.attach('ux-audit-report', { path: reportPath, contentType: 'application/json' });
 
-  const blockers = findings.filter((f) => f.severity === 'critical');
+  const blockers = findings.filter((f) => f.severity === 'critical' || f.severity === 'serious');
   expect(blockers, JSON.stringify(blockers, null, 2)).toEqual([]);
 });
