@@ -143,4 +143,13 @@ Nowe pomysły spoza spisanego zakresu oznacz jako enhancement, nie failure.
 
 ## Final evidence
 
-Finalny numer workflow runu, SHA i artifact należy odczytać z najnowszego **successful** `Deploy Shopify TEST Theme` po wdrożeniu strict deployment gate. Nie używaj starszego zielonego runu, jeśli log zawiera rejected theme file.
+Finalny numer workflow runu, SHA i artifact należy odczytać z najnowszego **successful** `Deploy Shopify TEST Theme`, którego `head_sha` jest równy aktualnemu `main`.
+
+Success artifact zawiera dodatkowo maszynowo czytelny pakiet:
+- `reports/astra/deploy-proof.json` — dowód targetu i przejścia wszystkich guardów deployment integrity,
+- `reports/astra/review-manifest.json` — SHA, run ID, status pakietu #1–#7 i jawne ograniczenia,
+- `reports/astra/REVIEW_SUMMARY.md` — krótki punkt wejścia do review.
+
+Astra ma porównać `review-manifest.json.head_sha` z aktualnym `main` i `workflow_run_id` z runem, z którego pobrano artifact. Jeśli się nie zgadzają, artifact jest nieważnym dowodem.
+
+Nie używaj starszego zielonego runu, jeśli jego SHA nie odpowiada aktualnemu `main` albo log zawiera rejected theme file.
