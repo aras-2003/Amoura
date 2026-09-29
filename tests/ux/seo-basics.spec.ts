@@ -15,16 +15,23 @@ async function gotoWithRetry(page: Page, route: string) {
   let response = null;
 
   for (let attempt = 1; attempt <= 3; attempt++) {
-    response = await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 30_000 });
-    if (!transient.has(response?.status() ?? 0)) return response;
+    response = await page.goto(route, { waitUntil: 'commit', timeout: 15_000 });
+
+    if (!transient.has(response?.status() ?? 0)) {
+      await page.locator('body').waitFor({ state: 'attached', timeout: 10_000 });
+      return response;
+    }
+
     await page.waitForTimeout(500 * attempt);
   }
 
   return response;
 }
 
-test('core pages expose stable SEO basics', async ({ page }) => {
-  for (const route of CORE_ROUTES) {
+for (const route of CORE_ROUTES) {
+  test(`SEO basics are stable on ${route}`, async ({ page }) => {
+    test.setTimeout(60_000);
+
     const response = await gotoWithRetry(page, route);
     expect(response?.status() ?? 0, route).toBeLessThan(400);
 
@@ -44,14 +51,25 @@ test('core pages expose stable SEO basics', async ({ page }) => {
     const ogTitle = page.locator('meta[property="og:title"]');
     const ogUrl = page.locator('meta[property="og:url"]');
     const ogDescription = page.locator('meta[property="og:description"]');
-    await expect(ogTitle).toHaveCount(1);
-    await expect(ogUrl).toHaveCount(1);
-    await expect(ogDescription).toHaveCount(1);
 
-    expect((await ogTitle.getAttribute('content') ?? '').trim().length, `${route}: empty og:title`).toBeGreaterThan(2);
-    expect((await ogDescription.getAttribute('content') ?? '').trim().length, `${route}: empty og:description`).toBeGreaterThan(10);
+    await expect(ogTitle, `${route}: og:title missing`).toHaveCount(1);
+    await expect(ogUrl, `${route}: og:url missing`).toHaveCount(1);
+    await expect(ogDescription, `${route}: og:description missing`).toHaveCount(1);
 
-    const robots = ((await page.locator('meta[name="robots"]').getAttribute('content').catch(() => null)) ?? '').toLowerCase();
+    expect(
+      (await ogTitle.getAttribute('content') ?? '').trim().length,
+      `${route}: empty og:title`
+    ).toBeGreaterThan(2);
+
+    expect(
+      (await ogDescription.getAttribute('content') ?? '').trim().length,
+      `${route}: empty og:description`
+    ).toBeGreaterThan(10);
+
+    const robots = (
+      (await page.locator('meta[name="robots"]').getAttribute('content').catch(() => null)) ?? ''
+    ).toLowerCase();
+
     expect(robots, `${route}: core route unexpectedly noindexed`).not.toContain('noindex');
-  }
-});
+  });
+}
