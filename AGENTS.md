@@ -94,10 +94,16 @@ For user-facing changes:
 - inspect console/runtime errors,
 - clearly identify mocked flows.
 
-## Git
+## Git and current execution mode
 
-For significant work:
-- use a dedicated feature branch,
-- keep changes scoped,
-- prepare a PR,
-- do not merge or deploy without explicit authorization.
+Default rule for significant work is scoped branches and review before integration.
+
+Current project authorization overrides that default for this prototype:
+- `main` is the canonical working branch,
+- user explicitly authorized direct changes on `main`,
+- automatic deployment is allowed only from `main`,
+- the approved TEST target is store `jksgiq-r4.myshopify.com`, theme `207539044694`,
+- no other theme/store may be published, deleted or modified,
+- a task is not DONE until its focused test and the consolidated QA gate pass on the same deployed SHA.
+
+If the user changes this authorization, revert to branch/PR-first workflow.
