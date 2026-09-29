@@ -40,10 +40,10 @@ Po wykryciu problemu:
 | 2 | Full-page screenshots | pełny capture mimo custom scroll container + DPR + non-sticky capture header | 3 projekty Playwright |
 | 3 | Touch targets / reflow | komponentowe 44px fixes, focus, overflow, 200% reflow equivalent | 5 testów |
 | 4 | Email flows | notification ≠ newsletter ≠ contact; required e-mail; success/error states | 2 testy |
-| 5 | PL/EN consistency | Klub/Club hydration, missing translations, copy hygiene, core routes | 2 testy |
+| 5 | PL/EN consistency | Klub/Club hydration, missing translations, copy hygiene, core routes + 8 live PL articles | 3 testy |
 | 6 | Klub content rhythm | 12 rytuałów, 4 tygodnie × 2/5/10 min, real articles, expert flags | dokument + redakcyjny DoD |
 | 7 | SEO basics | server HTML: title, one H1, canonical, OG, no accidental noindex | 14 tras PL/EN |
-| QA | Full storefront audit | crawl + runtime/accessibility/screenshots | mobile/tablet/desktop |
+| QA | Full storefront audit | crawl + runtime/accessibility/screenshots; 0 critical + 0 serious | mobile/tablet/desktop |
 | Cross-cutting | Review readiness | docs↔code consistency, deploy contract, supported locales | `tests/ux/review-readiness.spec.ts` |
 
 ## Deployment integrity
@@ -71,6 +71,7 @@ Jeśli którykolwiek z tych punktów nie jest spełniony, zielony browser audit 
 - `docs/UX_PRINCIPLES.md`
 - `docs/PRIVACY_PRINCIPLES.md`
 - `docs/SOURCE_TRACEABILITY.md`
+- `docs/SHOPIFY_CONTENT_STATE.md`
 
 ### Zadania i dowody
 - `docs/MODEL_HANDOFFS.md`
@@ -92,6 +93,7 @@ Jeśli którykolwiek z tych punktów nie jest spełniony, zielony browser audit 
 - `sections/amoura-club.liquid`
 - `templates/page.contact.json`
 - `tests/helpers/full-page-screenshot.ts`
+- `tests/helpers/audit.ts`
 - wszystkie focused suites w `tests/ux/`
 - `.github/workflows/deploy-test-theme.yml`
 
