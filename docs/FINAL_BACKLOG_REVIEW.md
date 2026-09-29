@@ -35,7 +35,7 @@ Pakiet jest przygotowany tak, aby końcowy reviewer sprawdził:
 - source traceability,
 - privacy principles,
 - deployment integrity,
-- pełny storefront audit z 0 critical i 0 serious findings,
+- pełny storefront audit z 0 critical, 0 serious i 0 standalone touch-target warnings,
 - live Shopify CMS article copy objęte testem language consistency.
 
 ## Świadome ograniczenia
