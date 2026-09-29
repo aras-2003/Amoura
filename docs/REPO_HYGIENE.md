@@ -45,9 +45,29 @@ Draft PR #3 i #4 są zamknięte jako superseded i nie powinny być mergowane.
 - Node 22,
 - Shopify CLI przypięte do wersji,
 - `npm run qa:dod` jako centralny gate,
-- lekkie raporty przy success,
+- strict Theme Check + strict push + rejected-file detection before accepting deploy,
+- raporty JSON i kluczowe full-page screenshots przy success,
 - pełne diagnostyki przy failure.
 
 ## Branch deletion
 
 Dostępny connector GitHub nie udostępnia operacji delete branch. Branche historyczne są zdezaktywowane operacyjnie, a nie fikcyjnie oznaczone jako usunięte.
+
+
+## Supported storefront locales
+
+Current Shopify state was verified through Admin GraphQL:
+- `pl` — primary, published,
+- `en` — published.
+
+Only `locales/pl.json` and `locales/en.default.json` are therefore kept as storefront locale payloads. Unpublished storefront locale JSON files were removed because they made strict Theme Check fail after Amoura-specific keys were added.
+
+Locale schema files (`*.schema.json`) remain because they describe theme-editor translations rather than published storefront language payloads.
+
+Before publishing another storefront locale in Shopify, add/restore the matching storefront locale JSON and make it pass `MatchingTranslations`.
+
+## Manual workflows
+
+- `bootstrap-theme.yml` is manual-only and main-only; it can snapshot the approved TEST theme back into the repository when explicitly requested.
+- `ux-audit.yml` is manual-only and main-only.
+- normal deployment and DoD validation happen only through `deploy-test-theme.yml` from `main`.
