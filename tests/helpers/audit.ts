@@ -123,6 +123,12 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
   const axe = await new AxeBuilder({ page })
     .exclude('#PBarNextFrameWrapper')
     .exclude('#PBarNextFrame')
+    // Shopify accelerated-checkout renders its own cross-origin payment UI in
+    // transient iframes with generated jsx-iframe-* ids. That markup is not
+    // owned or styleable by the theme and caused non-deterministic contrast
+    // failures between otherwise identical storefront runs (#244 vs #245).
+    // Keep the gate focused on first-party theme markup.
+    .exclude('iframe[id^="jsx-iframe-"]')
     .withTags(['wcag2a', 'wcag2aa'])
     .analyze();
 
