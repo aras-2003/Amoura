@@ -53,27 +53,23 @@ jq -n   --arg repository "$REPOSITORY"   --arg branch "$REF_NAME"   --arg sha "$
     ]
   }' > "$OUT_DIR/review-manifest.json"
 
-cat > "$OUT_DIR/REVIEW_SUMMARY.md" <<EOF
-# Astra runtime evidence
-
-- Repository: `$REPOSITORY`
-- Branch: `$REF_NAME`
-- SHA: `$SHA`
-- Workflow run: `$RUN_ID`
-- Run attempt: `$RUN_ATTEMPT`
-- QA gate: **PASSED**
-- Deployment integrity: **PASSED**
-
-Start the review from:
-1. `docs/ASTRA_REVIEW_PACKET.md`
-2. `docs/ASTRA_TASK_EVIDENCE.md`
-3. `docs/ASTRA_REVIEW_PROMPT.md`
-
-Runtime proof in this artifact:
-- `reports/astra/deploy-proof.json`
-- `reports/astra/review-manifest.json`
-- UX audit reports
-- retained full-page screenshots
-
-Known limitations are declared in `docs/ASTRA_REVIEW_PACKET.md` and repeated in the JSON manifest.
-EOF
+{
+  printf '# Astra runtime evidence\n\n'
+  printf -- '- Repository: `%s`\n' "$REPOSITORY"
+  printf -- '- Branch: `%s`\n' "$REF_NAME"
+  printf -- '- SHA: `%s`\n' "$SHA"
+  printf -- '- Workflow run: `%s`\n' "$RUN_ID"
+  printf -- '- Run attempt: `%s`\n' "$RUN_ATTEMPT"
+  printf -- '- QA gate: **PASSED**\n'
+  printf -- '- Deployment integrity: **PASSED**\n\n'
+  printf 'Start the review from:\n'
+  printf '1. `docs/ASTRA_REVIEW_PACKET.md`\n'
+  printf '2. `docs/ASTRA_TASK_EVIDENCE.md`\n'
+  printf '3. `docs/ASTRA_REVIEW_PROMPT.md`\n\n'
+  printf 'Runtime proof in this artifact:\n'
+  printf -- '- `reports/astra/deploy-proof.json`\n'
+  printf -- '- `reports/astra/review-manifest.json`\n'
+  printf -- '- UX audit reports\n'
+  printf -- '- retained full-page screenshots\n\n'
+  printf 'Known limitations are declared in `docs/ASTRA_REVIEW_PACKET.md` and repeated in the JSON manifest.\n'
+} > "$OUT_DIR/REVIEW_SUMMARY.md"

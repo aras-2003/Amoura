@@ -120,6 +120,7 @@ test('Astra runtime evidence is generated only after deploy and DoD success', as
   expect(evidence).toContain('review-manifest.json');
   expect(evidence).toContain('GITHUB_RUN_ID');
   expect(evidence).toContain('GITHUB_SHA');
+  expect(evidence).toContain("printf -- '- Repository: `%s`\\n'");
 
   const qaIndex = workflow.indexOf('Verify backlog Definition of Done');
   const evidenceIndex = workflow.indexOf('Build Astra review evidence');
