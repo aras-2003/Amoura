@@ -1,29 +1,12 @@
-import { readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
+import { execFileSync } from "node:child_process";
 
 const root = process.cwd();
-
-const scanRoots = [
-  "assets",
-  "blocks",
-  "config",
-  "layout",
-  "locales",
-  "sections",
-  "snippets",
-  "templates",
-  "scripts",
-  "tests",
-  "docs",
-  ".github/workflows",
-];
-
+const conflictPattern = /^(<{7}|={7}|>{7})/m;
 const textExtensions = new Set([
   ".css", ".js", ".json", ".liquid", ".md", ".mjs", ".ts", ".yml", ".yaml"
 ]);
-
-const jsonRoots = new Set(["config", "locales", "templates"]);
-const conflictPattern = /^(<{7}|={7}|>{7})/m;
 
 function stripShopifyGeneratedHeader(content) {
   let value = content.replace(/^\uFEFF/, "").trimStart();
@@ -35,52 +18,37 @@ function stripShopifyGeneratedHeader(content) {
   return value;
 }
 
-async function walk(dir) {
-  const entries = await readdir(join(root, dir), { withFileTypes: true });
-  const files = [];
-  for (const entry of entries) {
-    const rel = join(dir, entry.name);
-    if (entry.isDirectory()) {
-      files.push(...await walk(rel));
-    } else {
-      files.push(rel);
-    }
-  }
-  return files;
+function changedFiles() {
+  const output = execFileSync(
+    "git",
+    ["diff", "--name-only", "--diff-filter=ACMR", "origin/main...HEAD"],
+    { encoding: "utf8" }
+  );
+  return output.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
 }
 
+const files = changedFiles();
 const failures = [];
 let checkedText = 0;
 let checkedJson = 0;
 
-for (const scanRoot of scanRoots) {
-  let files = [];
-  try {
-    files = await walk(scanRoot);
-  } catch (error) {
-    if (error?.code === "ENOENT") continue;
-    throw error;
+for (const file of files) {
+  const extension = extname(file).toLowerCase();
+  if (!textExtensions.has(extension)) continue;
+
+  const content = await readFile(join(root, file), "utf8");
+  checkedText += 1;
+
+  if (conflictPattern.test(content)) {
+    failures.push(`${file}: contains unresolved merge-conflict markers`);
   }
 
-  for (const file of files) {
-    const extension = extname(file).toLowerCase();
-    if (!textExtensions.has(extension)) continue;
-
-    const content = await readFile(join(root, file), "utf8");
-    checkedText += 1;
-
-    if (conflictPattern.test(content)) {
-      failures.push(`${file}: contains unresolved merge-conflict markers`);
-    }
-
-    const topLevel = file.split("/")[0];
-    if (extension === ".json" && jsonRoots.has(topLevel)) {
-      try {
-        JSON.parse(stripShopifyGeneratedHeader(content));
-        checkedJson += 1;
-      } catch (error) {
-        failures.push(`${file}: invalid JSON (${error.message})`);
-      }
+  if (extension === ".json") {
+    try {
+      JSON.parse(stripShopifyGeneratedHeader(content));
+      checkedJson += 1;
+    } catch (error) {
+      failures.push(`${file}: invalid JSON (${error.message})`);
     }
   }
 }
@@ -110,5 +78,5 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`PR quality gate passed: ${checkedText} text files scanned, ${checkedJson} JSON files parsed.`);
+console.log(`PR quality gate passed: ${checkedText} changed text files scanned, ${checkedJson} changed JSON files parsed.`);
 console.log("No deployment command or Shopify theme token is used by the PR workflow.");
