@@ -14,7 +14,8 @@ Priority:
 3. `docs/BRAND_PRINCIPLES.md`
 4. `docs/UX_PRINCIPLES.md`
 5. `docs/PRIVACY_PRINCIPLES.md`
-6. current repository implementation
+6. `docs/ENVIRONMENTS.md`
+7. current repository implementation
 
 ## Product standard
 
@@ -96,14 +97,20 @@ For user-facing changes:
 
 ## Git and current execution mode
 
-Default rule for significant work is scoped branches and review before integration.
+Default execution model is branch/PR-first.
 
-Current project authorization overrides that default for this prototype:
-- `main` is the canonical working branch,
-- user explicitly authorized direct changes on `main`,
-- automatic deployment is allowed only from `main`,
-- the approved TEST target is store `jksgiq-r4.myshopify.com`, theme `207539044694`,
-- no other theme/store may be published, deleted or modified,
-- a task is not DONE until its focused test and the consolidated QA gate pass on the same deployed SHA.
+Current rules:
+- `main` is the canonical integration branch;
+- significant changes should be made on scoped branches and reviewed through PR;
+- `pr-quality-gate` is the pre-merge repository-safe check and must not deploy to Shopify;
+- deployment-capable automation may run only after merge to `main` or by explicit manual dispatch;
+- current Shopify QA target is store `jksgiq-r4.myshopify.com`, theme `207539044694`;
+- latest deployment evidence reports that theme's Shopify role as `live`, despite the theme name `Amoura — TEST`;
+- therefore the current target must not be described as proven unpublished/staging or treated as an isolated PR environment;
+- no PR branch may deploy to the shared current target;
+- no other theme/store may be published, deleted or modified without explicit approval;
+- rendered-storefront tasks are not DONE until their focused tests and consolidated QA pass on the same deployed SHA where applicable.
 
-If the user changes this authorization, revert to branch/PR-first workflow.
+The environment map and approval boundaries are defined in `docs/ENVIRONMENTS.md`.
+
+If a separate non-live Shopify theme is approved later, update the environment map before using it in automation.
