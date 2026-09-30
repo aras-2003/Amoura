@@ -148,6 +148,7 @@ test('serious accessibility findings remain blocking for Astra readiness', async
   expect(audit).toContain("f.code === 'small-touch-target'");
   expect(helper).toContain(".filter((x) => x.w < 44 || x.h < 44)");
   expect(helper).toContain("x.tag === 'A' && x.display === 'inline'");
+  expect(helper).toContain('.exclude(\'iframe[id^="jsx-iframe-"]\')');
   expect(packet).toContain('0 critical + 0 serious + 0 standalone touch warnings');
   expect(evidence).toContain('zero standalone `small-touch-target` warnings');
   expect(evidence).not.toContain('warning-level standalone touch targets remain visible');
