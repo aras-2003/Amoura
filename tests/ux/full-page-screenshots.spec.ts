@@ -30,6 +30,27 @@ async function closeCookiesIfVisible(page: Page) {
   }
 }
 
+async function expectPrimaryContentWithPropagationRetry(page: Page, route: string, contentSelector: string) {
+  const locator = () => page.locator(contentSelector).first();
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    if (await locator().isVisible().catch(() => false)) return;
+
+    if (attempt < 3) {
+      // Shopify theme pushes can be briefly eventually consistent across edge
+      // responses. Re-request the same route before declaring the rendered
+      // section missing; run #246 showed mobile stale while tablet/desktop
+      // immediately afterwards received the current template.
+      await page.waitForTimeout(800 * attempt);
+      await page.reload({ waitUntil: 'domcontentloaded', timeout: 30_000 });
+      await stripShopifyPreviewChrome(page);
+      await closeCookiesIfVisible(page);
+    }
+  }
+
+  await expect(locator(), `${route} should render its primary content after propagation retries`).toBeVisible();
+}
+
 test('full-page screenshots include the complete storefront', async ({ page }, testInfo) => {
   const dir = path.join('reports', 'screenshots', testInfo.project.name);
   fs.mkdirSync(dir, { recursive: true });
@@ -42,7 +63,7 @@ test('full-page screenshots include the complete storefront', async ({ page }, t
     await stripShopifyPreviewChrome(page);
     await closeCookiesIfVisible(page);
 
-    await expect(page.locator(contentSelector).first(), `${route} should render its primary content`).toBeVisible();
+    await expectPrimaryContentWithPropagationRetry(page, route, contentSelector);
 
     const shot = await captureFullPageScreenshot(page, path.join(dir, `${name}-full.png`));
     const viewport = page.viewportSize();
