@@ -1,0 +1,46 @@
+name: PR Quality Gate
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "assets/**"
+      - "blocks/**"
+      - "config/**"
+      - "layout/**"
+      - "locales/**"
+      - "sections/**"
+      - "snippets/**"
+      - "templates/**"
+      - "scripts/**"
+      - "tests/**"
+      - "docs/**"
+      - "AGENTS.md"
+      - "package.json"
+      - ".github/workflows/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: amoura-pr-quality-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pr-quality-gate:
+    name: pr-quality-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Run repository-safe PR checks
+        run: node scripts/pr-quality-gate.mjs
