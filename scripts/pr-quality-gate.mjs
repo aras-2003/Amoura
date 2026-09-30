@@ -1,5 +1,5 @@
 import { readFile, readdir } from "node:fs/promises";
-import { extname, join, relative } from "node:path";
+import { extname, join } from "node:path";
 
 const root = process.cwd();
 
@@ -22,8 +22,18 @@ const textExtensions = new Set([
   ".css", ".js", ".json", ".liquid", ".md", ".mjs", ".ts", ".yml", ".yaml"
 ]);
 
-const jsonRoots = new Set(["config", "locales", "templates"]);\n\nfunction stripShopifyGeneratedHeader(content) {\n  let value = content.replace(/^\\uFEFF/, "").trimStart();\n  while (value.startsWith("/*")) {\n    const end = value.indexOf("*/");\n    if (end === -1) return value;\n    value = value.slice(end + 2).trimStart();\n  }\n  return value;\n}
+const jsonRoots = new Set(["config", "locales", "templates"]);
 const conflictPattern = /^(<{7}|={7}|>{7})/m;
+
+function stripShopifyGeneratedHeader(content) {
+  let value = content.replace(/^\uFEFF/, "").trimStart();
+  while (value.startsWith("/*")) {
+    const end = value.indexOf("*/");
+    if (end === -1) return value;
+    value = value.slice(end + 2).trimStart();
+  }
+  return value;
+}
 
 async function walk(dir) {
   const entries = await readdir(join(root, dir), { withFileTypes: true });
