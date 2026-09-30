@@ -22,7 +22,7 @@ const textExtensions = new Set([
   ".css", ".js", ".json", ".liquid", ".md", ".mjs", ".ts", ".yml", ".yaml"
 ]);
 
-const jsonRoots = new Set(["config", "locales", "templates"]);
+const jsonRoots = new Set(["config", "locales", "templates"]);\n\nfunction stripShopifyGeneratedHeader(content) {\n  let value = content.replace(/^\\uFEFF/, "").trimStart();\n  while (value.startsWith("/*")) {\n    const end = value.indexOf("*/");\n    if (end === -1) return value;\n    value = value.slice(end + 2).trimStart();\n  }\n  return value;\n}
 const conflictPattern = /^(<{7}|={7}|>{7})/m;
 
 async function walk(dir) {
@@ -66,7 +66,7 @@ for (const scanRoot of scanRoots) {
     const topLevel = file.split("/")[0];
     if (extension === ".json" && jsonRoots.has(topLevel)) {
       try {
-        JSON.parse(content);
+        JSON.parse(stripShopifyGeneratedHeader(content));
         checkedJson += 1;
       } catch (error) {
         failures.push(`${file}: invalid JSON (${error.message})`);
