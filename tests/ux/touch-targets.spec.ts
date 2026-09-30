@@ -126,3 +126,28 @@ test('key pages reflow at a 200% desktop zoom equivalent', async ({ page }) => {
     expect(overlaps, `overlapping targets at 200% desktop zoom equivalent on ${route}: ${JSON.stringify(overlaps)}`).toEqual([]);
   }
 });
+
+
+test('inline-link exception applies only to links embedded in running text', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.setContent(`
+    <main>
+      <p>Read the <a id="embedded" href="#">privacy policy</a> before continuing.</p>
+      <div><a id="standalone" href="#">Standalone link</a></div>
+    </main>
+  `);
+
+  await page.addStyleTag({ content: `
+    #embedded, #standalone {
+      display: inline;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  ` });
+
+  const findings = await auditPage(page, '/fixture-inline-links', 'mobile');
+  const touch = findings.filter((f) => f.code === 'small-touch-target');
+
+  expect(touch.some((f) => f.detail.includes('#embedded'))).toBe(false);
+  expect(touch.some((f) => f.detail.includes('#standalone'))).toBe(true);
+});

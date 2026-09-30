@@ -63,18 +63,24 @@ export async function auditPage(page: Page, route: string, viewport: string): Pr
         const style = getComputedStyle(el);
         const id = (el as HTMLElement).id ? `#${(el as HTMLElement).id}` : '';
         const classes = [...(el as HTMLElement).classList].slice(0, 3).map((c) => `.${c}`).join('');
+        const parent = el.parentElement;
+        const hasSurroundingRunningText = !!parent && [...parent.childNodes].some((node) =>
+          node !== el && node.nodeType === Node.TEXT_NODE && (node.textContent || '').trim().length > 0
+        );
         return {
           w: r.width,
           h: r.height,
           text: (el.textContent || '').trim().slice(0, 80),
           tag: el.tagName,
           display: style.display,
+          inlineTextException: el.tagName === 'A' && style.display === 'inline' && hasSurroundingRunningText,
           selector: `${el.tagName.toLowerCase()}${id}${classes}`
         };
       })
-      // WCAG allows an exception for links embedded inline in running text.
-      // Keep the stricter 44px product standard for standalone controls/CTAs.
-      .filter((x) => !(x.tag === 'A' && x.display === 'inline'))
+      // WCAG permits an exception for links embedded inline in running text.
+      // Do not treat every display:inline anchor as exempt: a standalone inline
+      // link still needs to satisfy the product's 44px target standard.
+      .filter((x) => !x.inlineTextException)
       .filter((x) => x.w < 44 || x.h < 44)
       .slice(0, 20);
 
