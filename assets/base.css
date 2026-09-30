@@ -851,6 +851,16 @@ button.shopify-payment-button__button--unbranded {
   text-transform: var(--button-text-case-primary);
 }
 
+/* Shopify renders the accelerated-checkout "more payment options" control as a
+ * 35px-tall anchor. Keep it at the same 44px minimum touch target used by the
+ * rest of the storefront controls. */
+a#more-payment-options-link.shopify-payment-button__more-options {
+  min-height: var(--minimum-touch-target, 44px) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
 textarea,
 input:not([type='checkbox'], [type='radio']) {
   background-color: var(--color-input-background);
